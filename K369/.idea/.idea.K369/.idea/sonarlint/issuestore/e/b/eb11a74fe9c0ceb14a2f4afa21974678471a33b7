@@ -1,0 +1,12 @@
+
+Fcsharpsquid:S3903¾"#Move 'User' into a named namespace.(ÌÙ¨­øÿÿÿÿ
+Kcsharpsquid:S3903	".Move 'DatabaseManager' into a named namespace.(ş˜”÷
+Mcsharpsquid:S3903ò"#Move 'Task' into a named namespace.(ÃÍ“Øûÿÿÿÿ8ª®ïÜ1
+Mcsharpsquid:S3903Ó"#Move 'Meal' into a named namespace.(ÕÒ´±üÿÿÿÿ8ª®ïÜ1
+Lcsharpsquid:S3903‰"'Move 'Nutrient' into a named namespace.(ãÙ€ç8ª®ïÜ1
+wcsharpsquid:S3604Ä"TRemove the member initializer, all constructors set an initial value for the member.(ñ»ó«ıÿÿÿÿ
+ocsharpsquid:S107á"FConstructor has 11 parameters, which is greater than the 7 authorized.(Æºö©ÿÿÿÿÿ8ª®ïÜ1
+dcsharpsquid:S1079"AMethod has 13 parameters, which is greater than the 7 authorized.(¶çãÆ8æş‰ïÜ1
+ccsharpsquid:S107J"@Method has 9 parameters, which is greater than the 7 authorized.(”¿à‡8Ô¸íÜ1
+ecsharpsquid:S1751°";Refactor the containing loop to do more than one iteration.(ßëíùÿÿÿÿ8ù´ÜíÜ1
+Gcsharpsquid:S125"Remove this commented out code.(·µş´úÿÿÿÿ8Ÿš÷îÜ1
