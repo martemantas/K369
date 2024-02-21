@@ -1,56 +1,65 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
-public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler
+public class SwipeHandler : MonoBehaviour
 {
-    private Vector3 panelLocation;
-    public float percentThreshold = 0.2f;
-    public float easing = 0.5f;
+    public float swipeThreshold = 50f;
+    public string mainSceneName = "Main";
+    public string timetableSceneName = "Timetable";
+    public string nutritionSceneName = "Nutrition";
 
-    // Start is called before the first frame update
-    void Start()
+    private Vector2 startTouchPosition;
+    private Vector2 endTouchPosition;
+
+    void Update()
     {
-        panelLocation = transform.position;
+        DetectSwipe();
     }
 
-    public void OnDrag(PointerEventData data)
+    void DetectSwipe()
     {
-        float difference = data.pressPosition.x - data.position.x;
-        transform.position = panelLocation - new Vector3(difference, 0, 0);
-    }
-    public void OnEndDrag(PointerEventData data)
-    {
-        float percentage = (data.pressPosition.x - data.position.x) / Screen.width;
-        if(Mathf.Abs(percentage) >= percentThreshold) 
+        if (Input.touchCount > 0)
         {
-            Vector3 newLocation = panelLocation;
-            if(percentage > 0)
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
             {
-                newLocation += new Vector3(-Screen.width, 0, 0);
+                startTouchPosition = touch.position;
             }
-            else if(percentage < 0)
+            else if (touch.phase == TouchPhase.Ended)
             {
-                newLocation += new Vector3(Screen.width, 0, 0);
+                endTouchPosition = touch.position;
+
+                float swipeMagnitude = (endTouchPosition - startTouchPosition).magnitude;
+                if (swipeMagnitude > swipeThreshold)
+                {
+                    float swipeDirection = endTouchPosition.x - startTouchPosition.x;
+                    if (SceneManager.GetActiveScene().name == mainSceneName)
+                    {
+                        if (swipeDirection < 0) // Left swipe
+                        {
+                            LoadScene(nutritionSceneName);
+                        }
+                        else if (swipeDirection > 0) // Right swipe
+                        {
+                            LoadScene(timetableSceneName);
+                        }
+                    }
+                    else if (SceneManager.GetActiveScene().name == timetableSceneName && swipeDirection < 0)
+                    {
+                        LoadScene(mainSceneName);
+                    }
+                    else if (SceneManager.GetActiveScene().name == nutritionSceneName && swipeDirection > 0)
+                    {
+                        LoadScene(mainSceneName);
+                    }
+                }
             }
-            StartCoroutine(SmoothMove(transform.position, newLocation, easing));
-            panelLocation = newLocation;
-        }
-        else
-        {
-            StartCoroutine(SmoothMove(transform.position, panelLocation, easing));
         }
     }
-    IEnumerator SmoothMove(Vector3 startpos, Vector3 endpos, float seconds)
+
+    void LoadScene(string sceneName)
     {
-        float t = 0f;
-        while(t <= 1.0)
-        {
-            t += Time.deltaTime / seconds;
-            transform.position = Vector3.Lerp(startpos, endpos, Mathf.SmoothStep(0f, 1f, t));
-            yield return null;
-        }
+        SceneManager.LoadScene(sceneName);
     }
 }
