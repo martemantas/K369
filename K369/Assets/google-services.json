@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "277216125142",
+    "firebase_url": "https://k369-4c7ad-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "k369-4c7ad",
+    "storage_bucket": "k369-4c7ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277216125142:android:73e16c30a3e12422ab2977",
+        "android_client_info": {
+          "package_name": "K369.mityba"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-pRQG60KgdekHgiS_w1uuzfGs84Z5jA0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

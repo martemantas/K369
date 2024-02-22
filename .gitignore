@@ -1,0 +1,27 @@
+# Unity-specific
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+# Android-specific
+*.apk
+*.aab
+/build/
+
+# iOS-specific
+*.ipa
+/Build/
+/DerivedData/
+
+# User-specific files
+*.user
+*.userprefs
+*.unityproj
+*.sln
+*.swp
+*.DS_Store
+Thumbs.db
