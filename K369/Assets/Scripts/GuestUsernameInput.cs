@@ -17,10 +17,10 @@ public class GuestUsernameInput : MonoBehaviour
     int usernameLengthMax = 7;
 
     // Validation error messages
-    public string usernameLengthError = "Vardo ilgio klaida.";
-    public string usernameExistanceError = "Vardas uþimtas.";
-    public string usernameFormatError = "Vardo formato klaida.";
-    public string successMessage = "Labas, ";
+    public string usernameLengthError = "Username length is incorrect.";
+    public string usernameExistanceError = "Username is taken.";
+    public string usernameFormatError = "Username format is incorrect.";
+    public string successMessage = "Welcome, ";
     public bool canEnter = false;       // Check if user can enter the Main screen
 
     // Screens load settings
@@ -50,6 +50,7 @@ public class GuestUsernameInput : MonoBehaviour
     /// </summary>
     public void LoadButtonAction()
     {
+        ValidateButtonAction();
         if (canEnter)
         {
             SceneManager.LoadScene(MainMenuScreenName);
