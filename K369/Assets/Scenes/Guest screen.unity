@@ -1237,10 +1237,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   output: {fileID: 215884259}
   username: {fileID: 1484844167}
-  usernameLengthError: Vardo ilgio klaida.
-  usernameExistanceError: "Vardas u\u017Eimtas."
-  usernameFormatError: Vardo formato klaida.
-  successMessage: 'Labas, '
+  usernameLengthError: Username length is incorrect.
+  usernameExistanceError: Username is taken.
+  usernameFormatError: Username format is incorrect.
+  successMessage: 'Welcome, '
   canEnter: 0
   MainMenuScreenName: Main screen
   GuestScreenName: Guest screen
