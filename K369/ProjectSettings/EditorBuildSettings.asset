@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Timetable screen.unity
     guid: 6c79cecd49112174694bf44da802c281
+  - enabled: 1
+    path: Assets/Scenes/Login screen.unity
+    guid: f7f9a2c20ed7c8146914994cf55f31a1
+  - enabled: 1
+    path: Assets/Scenes/Register screen.unity
+    guid: afc3ee11755e6ba4b8677efe70524f7d
   m_configObjects: {}
