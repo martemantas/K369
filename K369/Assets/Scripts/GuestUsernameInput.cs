@@ -26,6 +26,7 @@ public class GuestUsernameInput : MonoBehaviour
     // Screens load settings
     public string MainMenuScreenName = "Main screen";
     public string GuestScreenName = "Guest screen";
+    public string StartScreenName = "Start screen";
 
     /// <summary>
     /// Validation process when button 'Tikrinti' is pressed
@@ -62,11 +63,19 @@ public class GuestUsernameInput : MonoBehaviour
     }
 
     /// <summary>
-    /// Guest screen opening process when button 'Tæsti kaip sveèias' is pressed
+    /// Guest screen opening process when button 'Play as guest' is pressed
     /// </summary>
     public void EnterAsGuestButtonAction()
     {
         SceneManager.LoadScene(GuestScreenName);     
+    }
+
+    /// <summary>
+    /// Opens main menu screen
+    /// </summary>
+    public void BackButtonAction()
+    {
+        SceneManager.LoadScene(StartScreenName);
     }
 
     /// <summary>
