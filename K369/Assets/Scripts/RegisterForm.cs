@@ -34,13 +34,13 @@ public class RegisterForm : MonoBehaviour
         if (passwordField.text != confirmPasswordField.text)
         {
             errorMessage.text = "Passwords must match";
-            yield break; // Exit the Coroutine
+            yield break;
         }
 
         if (!IsValidEmail(emailField.text))
         {
             errorMessage.text = "Must be a valid email address";
-            yield break; // Exit the Coroutine
+            yield break;
         }
 
         bool emailIsUnique = false; 
@@ -85,7 +85,6 @@ public class RegisterForm : MonoBehaviour
     
     void PopulateDropdowns()
     {
-        // Days
         dayDropdown.ClearOptions();
         List<string> days = new List<string>();
         for (int day = 1; day <= 31; day++)
@@ -94,12 +93,10 @@ public class RegisterForm : MonoBehaviour
         }
         dayDropdown.AddOptions(days);
 
-        // Months
         monthDropdown.ClearOptions();
         List<string> months = new List<string>{"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         monthDropdown.AddOptions(months);
 
-        // Years
         yearDropdown.ClearOptions();
         List<string> years = new List<string>();
         for (int year = System.DateTime.Now.Year; year >= 1900; year--)
