@@ -184,6 +184,48 @@ public class DatabaseManager : MonoBehaviour
                 }
             });
     }
+
+
+    public void GetUserByEmailAndPassword(string email, string password, Action<User> callback)
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("Users")
+            .OrderByChild("Email")
+            .EqualTo(email)
+            .GetValueAsync().ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted || !task.IsCompleted)
+                {
+                    Debug.LogError("Error fetching user: " + task.Exception);
+                    callback(null);
+                }
+                else
+                {
+                    DataSnapshot snapshot = task.Result;
+                    if (snapshot.Exists && snapshot.ChildrenCount > 0)
+                    {
+                        foreach (var childSnapshot in snapshot.Children)
+                        {
+                            User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
+                            if (foundUser.Password == password)
+                            {
+                                callback(foundUser);
+                                return;
+                            }
+                        }
+                        Debug.Log("No user found with the specified email and password.");
+                        callback(null); // No user found with the specified password
+                    }
+                    else
+                    {
+                        Debug.Log("No user found with the specified email.");
+                        callback(null); // No user found with the specified email
+                    }
+                }
+            });
+    }
+
+
 }
 
 [System.Serializable]
