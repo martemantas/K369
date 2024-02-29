@@ -14,7 +14,7 @@ public class DatabaseManager : MonoBehaviour
     {
         databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         //AddNewUser("newId", "user155", "password", "asd@emaio.com", "2021-10-01", "2021-10-01");
-        ExampleGetUser();
+        //ExampleGetUser();
     }
     
     //Firebase is asynchronous, so we use callbacks to handle the results
