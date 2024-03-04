@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class RegisterPageScript : MonoBehaviour
 {
     public string StartScreenName = "Start screen";
