@@ -120,9 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Poppins-Regular SDF 1
   m_EditorClassIdentifier: 
-  hashCode: 1038840109
+  hashCode: 1720480956
   material: {fileID: -4839405539956619440}
-  materialHashCode: -1081833491
+  materialHashCode: 1787068444
   m_Version: 1.1.0
   m_SourceFontFileGUID: ee659fb0d94f2814d8865a00f553d3a5
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: ee659fb0d94f2814d8865a00f553d3a5, type: 3}
