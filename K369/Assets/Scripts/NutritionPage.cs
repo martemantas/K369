@@ -4,11 +4,11 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class NutritionPage : MonoBehaviour
 {
     public Image[] imagesPieChart;
-    public float[] values;
 
     public TMP_Text fat;
     public TMP_Text carbs;
@@ -24,17 +24,18 @@ public class NutritionPage : MonoBehaviour
     public string YouScreenName = "Main screen";
     public string SettingsScreenName = "Settings screen";
 
+    public GameObject scrollViewContent;
+    public GameObject newMealCardButton;
+
 
     void Start()
     {
         SetValues();
     }
 
-    // Set nutrition values 
+    // Counts nutrition values
     public void SetValues()
     {
-        float total = 0;
-
         fatValue = float.Parse(fat.text);
         carbsValue = float.Parse(carbs.text);
         proteinsValue = float.Parse(proteins.text);
@@ -43,46 +44,44 @@ public class NutritionPage : MonoBehaviour
         kcalValue = fatValue + carbsValue + proteinsValue;
         kcal.text = kcalValue.ToString();
 
-        values[0] = fatValue;
-        values[1] = carbsValue;
-        values[2] = proteinsValue;
+        float[] values = { fatValue, carbsValue, proteinsValue };
+        PieChartCalculation(values);
+    }
 
+    // Calculates pie chart values
+    public void PieChartCalculation(float[] values)
+    {
+        float total = values.Sum();
+        float runningPercentage = 0f;
         for (int i = 0; i < values.Length; i++)
         {
-            total += FindPercentage(values, i);
-            imagesPieChart[i].fillAmount = total;
+            float percentage = values[i] / total;
+            runningPercentage += percentage;
+            imagesPieChart[i].fillAmount = runningPercentage;
         }
     }
 
-    // Find percentages for pie chart ploting
-    private float FindPercentage(float[] value, int index)
-    {
-        float total = 0;
-        for(int i = 0; i < value.Length; i++)
-        {
-            total += value[i];
-        }
-        return value[index] / total;
-    }
-
+    // Opens timetable screen
     public void ScheduleButtonAction()
     {
         SceneManager.LoadScene(ScheduleScreenName);
     }
 
+    // Opens profile screen
     public void YouButtonAction()
     {
         SceneManager.LoadScene(YouScreenName);
     }
 
-    // Need to implement
-    public void SettingsButtonAction()
+    // Adds new meal card. Does not save anything currently
+    public void AddMealButtonAction()
     {
-
+        GameObject newCard = (GameObject)Instantiate(newMealCardButton);
+        newCard.transform.SetParent(scrollViewContent.transform);
     }
 
     // Need to implement
-    public void AddMealButtonAction()
+    public void SettingsButtonAction()
     {
 
     }
