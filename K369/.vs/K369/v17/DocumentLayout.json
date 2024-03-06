@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\manto\\Documents\\K369\\K369\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|c:\\users\\manto\\documents\\k369\\k369\\assets\\scripts\\guestusernameinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\guestusernameinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|c:\\users\\manto\\documents\\k369\\k369\\assets\\scripts\\highlightobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\highlightobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|c:\\users\\manto\\documents\\k369\\k369\\assets\\scripts\\pageswiper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|c:\\users\\manto\\documents\\k369\\k369\\assets\\scripts\\dayofweek.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dayofweek.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\pageswiper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\pageswiper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\guestusernameinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\guestusernameinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,6 +31,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "HighlightObject.cs",
+              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\HighlightObject.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\HighlightObject.cs",
+              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\HighlightObject.cs",
+              "RelativeToolTip": "Assets\\Scripts\\HighlightObject.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-06T17:49:06.091Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DayOfWeek.cs",
+              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DayOfWeek.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DayOfWeek.cs",
+              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DayOfWeek.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DayOfWeek.cs",
+              "ViewState": "AQIAAC4AAAAAAAAAAAAiwFQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-06T15:01:32.809Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "GuestUsernameInput.cs",
               "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\GuestUsernameInput.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\GuestUsernameInput.cs",
@@ -30,12 +64,11 @@
               "RelativeToolTip": "Assets\\Scripts\\GuestUsernameInput.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-23T19:13:04.817Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-23T19:13:04.817Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "PageSwiper.cs",
               "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\PageSwiper.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PageSwiper.cs",
@@ -43,8 +76,7 @@
               "RelativeToolTip": "Assets\\Scripts\\PageSwiper.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-18T19:50:56.613Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-18T19:50:56.613Z"
             }
           ]
         }
