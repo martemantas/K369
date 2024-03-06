@@ -78,7 +78,8 @@ public class NutritionPage : MonoBehaviour
     {
         GameObject newCard = (GameObject)Instantiate(newMealCardButton);
         newCard.transform.SetParent(scrollViewContent.transform);
-    }
+        newCard.transform.localScale = new Vector3(1, 1, 1);
+    } 
 
     // Need to implement
     public void SettingsButtonAction()
