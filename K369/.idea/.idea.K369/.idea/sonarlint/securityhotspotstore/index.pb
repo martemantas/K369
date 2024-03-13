@@ -15,3 +15,9 @@ N
 Assets/Scripts/RegisterForm.cs,9\b\9b9dbb71cb3b451621dc64ab6e542a41d0728ba8
 Z
 *Assets/Plugins/Android/AndroidManifest.xml,c\1\c18ebe23595b3e06d6bfdea04659b986054c6a81
+R
+"Assets/Scripts/RadioButtonGroup.cs,0\e\0ec88dd579e4fe44bd041d931c03e8c731a001bd
+N
+Assets/RandomMoveAndScaleUI.cs,2\c\2c8f637d69602706b9d13f0bae0f77a39c34b39b
+H
+Assets/Scripts/Logout.cs,1\9\1923e5f62019a30e961104d237025816e1d27277
