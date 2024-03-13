@@ -1,0 +1,10 @@
+
+Wcsharpsquid:S3903"3Move 'FacebookLoginManager' into a named namespace.(“¸Òü8¬•ãØá1
+mcsharpsquid:S1104
+"DMake this field 'private' and encapsulate it in a 'public' property.(ñ†İøÿÿÿÿ8­•ãØá1
+hcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ªõ·8­•ãØá1
+mcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(•Íıÿÿÿÿ8íóèØá1
+Ucsharpsquid:S1172Y"1Remove this unused method parameter 'facebookId'.(ÕşÛî8Ò‚ˆÙá1
+Ocsharpsquid:S1172Y"+Remove this unused method parameter 'name'.(ÕşÛî8Ò‚ˆÙá1
+csharpsquid:S2583`"fChange this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.(Ã÷×‘øÿÿÿÿ8Ó‚ˆÙá1
+Mcsharpsquid:S14810"*Remove the unused local variable 'aToken'.(¿«î8Ó‚ˆÙá1
