@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RegisterForm : MonoBehaviour
@@ -58,6 +59,8 @@ public class RegisterForm : MonoBehaviour
         string registrationDate = DateTime.Now.ToString("yyyy-MM-dd");
         string dob = GetFormattedDateOfBirth();
         databaseManager.AddNewUser(userId, usernameField.text, passwordField.text, emailField.text, dob, registrationDate);
+        SceneManager.LoadScene("Main screen");
+
     }
 
     

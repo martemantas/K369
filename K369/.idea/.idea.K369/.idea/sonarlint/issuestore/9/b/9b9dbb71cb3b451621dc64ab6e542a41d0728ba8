@@ -1,12 +1,13 @@
 
-Mcsharpsquid:S3903	"+Move 'RegisterForm' into a named namespace.(ìÚèÙûÿÿÿÿ
-acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Ü–àó
-acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(±”³Ä
-acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¨‡ü
-acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ëµ‰ˆ
-fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(½¥‡òşÿÿÿÿ
-fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¾ğ©êşÿÿÿÿ
-fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Äİ ‹üÿÿÿÿ
-fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ñ†İøÿÿÿÿ
-fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Ã†®¤ûÿÿÿÿ
-ˆcsharpsquid:S25833"fChange this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.(¥§¿¦üÿÿÿÿ
+Mcsharpsquid:S3903
+"+Move 'RegisterForm' into a named namespace.(ìÚèÙûÿÿÿÿ
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Ü–àó
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(±”³Ä
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¨‡ü
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ëµ‰ˆ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(½¥‡òşÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¾ğ©êşÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Äİ ‹üÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ñ†İøÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Ã†®¤ûÿÿÿÿ
+ˆcsharpsquid:S25834"fChange this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.(¥§¿¦üÿÿÿÿ
