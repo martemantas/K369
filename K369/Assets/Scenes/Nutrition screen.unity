@@ -2406,7 +2406,7 @@ MonoBehaviour:
   kcalValue: 0
   ScheduleScreenName: Timetable screen
   YouScreenName: Main screen
-  SettingsScreenName: Settings screen
+  SettingsScreenName: Settings
   scrollViewContent: {fileID: 1939926615}
   newMealCardButton: {fileID: 5916260267994294423}
 --- !u!4 &840359729

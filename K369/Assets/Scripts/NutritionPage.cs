@@ -22,7 +22,7 @@ public class NutritionPage : MonoBehaviour
 
     public string ScheduleScreenName = "Timetable screen";
     public string YouScreenName = "Main screen";
-    public string SettingsScreenName = "Settings screen";
+    public string SettingsScreenName = "Settings";
 
     public GameObject scrollViewContent;
     public GameObject newMealCardButton;
@@ -81,10 +81,9 @@ public class NutritionPage : MonoBehaviour
         newCard.transform.localScale = new Vector3(1, 1, 1);
     } 
 
-    // Need to implement
     public void SettingsButtonAction()
     {
-
+        SceneManager.LoadScene(SettingsScreenName);
     }
 
     // Need to implement
