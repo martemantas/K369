@@ -48,6 +48,26 @@ public class NutritionPage : MonoBehaviour
         PieChartCalculation(values);
     }
 
+    public float GetKCalValue()
+    {
+        return kcalValue;
+    }
+
+    public float GetFatValue()
+    {
+        return fatValue;
+    }
+
+    public float GetCarbsValue()
+    {
+        return carbsValue;
+    }
+
+    public float GetProteinsValue()
+    {
+        return proteinsValue;
+    }
+
     // Calculates pie chart values
     public void PieChartCalculation(float[] values)
     {

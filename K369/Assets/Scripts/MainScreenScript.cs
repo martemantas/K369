@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -31,7 +32,13 @@ public class MainScreenScript : MonoBehaviour
 
     void Start()
     {
-        UpdateStatusBars();
+        SetBars();
+    }
+
+    // Get fat, proteins and carbs values from nutrition page
+    void SetBars()
+    {
+        
     }
 
     void UpdateStatusBars()
