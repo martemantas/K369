@@ -3214,6 +3214,7 @@ GameObject:
   - component: {fileID: 1728459614}
   - component: {fileID: 1728459613}
   - component: {fileID: 1728459612}
+  - component: {fileID: 1728459615}
   m_Layer: 5
   m_Name: ForgotPassword
   m_TagString: Untagged
@@ -3284,7 +3285,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1728459613}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1728459615}
+        m_TargetAssemblyTypeName: LoginPageScript, Assembly-CSharp
+        m_MethodName: LoginButtonAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1728459613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3323,6 +3336,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728459610}
   m_CullTransparentMesh: 1
+--- !u!114 &1728459615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728459610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1f6a5c33fd09c498de96278a5f4c67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartScreenName: Start screen
+  LoginScreenName: Forgot password
 --- !u!1 &1810423449
 GameObject:
   m_ObjectHideFlags: 0
