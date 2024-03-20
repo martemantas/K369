@@ -45,6 +45,7 @@
     <Analyzer Include="D:\Unity\2022.3.20f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\PasswordReset.cs" />
     <Compile Include="Assets\Scripts\LoginPageScript.cs" />
     <Compile Include="Assets\Scripts\NutritionPage.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsLoginManager.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\UIInputHelper.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\Scripts\MainScreenScript.cs" />
+    <Compile Include="Assets\MoveObjectOnClick.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\MenuBase.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\SubMenus\MainMenu.cs" />
@@ -116,7 +118,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\SubMenus\AppLinks.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
-    <Compile Include="Assets\PasswordReset.cs" />
     <Compile Include="Assets\Scripts\DayOfWeek.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsFriendsManager.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsReferralsManager.cs" />
@@ -128,11 +129,11 @@
     <Compile Include="Assets\Scripts\Logout.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\SubMenus\TournamentsMenu.cs" />
-    <Compile Include="Assets\Logo.cs" />
     <Compile Include="Assets\Scripts\RegisterForm.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsA2UNotificationsManager.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\SubMenus\AppRequests.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsPurchaseManager.cs" />
+    <Compile Include="Assets\ButtonObjectManager.cs" />
     <Compile Include="Assets\Scripts\RandomMoveAndScaleUI.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\CloudAndroid\Scripts\Utility.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />

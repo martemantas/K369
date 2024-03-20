@@ -17,3 +17,11 @@ H
 Assets/Scripts/Logout.cs,1\9\1923e5f62019a30e961104d237025816e1d27277
 G
 Assets/PasswordReset.cs,0\1\011a03e121b4cc341f957dff703b981ca32c919c
+M
+Assets/ButtonObjectManager.cs,8\0\80c96aabfe17396475a126e1d8ee73cd1d23ba47
+K
+Assets/MoveObjectOnClick.cs,5\1\51d46793aa505a8fb26a4039ddcab9b3b08f78fa
+R
+"Assets/Scripts/MainScreenScript.cs,9\b\9b5d569f24b0750dc1ffa9de910c6bd0c21a53c4
+L
+Assets/Scripts/PageSwiper.cs,5\7\5772030ed1c403c1d1c5967a9b423be2ac818521
