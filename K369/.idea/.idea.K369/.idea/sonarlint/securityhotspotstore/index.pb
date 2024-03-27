@@ -15,8 +15,6 @@ R
 "Assets/Scripts/RadioButtonGroup.cs,0\e\0ec88dd579e4fe44bd041d931c03e8c731a001bd
 H
 Assets/Scripts/Logout.cs,1\9\1923e5f62019a30e961104d237025816e1d27277
-G
-Assets/PasswordReset.cs,0\1\011a03e121b4cc341f957dff703b981ca32c919c
 M
 Assets/ButtonObjectManager.cs,8\0\80c96aabfe17396475a126e1d8ee73cd1d23ba47
 K

@@ -6,11 +6,18 @@ public class RadioButtonGroup : MonoBehaviour
 {
     public Button[] buttons;
     private Button selectedButton;
-    public Sprite selectedSprite; 
-    public Sprite deselectedSprite; 
+
+    private Color selectedColor = new Color(0.607f, 0.745f, 0.243f); // #9BBE3E
+    private ColorBlock defaultColors; 
 
     void Start()
     {
+
+        if (buttons.Length > 0)
+        {
+            defaultColors = buttons[0].colors;
+        }
+
         foreach (Button btn in buttons)
         {
             btn.onClick.AddListener(() => SelectButton(btn));
@@ -21,10 +28,17 @@ public class RadioButtonGroup : MonoBehaviour
     {
         if (selectedButton != null)
         {
-            selectedButton.GetComponent<Image>().sprite = deselectedSprite;
+            selectedButton.colors = defaultColors;
         }
 
         selectedButton = button;
-        selectedButton.GetComponent<Image>().sprite = selectedSprite;
+
+        ColorBlock cb = selectedButton.colors;
+        cb.normalColor = selectedColor;
+        cb.highlightedColor = selectedColor;
+        cb.pressedColor = selectedColor;
+        cb.selectedColor = selectedColor;
+
+        selectedButton.colors = cb;
     }
 }
