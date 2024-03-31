@@ -47,13 +47,14 @@ public class GuestUsernameInput : MonoBehaviour
     }
 
     /// <summary>
-    /// Main screen opening process when button 'Pradëti' is pressed
+    /// Main screen opening process when button 'Pradï¿½ti' is pressed
     /// </summary>
     public void LoadButtonAction()
     {
         ValidateButtonAction();
         if (canEnter)
         {
+            UserManager.Instance.LoginUser(new User(username.text,username.text,"","","","",0,0,0,0,0,0));
             SceneManager.LoadScene(MainMenuScreenName);
         }
         else

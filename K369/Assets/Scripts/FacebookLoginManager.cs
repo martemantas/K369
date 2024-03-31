@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class FacebookLoginManager : MonoBehaviour
 {
-    public DatabaseManager databaseManager;
     public string MainScreenName = "Main screen";
     public string RegisterScreenName = "Register screen";
 
@@ -76,7 +75,7 @@ public class FacebookLoginManager : MonoBehaviour
         WaitForCallback wait = new WaitForCallback();
         bool isUnique = false;
 
-        databaseManager.GetUserByEmail(email, (User user) =>
+        DatabaseManager.Instance.GetUserByEmail(email, (User user) =>
         {
             isUnique = user == null;
             wait.Complete(); // Indicate that the callback has been called

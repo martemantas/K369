@@ -16,7 +16,6 @@ public class RegisterForm : MonoBehaviour
     public TMP_Dropdown dayDropdown;
     public TMP_Dropdown monthDropdown;
     public TMP_Dropdown yearDropdown;
-    public DatabaseManager databaseManager;
     public TMP_Text errorMessage;
 
     private void Start()
@@ -58,7 +57,7 @@ public class RegisterForm : MonoBehaviour
         string userId = Guid.NewGuid().ToString();
         string registrationDate = DateTime.Now.ToString("yyyy-MM-dd");
         string dob = GetFormattedDateOfBirth();
-        databaseManager.AddNewUser(userId, usernameField.text, passwordField.text, emailField.text, dob, registrationDate);
+        DatabaseManager.Instance.AddNewUser(userId, usernameField.text, passwordField.text, emailField.text, dob, registrationDate);
         SceneManager.LoadScene("Main screen");
 
     }
@@ -74,7 +73,7 @@ public class RegisterForm : MonoBehaviour
         WaitForCallback wait = new WaitForCallback();
         bool isUnique = false;
 
-        databaseManager.GetUserByEmail(email, (User user) =>
+        DatabaseManager.Instance.GetUserByEmail(email, (User user) =>
         {
             isUnique = user == null;
             wait.Complete(); // Indicate that the callback has been called

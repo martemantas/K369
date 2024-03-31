@@ -23,3 +23,19 @@ R
 "Assets/Scripts/MainScreenScript.cs,9\b\9b5d569f24b0750dc1ffa9de910c6bd0c21a53c4
 L
 Assets/Scripts/PageSwiper.cs,5\7\5772030ed1c403c1d1c5967a9b423be2ac818521
+M
+Assets/Scripts/UserManager.cs,c\0\c0ac58d2e86ff1803a4d2ec22a3dc58c6a598cb5
+Q
+!Assets/Scripts/HighlightObject.cs,9\0\900ff9141451de155b3268eea8fca10b91c8a8fb
+O
+Assets/Scripts/TimetablePage.cs,1\0\10fabae7bca8a73d958f5adcd1396d529ff210e4
+K
+Assets/Scripts/DayOfWeek.cs,b\b\bbb657f5923e03da4cb6c805f76b73604e7d5a3a
+U
+%Assets/Scripts/ButtonObjectManager.cs,9\2\925a15bc09a2e62d9b1dc18e6600612075ae9f75
+J
+Assets/ReverseSetActive.cs,6\4\649cff15b054c5d7323817a79255e7f43191b13b
+T
+$Assets/Scripts/GuestUsernameInput.cs,f\1\f1e18ba720446d689657e892dc4c854bc34a1a2f
+V
+&Assets/Scripts/FacebookLoginManager.cs,5\0\50d7d611ae8e6fb851a26a02baa98bfb87e40b52

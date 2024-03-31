@@ -1,0 +1,16 @@
+
+Ncsharpsquid:S3903
+"1Move 'GuestUsernameInput' into a named namespace.(Éàø°
+Acsharpsquid:S2933"$Make 'usernameLengthMin' 'readonly'.(úÎ§
+@csharpsquid:S2933"$Make 'usernameLengthMax' 'readonly'.(âöµA
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Á­ûş
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(½¶²çüÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(‹ÉŠ¶ıÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ŸÃ—»ıÿÿÿÿ
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ì³‘¤
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(·Õ®¢øÿÿÿÿ
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(‚õ¶î
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(îÜíˆ
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¼À±Ü
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Ü³Ï®üÿÿÿÿ
+ƒcsharpsquid:S2583j"fChange this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.(®¦”º

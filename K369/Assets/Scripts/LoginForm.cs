@@ -12,7 +12,6 @@ public class LoginForm : MonoBehaviour
     public TMP_InputField email;
     public TMP_InputField password;
     public TMP_Text errorMessage;
-    public DatabaseManager databaseManager;
     public string MainScreenName = "Main screen";
 
     // Error messages
@@ -66,22 +65,20 @@ public class LoginForm : MonoBehaviour
             yield break;
         }
 
-        bool credentialsNotRegistered = false; // Credentials in database check
-        yield return StartCoroutine(AreCredentialsNotUsed(userEmail, userPassword, notExists => {
-            credentialsNotRegistered = notExists;
+        User user = null; // Holds the retrieved user object
+        yield return StartCoroutine(TryGetUserWithCredentials(userEmail, userPassword, fetchedUser => {
+            user = fetchedUser;
         }));
 
-        if (credentialsNotRegistered)
+        if (user == null)
         {
             errorMessage.text = errorIncorrectData;
             yield break;
         }
 
-        // User input data is correct (registered in database)
-        if (!credentialsNotRegistered)
-        {
-            LoadScene();
-        }
+        // If execution reaches here, login is successful
+        UserManager.Instance.LoginUser(user); // Save logged-in user
+        LoadScene(); // Move to the next scene
     }
 
     private IEnumerator IsEmailUnique(string email, Action<bool> callback)
@@ -89,7 +86,7 @@ public class LoginForm : MonoBehaviour
         WaitForCallback wait = new WaitForCallback();
         bool isUnique = false;
 
-        databaseManager.GetUserByEmail(email, (User user) =>
+        DatabaseManager.Instance.GetUserByEmail(email, (User user) =>
         {
             isUnique = user == null;
             wait.Complete(); // Indicate that the callback has been called
@@ -100,21 +97,22 @@ public class LoginForm : MonoBehaviour
         callback(isUnique);
     }
 
-    private IEnumerator AreCredentialsNotUsed(string email, string password, Action<bool> callback)
+    private IEnumerator TryGetUserWithCredentials(string email, string password, Action<User> callback)
     {
         WaitForCallback wait = new WaitForCallback();
-        bool notExists = false;
+        User fetchedUser = null;
 
-        databaseManager.GetUserByEmailAndPassword(email, password, (User user) =>
+        DatabaseManager.Instance.GetUserByEmailAndPassword(email, password, (User user) =>
         {
-            notExists = user == null;
+            fetchedUser = user; // Directly use the user object returned from the database
             wait.Complete(); // Indicate that the callback has been called
         });
 
         yield return wait;
 
-        callback(notExists);
+        callback(fetchedUser); // Pass the User object (null if credentials are incorrect)
     }
+
 
     private bool IsValidEmail(string email)
     {
