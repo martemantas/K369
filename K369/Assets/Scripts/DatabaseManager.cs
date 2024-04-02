@@ -9,12 +9,24 @@ using Firebase.Extensions;
 public class DatabaseManager : MonoBehaviour
 {
     DatabaseReference databaseReference;
+    public static DatabaseManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Prevents the UserManager from being destroyed when changing scenes
+        }
+        else
+        {
+            Destroy(gameObject); // Ensures there is only one instance of the UserManager
+        }
+    }
 
     void Start()
     {
         databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
-        //AddNewUser("newId", "user155", "password", "asd@emaio.com", "2021-10-01", "2021-10-01");
-        //ExampleGetUser();
     }
     
     //Firebase is asynchronous, so we use callbacks to handle the results
@@ -37,7 +49,7 @@ public class DatabaseManager : MonoBehaviour
 
     public void AddNewUser(string userId, string username, string password, string email, string birthday, string registrationDate)
     {
-        User newUser = new User(username, password, email, birthday, registrationDate);
+        User newUser = new User(userId, username, password, email, birthday, registrationDate, 0, 0, 0, 0, 0,1);
         string json = JsonUtility.ToJson(newUser);
 
         databaseReference.Child("Users").Child(userId).SetRawJsonValueAsync(json).ContinueWithOnMainThread(task => {
@@ -71,22 +83,30 @@ public class DatabaseManager : MonoBehaviour
         });
     }
 
-    public void AddNewTask(string userId, string taskId, string name, string description, string dateAdded, string dateCompleted, string dateExpire, int points, bool completed)
-    {
+    public void AddNewTask(string userId, string taskId, string name, string description, string dateAdded, string dateCompleted, string dateExpire, int points, bool completed) {
         Task newTask = new Task(name, description, dateAdded, dateCompleted, dateExpire, points, completed);
         string json = JsonUtility.ToJson(newTask);
+    
+        Debug.Log($"Adding task to path: Users/{userId}/Tasks/{taskId} with data: {json}");
 
         databaseReference.Child("Users").Child(userId).Child("Tasks").Child(taskId).SetRawJsonValueAsync(json).ContinueWithOnMainThread(task => {
-            if (task.IsFaulted)
-            {
-                Debug.LogError("Error adding new task: " + task.Exception);
-            }
-            else if (task.IsCompleted)
-            {
+            if (task.IsFaulted) {
+                // Log the error
+                foreach(var exception in task.Exception.Flatten().InnerExceptions) {
+                    FirebaseException firebaseEx = exception as FirebaseException;
+                    if(firebaseEx != null) {
+                        Debug.LogError($"Error adding new task: {firebaseEx.ErrorCode} - {firebaseEx.Message}");
+                    } else {
+                        Debug.LogError("Error adding new task: " + exception.Message);
+                    }
+                }
+            } else if (task.IsCompleted) {
                 Debug.Log("New task added successfully for user: " + userId);
             }
         });
     }
+
+    
 
     public void AddNewNutrientRecord(string userId, string nutrientId, string date, int protein, int fat, int carbohydrates, int calories)
     {
@@ -209,6 +229,9 @@ public class DatabaseManager : MonoBehaviour
                             User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
                             if (foundUser.Password == password)
                             {
+                                // Set the user's ID to the key of the child snapshot,
+                                // which is the user's unique identifier in Firebase
+                                foundUser.Id = childSnapshot.Key;
                                 callback(foundUser);
                                 return;
                             }
@@ -226,43 +249,59 @@ public class DatabaseManager : MonoBehaviour
     }
 
 
+
 }
 
 [System.Serializable]
 public class User
 {
+    public string Id;
     public string Username;
     public string Password;
     public string Email;
     public string Birthday;
     public string SaveData = "";
     public string RegistrationDate;
-
-    public User(string username, string password, string email, string birthday, string registrationDate)
+    public int todayCarbs = 0;
+    public int todayProtein = 0;
+    public int todayFat = 0;
+    public int todayCalories = 0;
+    public int Points = 0;
+    public List<Task> Tasks = new List<Task>();
+    public int userType = 0; // 0 - guest, 1 - user, 2 - parent
+    
+    public User(string id, string username, string password, string email, string birthday, string registrationDate, int todayCarbs, int todayProtein, int todayFat, int todayCalories, int points, int type)
     {
+        Id = id;
         Username = username;
         Password = password; // Store passwords (not)securely
         Email = email;
         Birthday = birthday;
         SaveData = "";
         RegistrationDate = registrationDate;
+        this.todayCarbs = todayCarbs;
+        this.todayProtein = todayProtein;
+        this.todayFat = todayFat;
+        this.todayCalories = todayCalories;
+        Points = points;
+        userType = type;
     }
 }
 
 [System.Serializable]
 public class Meal
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public int Carbohydrates { get; set; }
-    public int Protein { get; set; }
-    public int Fat { get; set; }
-    public bool Completed { get; set; }
-    public string DateAdded { get; set; }
-    public string DateCompleted { get; set; }
-    public string DateExpire { get; set; }
-    public int Points { get; set; }
-    public int Calories { get; set; }
+    public string Name;
+    public string Description;
+    public int Carbohydrates;
+    public int Protein;
+    public int Fat;
+    public bool Completed;
+    public string DateAdded;
+    public string DateCompleted;
+    public string DateExpire;
+    public int Points;
+    public int Calories;
 
     public Meal(string name, string description, int carbohydrates, int protein, int fat, bool completed, string dateAdded, string dateCompleted, string dateExpire, int points, int calories)
     {
@@ -283,13 +322,13 @@ public class Meal
 [System.Serializable]
 public class Task
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public string DateAdded { get; set; }
-    public string DateCompleted { get; set; }
-    public string DateExpire { get; set; }
-    public int Points { get; set; }
-    public bool Completed { get; set; }
+    public string Name;
+    public string Description;
+    public string DateAdded;
+    public string DateCompleted;
+    public string DateExpire;
+    public int Points;
+    public bool Completed;
 
     public Task(string name, string description, string dateAdded, string dateCompleted, string dateExpire, int points, bool completed)
     {
@@ -306,11 +345,11 @@ public class Task
 [System.Serializable]
 public class Nutrient
 {
-    public string Date { get; set; }
-    public int Protein { get; set; }
-    public int Fat { get; set; }
-    public int Carbohydrates { get; set; }
-    public int Calories { get; set; }
+    public string Date;
+    public int Protein;
+    public int Fat;
+    public int Carbohydrates;
+    public int Calories;
 
     public Nutrient(string date, int protein, int fat, int carbohydrates, int calories)
     {

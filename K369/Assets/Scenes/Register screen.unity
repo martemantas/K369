@@ -464,7 +464,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 52735773}
-  - component: {fileID: 52735772}
   - component: {fileID: 52735771}
   m_Layer: 0
   m_Name: RegistrationManager
@@ -492,20 +491,7 @@ MonoBehaviour:
   dayDropdown: {fileID: 2100818266}
   monthDropdown: {fileID: 862812305}
   yearDropdown: {fileID: 803437979}
-  databaseManager: {fileID: 52735772}
   errorMessage: {fileID: 1876216}
---- !u!114 &52735772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 52735770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 133508a2699975e4f89d0a43b86288d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &52735773
 Transform:
   m_ObjectHideFlags: 0
@@ -2874,7 +2860,6 @@ GameObject:
   - component: {fileID: 458966184}
   - component: {fileID: 458966183}
   - component: {fileID: 458966182}
-  - component: {fileID: 458966181}
   - component: {fileID: 458966186}
   m_Layer: 5
   m_Name: Continue With Facebook
@@ -2903,18 +2888,6 @@ RectTransform:
   m_AnchoredPosition: {x: 424.92862, y: -1605}
   m_SizeDelta: {x: 800, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &458966181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 458966179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 133508a2699975e4f89d0a43b86288d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &458966182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2927,7 +2900,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74092908b2bd1644b7621d33a325328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  databaseManager: {fileID: 458966181}
   MainScreenName: Main screen
   RegisterScreenName: Register screen
 --- !u!114 &458966183

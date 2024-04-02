@@ -4,12 +4,11 @@ Jcsharpsquid:S3903
 acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¿£¼ë
 fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(§Ú‰—ùÿÿÿÿ
 fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Ã†®¤ûÿÿÿÿ
-fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ñž†Ýøÿÿÿÿ
-acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ªõŽ·
-fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(òÖÜ£ùÿÿÿÿ
-acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(šØ£é
-fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(­­®­úÿÿÿÿ
-acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(×ÌŠ÷
-acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ü¦Õ¸
-ˆcsharpsquid:S2583?"fChange this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.(Ã÷×‘øÿÿÿÿ
-ˆcsharpsquid:S2583J"fChange this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.(ù¥©þûÿÿÿÿ
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ªõŽ·
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(òÖÜ£ùÿÿÿÿ
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(šØ£é
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(­­®­úÿÿÿÿ
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(×ÌŠ÷
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ü¦Õ¸
+‰csharpsquid:S2583I"eChange this condition so that it does not always evaluate to 'True'. Some code paths are unreachable.(°­ç´8²äôýè1
+ˆcsharpsquid:S2583>"fChange this condition so that it does not always evaluate to 'False'. Some code paths are unreachable.(Ã÷×‘øÿÿÿÿ
