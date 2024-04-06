@@ -3,32 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\manto\\Documents\\K369\\K369\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|c:\\users\\manto\\documents\\k369\\k369\\assets\\scripts\\logout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\logout.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|c:\\users\\manto\\documents\\k369\\k369\\assets\\scripts\\displayinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\displayinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|c:\\users\\manto\\documents\\k369\\k369\\assets\\scripts\\timetablepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\timetablepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\nutritionpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|c:\\users\\manto\\documents\\k369\\k369\\assets\\scripts\\nutritionpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\nutritionpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\highlightobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\highlightobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\databasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\databasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\dayofweek.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dayofweek.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\pageswiper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\pageswiper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\guestusernameinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\guestusernameinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\registerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\registerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,34 +30,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Logout.cs",
-              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\Logout.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Logout.cs",
-              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\Logout.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Logout.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-16T10:57:52.16Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TimetablePage.cs",
-              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\TimetablePage.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\TimetablePage.cs",
-              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\TimetablePage.cs",
-              "RelativeToolTip": "Assets\\Scripts\\TimetablePage.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAcwAsAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-06T18:23:54.845Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
@@ -74,57 +40,61 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\NutritionPage.cs",
               "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\NutritionPage.cs",
               "RelativeToolTip": "Assets\\Scripts\\NutritionPage.cs",
-              "ViewState": "AQIAAD4AAAAAAAAAAAAgwFAAAAA8AAAA",
+              "ViewState": "AQIAAEEAAAAAAAAAAAA9wAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-06T18:12:56.706Z"
+              "WhenOpened": "2024-04-06T12:59:37.891Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginForm.cs",
+              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\LoginForm.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\LoginForm.cs",
+              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\LoginForm.cs",
+              "RelativeToolTip": "Assets\\Scripts\\LoginForm.cs",
+              "ViewState": "AQIAADkAAAAAAAAAAAAYwFUAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-05T16:09:14.597Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "HighlightObject.cs",
-              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\HighlightObject.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\HighlightObject.cs",
-              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\HighlightObject.cs",
-              "RelativeToolTip": "Assets\\Scripts\\HighlightObject.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAoAAAA",
+              "Title": "DatabaseManager.cs",
+              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DatabaseManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DatabaseManager.cs",
+              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DatabaseManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DatabaseManager.cs",
+              "ViewState": "AQIAAAYBAAAAAAAAAAAhwB0BAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-06T17:49:06.091Z"
+              "WhenOpened": "2024-04-05T16:03:22.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DisplayInfo.cs",
+              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DisplayInfo.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DisplayInfo.cs",
+              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DisplayInfo.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DisplayInfo.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAzwA8AAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-05T15:59:08.534Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "DayOfWeek.cs",
-              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DayOfWeek.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\DayOfWeek.cs",
-              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DayOfWeek.cs",
-              "RelativeToolTip": "Assets\\Scripts\\DayOfWeek.cs",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAiwFQAAAAAAAAA",
+              "Title": "RegisterForm.cs",
+              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\RegisterForm.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\RegisterForm.cs",
+              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\RegisterForm.cs",
+              "RelativeToolTip": "Assets\\Scripts\\RegisterForm.cs",
+              "ViewState": "AQIAADsAAAAAAAAAAAAgwA0AAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-06T15:01:32.809Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "GuestUsernameInput.cs",
-              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\GuestUsernameInput.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\GuestUsernameInput.cs",
-              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\GuestUsernameInput.cs",
-              "RelativeToolTip": "Assets\\Scripts\\GuestUsernameInput.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-23T19:13:04.817Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PageSwiper.cs",
-              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\PageSwiper.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\PageSwiper.cs",
-              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\PageSwiper.cs",
-              "RelativeToolTip": "Assets\\Scripts\\PageSwiper.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-18T19:50:56.613Z"
+              "WhenOpened": "2024-04-05T15:53:42.681Z"
             }
           ]
         }
