@@ -58,6 +58,7 @@ public class RegisterForm : MonoBehaviour
         string registrationDate = DateTime.Now.ToString("yyyy-MM-dd");
         string dob = GetFormattedDateOfBirth();
         DatabaseManager.Instance.AddNewUser(userId, usernameField.text, passwordField.text, emailField.text, dob, registrationDate);
+        UserManager.Instance.LoginUser(new User(userId, usernameField.text,"" , emailField.text, dob, registrationDate,0,0,0,0,0,1));
         SceneManager.LoadScene("Main screen");
 
     }

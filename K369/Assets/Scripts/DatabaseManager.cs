@@ -190,63 +190,72 @@ public class DatabaseManager : MonoBehaviour
                     {
                         foreach (var childSnapshot in snapshot.Children)
                         {
-                            // Deserialize the found user snapshot to a User object
                             User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
-                            callback(foundUser); // Return the found user via callback
-                            return; // Assuming only one user will match
+                            callback(foundUser); 
+                            return; 
                         }
                     }
                     else
                     {
                         Debug.Log("No user found with the specified email.");
-                        callback(null); // No user found
+                        callback(null); 
                     }
                 }
             });
     }
 
 
-    public void GetUserByEmailAndPassword(string email, string password, Action<User> callback)
-    {
-        FirebaseDatabase.DefaultInstance
-            .GetReference("Users")
-            .OrderByChild("Email")
-            .EqualTo(email)
-            .GetValueAsync().ContinueWithOnMainThread(task =>
+public void GetUserByEmailAndPassword(string email, string password, Action<User> callback)
+{
+    FirebaseDatabase.DefaultInstance
+        .GetReference("Users")
+        .OrderByChild("Email")
+        .EqualTo(email)
+        .GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted || !task.IsCompleted)
             {
-                if (task.IsFaulted || !task.IsCompleted)
+                Debug.LogError("Error fetching user: " + task.Exception);
+                callback(null);
+            }
+            else
+            {
+                DataSnapshot snapshot = task.Result;
+                if (snapshot.Exists && snapshot.ChildrenCount > 0)
                 {
-                    Debug.LogError("Error fetching user: " + task.Exception);
-                    callback(null);
+                    foreach (var childSnapshot in snapshot.Children)
+                    {
+
+                        User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
+
+                        if (foundUser.Password == password)
+                        {
+                            foundUser.Tasks.Clear();
+
+                            DataSnapshot tasksSnapshot = childSnapshot.Child("Tasks");
+                            foreach (DataSnapshot taskSnapshot in tasksSnapshot.Children)
+                            {
+                                Task _task = JsonUtility.FromJson<Task>(taskSnapshot.GetRawJsonValue());
+                                foundUser.Tasks.Add(_task);
+                            }
+
+                            foundUser.Id = childSnapshot.Key;
+                            callback(foundUser);
+                            return;
+                        }
+                    }
+                    Debug.Log("No user found with the specified email and password.");
+                    callback(null); // No user found with the specified password
                 }
                 else
                 {
-                    DataSnapshot snapshot = task.Result;
-                    if (snapshot.Exists && snapshot.ChildrenCount > 0)
-                    {
-                        foreach (var childSnapshot in snapshot.Children)
-                        {
-                            User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
-                            if (foundUser.Password == password)
-                            {
-                                // Set the user's ID to the key of the child snapshot,
-                                // which is the user's unique identifier in Firebase
-                                foundUser.Id = childSnapshot.Key;
-                                callback(foundUser);
-                                return;
-                            }
-                        }
-                        Debug.Log("No user found with the specified email and password.");
-                        callback(null); // No user found with the specified password
-                    }
-                    else
-                    {
-                        Debug.Log("No user found with the specified email.");
-                        callback(null); // No user found with the specified email
-                    }
+                    Debug.Log("No user found with the specified email.");
+                    callback(null); // No user found with the specified email
                 }
-            });
-    }
+            }
+        });
+}
+
 
 
 
