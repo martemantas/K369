@@ -78,6 +78,12 @@ public class LoginForm : MonoBehaviour
 
         // If execution reaches here, login is successful
         UserManager.Instance.LoginUser(user); // Save logged-in user
+        PlayerPrefs.SetString("Username", user.Username); // Save info in PlayerPrefs
+        PlayerPrefs.SetString("Points", user.Points.ToString());
+        PlayerPrefs.SetString("Calories", user.todayCalories.ToString());
+        PlayerPrefs.SetString("Carbs", user.todayCarbs.ToString());
+        PlayerPrefs.SetString("Protein", user.todayProtein.ToString());
+        PlayerPrefs.SetString("Fat", user.todayFat.ToString());
         LoadScene(); // Move to the next scene
     }
 
