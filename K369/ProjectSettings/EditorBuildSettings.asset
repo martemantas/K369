@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Forgot password.unity
     guid: 9eb808cbbe60dac40b8643fdebd9a1bb
+  - enabled: 1
+    path: Assets/Scenes/FoodSearch screen.unity
+    guid: c8ca4c069eab5f347a4cd0ed4d6e8b22
+  - enabled: 1
+    path: Assets/Scenes/AddFood screen.unity
+    guid: 5fe0da1fc9c1f234a9728a7e795b6543
   m_configObjects: {}
