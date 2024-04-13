@@ -63,6 +63,39 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
+    
+    public void UpdateUserDetails(string userId, string newUsername, string newEmail, string newBirthday)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        if (!string.IsNullOrEmpty(newUsername)) updates["Username"] = newUsername;
+        if (!string.IsNullOrEmpty(newEmail)) updates["Email"] = newEmail;
+        if (!string.IsNullOrEmpty(newBirthday)) updates["Birthday"] = newBirthday;
+
+        UpdateUser(userId, updates);
+    }
+
+    public void UpdateUser(string userId, Dictionary<string, object> updates)
+    {
+        DatabaseReference userRef = databaseReference.Child("Users").Child(userId);
+        userRef.UpdateChildrenAsync(updates).ContinueWithOnMainThread(task => {
+            if (task.IsFaulted)
+            {
+                Debug.LogError("Error updating user: " + task.Exception);
+            }
+            else if (task.IsCompleted)
+            {
+                Debug.Log("User updated successfully for userId: " + userId);
+            }
+        });
+    }
+    public void UpdateUserPoints(string userId, int newPoints)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["Points"] = newPoints;
+
+        UpdateUser(userId, updates);
+    }
+
 
 
     
@@ -84,7 +117,7 @@ public class DatabaseManager : MonoBehaviour
     }
 
     public void AddNewTask(string userId, string taskId, string name, string description, string dateAdded, string dateCompleted, string dateExpire, int points, bool completed) {
-        Task newTask = new Task(name, description, dateAdded, dateCompleted, dateExpire, points, completed);
+        Task newTask = new Task(taskId, name, description, dateAdded, dateCompleted, dateExpire, points, completed);
         string json = JsonUtility.ToJson(newTask);
     
         Debug.Log($"Adding task to path: Users/{userId}/Tasks/{taskId} with data: {json}");
@@ -156,6 +189,21 @@ public class DatabaseManager : MonoBehaviour
         });
     }
     
+    public void MarkTaskAsCompleted(string userId, string taskId)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["Completed"] = true;  
+        UpdateTask(userId, taskId, updates);
+    }
+    public void UpdateTaskDetails(string userId, string taskId, string newName, string newDescription)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["Name"] = newName;
+        updates["Description"] = newDescription;
+
+        UpdateTask(userId, taskId, updates);
+    }
+
     public void UpdateTask(string userId, string taskId, Dictionary<string, object> updates)
     {
         DatabaseReference taskRef = databaseReference.Child("Users").Child(userId).Child("Tasks").Child(taskId);
@@ -331,6 +379,7 @@ public class Meal
 [System.Serializable]
 public class Task
 {
+    public string TaskId;
     public string Name;
     public string Description;
     public string DateAdded;
@@ -339,8 +388,9 @@ public class Task
     public int Points;
     public bool Completed;
 
-    public Task(string name, string description, string dateAdded, string dateCompleted, string dateExpire, int points, bool completed)
+    public Task(string taskId, string name, string description, string dateAdded, string dateCompleted, string dateExpire, int points, bool completed)
     {
+        TaskId = taskId;
         Name = name;
         Description = description;
         DateAdded = dateAdded;
