@@ -13,20 +13,18 @@ public class FormToPrefabSubmitter : MonoBehaviour
     {
         GameObject instantiatedPrefab = Instantiate(prefabToInstantiate, prefabParent ? prefabParent : null);
         User user = UserManager.Instance.CurrentUser;
-        user.Tasks.Add(new Task(inputFields[0].text, inputFields[1].text, "", "", "",0,false));
+        string taskId = Guid.NewGuid().ToString();
+        user.Tasks.Add(new Task(taskId,inputFields[0].text, inputFields[1].text, "", "", "",10,false));
         if (user.userType != 0)
         {
-            string taskId = Guid.NewGuid().ToString();
             DatabaseManager.Instance.AddNewTask(user.Id, taskId, inputFields[0].text, inputFields[1].text, "", "", "",
                 0,
                 false);
         }
-
-        Text[] textComponents = instantiatedPrefab.GetComponentsInChildren<Text>();
-        
-        for (int i = 0; i < inputFields.Length && i < textComponents.Length; i++)
+        TaskPrefabController controller = instantiatedPrefab.GetComponent<TaskPrefabController>();
+        if (controller != null)
         {
-            textComponents[i].text = inputFields[i].text;
+            controller.Initialize(taskId, inputFields[0].text, inputFields[1].text, 10);
         }
     }
 }
