@@ -5,6 +5,7 @@ using UnityEngine;
 using Firebase;
 using Firebase.Database;
 using Firebase.Extensions;
+using Unity.VisualScripting;
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -47,9 +48,9 @@ public class DatabaseManager : MonoBehaviour
     }
 
 
-    public void AddNewUser(string userId, string username, string password, string email, string birthday, string registrationDate)
+    public void AddNewUser(string userId, string username, string password, string email, string birthday, string registrationDate, int age, string gender, string goals)
     {
-        User newUser = new User(userId, username, password, email, birthday, registrationDate, 0, 0, 0, 0, 0,1);
+        User newUser = new User(userId, username, password, email, birthday, registrationDate, 0, 0, 0, 0, 0,1, age, gender, goals);
         string json = JsonUtility.ToJson(newUser);
 
         databaseReference.Child("Users").Child(userId).SetRawJsonValueAsync(json).ContinueWithOnMainThread(task => {
@@ -326,8 +327,11 @@ public class User
     public int Points = 0;
     public List<Task> Tasks = new List<Task>();
     public int userType = 0; // 0 - guest, 1 - user, 2 - parent
-    
-    public User(string id, string username, string password, string email, string birthday, string registrationDate, int todayCarbs, int todayProtein, int todayFat, int todayCalories, int points, int type)
+    public int Age;
+    public string Gender;
+    public string Goals;
+
+    public User(string id, string username, string password, string email, string birthday, string registrationDate, int todayCarbs, int todayProtein, int todayFat, int todayCalories, int points, int type, int age, string gender, string goals)
     {
         Id = id;
         Username = username;
@@ -342,6 +346,9 @@ public class User
         this.todayCalories = todayCalories;
         Points = points;
         userType = type;
+        Age = age;
+        Goals = goals;
+        Gender = gender;
     }
 }
 

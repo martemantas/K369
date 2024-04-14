@@ -17,6 +17,9 @@ public class RegisterForm : MonoBehaviour
     public TMP_Dropdown monthDropdown;
     public TMP_Dropdown yearDropdown;
     public TMP_Text errorMessage;
+    public TMP_InputField ageInputField;
+    public GameObject GenderButtons;
+    public GameObject GoalsButtons;
 
     private void Start()
     {
@@ -57,8 +60,11 @@ public class RegisterForm : MonoBehaviour
         string userId = Guid.NewGuid().ToString();
         string registrationDate = DateTime.Now.ToString("yyyy-MM-dd");
         string dob = GetFormattedDateOfBirth();
-        DatabaseManager.Instance.AddNewUser(userId, usernameField.text, passwordField.text, emailField.text, dob, registrationDate);
-        UserManager.Instance.LoginUser(new User(userId, usernameField.text,"" , emailField.text, dob, registrationDate,0,0,0,0,0,1));
+        int age = GetAgeFromInputField();
+        string gender = GetSelectedGender();
+        string goals = GetSelectedGoals();
+        DatabaseManager.Instance.AddNewUser(userId, usernameField.text, passwordField.text, emailField.text, dob, registrationDate, age, gender, goals);
+        UserManager.Instance.LoginUser(new User(userId, usernameField.text,"" , emailField.text, dob, registrationDate,0,0,0,0,0,1, age, gender, goals));
         SceneManager.LoadScene("Main screen");
 
     }
@@ -108,7 +114,7 @@ public class RegisterForm : MonoBehaviour
         }
         yearDropdown.AddOptions(years);
     }
-    
+
     private string GetFormattedDateOfBirth()
     {
         string day = dayDropdown.options[dayDropdown.value].text;
@@ -127,5 +133,29 @@ public class RegisterForm : MonoBehaviour
         {
             isDone = true;
         }
+    }
+    private int GetAgeFromInputField()
+    {
+        int age = 0;
+        if (!string.IsNullOrEmpty(ageInputField.text))
+        {
+            if (int.TryParse(ageInputField.text, out int parsedAge))
+            {
+                age = parsedAge;
+            }
+        }
+        return age;
+    }
+
+    private string GetSelectedGender()
+    {
+        RadioButtonGroup genderButtonGroup = GenderButtons.GetComponent<RadioButtonGroup>();
+        return genderButtonGroup.GetSelectedButtonText();
+    }
+
+    private string GetSelectedGoals()
+    {
+        RadioButtonGroup goalsButtonGroup = GoalsButtons.GetComponent<RadioButtonGroup>();
+        return goalsButtonGroup.GetSelectedButtonText();
     }
 }
