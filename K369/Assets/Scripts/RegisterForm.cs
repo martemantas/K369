@@ -63,6 +63,8 @@ public class RegisterForm : MonoBehaviour
         int age = GetAgeFromInputField();
         string gender = GetSelectedGender();
         string goals = GetSelectedGoals();
+        UserManager userManager = UserManager.Instance;
+        userManager.SetPlayerAge(age);
         DatabaseManager.Instance.AddNewUser(userId, usernameField.text, passwordField.text, emailField.text, dob, registrationDate, age, gender, goals);
         UserManager.Instance.LoginUser(new User(userId, usernameField.text,"" , emailField.text, dob, registrationDate,0,0,0,0,0,1, age, gender, goals));
         SceneManager.LoadScene("Main screen");
