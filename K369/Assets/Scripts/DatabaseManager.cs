@@ -101,13 +101,27 @@ public class DatabaseManager : MonoBehaviour
     
     public void AddNewMeal(string userId, string mealId, string name, string description, int carbohydrates, int protein, int fat, bool completed, string dateAdded, string dateCompleted, string dateExpire, int points, int calories)
     {
-        Meal newMeal = new Meal(name, description, carbohydrates, protein, fat, completed, dateAdded, dateCompleted, dateExpire, points, calories);
+        Meal newMeal = new Meal(mealId, name, description, carbohydrates, protein, fat, completed, dateAdded, dateCompleted, dateExpire, points, calories);
         string json = JsonUtility.ToJson(newMeal);
+
+        Debug.Log($"Adding meal to path: Users/{userId}/Meals/{mealId} with data: {json}");
 
         databaseReference.Child("Users").Child(userId).Child("Meals").Child(mealId).SetRawJsonValueAsync(json).ContinueWithOnMainThread(task => {
             if (task.IsFaulted)
             {
-                Debug.LogError("Error adding new meal: " + task.Exception);
+                // Log the error
+                foreach (var exception in task.Exception.Flatten().InnerExceptions)
+                {
+                    FirebaseException firebaseEx = exception as FirebaseException;
+                    if (firebaseEx != null)
+                    {
+                        Debug.LogError($"Error adding new meal: {firebaseEx.ErrorCode} - {firebaseEx.Message}");
+                    }
+                    else
+                    {
+                        Debug.LogError("Error adding new meal: " + exception.Message);
+                    }
+                }
             }
             else if (task.IsCompleted)
             {
@@ -202,6 +216,21 @@ public class DatabaseManager : MonoBehaviour
         updates["Description"] = newDescription;
 
         UpdateTask(userId, taskId, updates);
+    }
+
+    public void MarkMealAsCompleted(string userId, string mealId)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["Completed"] = true;
+        UpdateMeal(userId, mealId, updates);
+    }
+    public void UpdateMealDetails(string userId, string mealId, string newName, string newDescription)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["Name"] = newName;
+        updates["Description"] = newDescription;
+
+        UpdateMeal(userId, mealId, updates);
     }
 
     public void UpdateTask(string userId, string taskId, Dictionary<string, object> updates)
@@ -325,6 +354,7 @@ public class User
     public int todayCalories = 0;
     public int Points = 0;
     public List<Task> Tasks = new List<Task>();
+    public List<Meal> Meals = new List<Meal>();
     public int userType = 0; // 0 - guest, 1 - user, 2 - parent
     
     public User(string id, string username, string password, string email, string birthday, string registrationDate, int todayCarbs, int todayProtein, int todayFat, int todayCalories, int points, int type)
@@ -348,6 +378,7 @@ public class User
 [System.Serializable]
 public class Meal
 {
+    public string MealId;
     public string Name;
     public string Description;
     public int Carbohydrates;
@@ -360,8 +391,9 @@ public class Meal
     public int Points;
     public int Calories;
 
-    public Meal(string name, string description, int carbohydrates, int protein, int fat, bool completed, string dateAdded, string dateCompleted, string dateExpire, int points, int calories)
+    public Meal(string mealId, string name, string description, int carbohydrates, int protein, int fat, bool completed, string dateAdded, string dateCompleted, string dateExpire, int points, int calories)
     {
+        MealId = mealId;
         Name = name;
         Description = description;
         Carbohydrates = carbohydrates;
