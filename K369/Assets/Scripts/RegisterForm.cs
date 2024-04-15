@@ -61,12 +61,14 @@ public class RegisterForm : MonoBehaviour
         string registrationDate = DateTime.Now.ToString("yyyy-MM-dd");
         string dob = GetFormattedDateOfBirth();
         int age = GetAgeFromInputField();
+        int height = 0; // GetHeightFromInputField();
+        int weight = 0; // GetWeightFromInputField();
         string gender = GetSelectedGender();
         string goals = GetSelectedGoals();
         UserManager userManager = UserManager.Instance;
         userManager.SetPlayerAge(age);
-        DatabaseManager.Instance.AddNewUser(userId, usernameField.text, passwordField.text, emailField.text, dob, registrationDate, age, gender, goals);
-        UserManager.Instance.LoginUser(new User(userId, usernameField.text,"" , emailField.text, dob, registrationDate,0,0,0,0,0,1, age, gender, goals));
+        DatabaseManager.Instance.AddNewUser(userId, usernameField.text, passwordField.text, emailField.text, dob, registrationDate, age, height, weight, gender, goals);
+        UserManager.Instance.LoginUser(new User(userId, usernameField.text,"" , emailField.text, dob, registrationDate,0,0,0,0,0,1, age, height, weight, gender, goals));
         SceneManager.LoadScene("Main screen");
 
     }

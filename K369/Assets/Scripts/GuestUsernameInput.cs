@@ -54,7 +54,7 @@ public class GuestUsernameInput : MonoBehaviour
         ValidateButtonAction();
         if (canEnter)
         {
-            UserManager.Instance.LoginUser(new User(username.text,username.text,"","","","",0,0,0,0,0,0,123, "", "")); //last 0 is age, not sure if needs to be changed
+            UserManager.Instance.LoginUser(new User(username.text,username.text,"","","","",0,0,0,0,0,0,0,0,0 , "", ""));
             SceneManager.LoadScene(MainMenuScreenName);
         }
         else
