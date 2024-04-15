@@ -25,9 +25,6 @@ public class NutritionPage : MonoBehaviour
     public string SettingsScreenName = "Settings";
     public string FoodSearchScreenName = "FoodSearch screen";
 
-    public GameObject scrollViewContent;
-    public GameObject newMealCardButton;
-
 
     void Start()
     {
@@ -94,25 +91,14 @@ public class NutritionPage : MonoBehaviour
         SceneManager.LoadScene(YouScreenName);
     }
 
-    // Adds new meal card. Does not save anything currently
-    public void AddMealButtonAction()
-    {
-        GameObject newCard = (GameObject)Instantiate(newMealCardButton);
-        //newCard.transform.SetParent(scrollViewContent.transform);
-        //newCard.transform.localScale = new Vector3(1, 1, 1);
-
-        SceneManager.LoadScene(FoodSearchScreenName);
-    } 
-
     public void SettingsButtonAction()
     {
         SceneManager.LoadScene(SettingsScreenName);
     }
 
-    // Need to implement
-    public void EditButtonAction()
+    public void SearchFoodButtonAction()
     {
-
+        SceneManager.LoadScene(FoodSearchScreenName);
     }
 
 }

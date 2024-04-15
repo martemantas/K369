@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,9 +31,20 @@ public class MainScreenScript : MonoBehaviour
     public float currentProteinsValue = 30f;
     public float currentCarbsValue = 20f;
 
+    public TextMeshProUGUI username;
+    public TextMeshProUGUI userPoints;
+
     void Start()
     {
         SetBars();
+        SetUserInfo();
+    }
+
+    void SetUserInfo()
+    {
+        User user = UserManager.Instance.CurrentUser;
+        username.text = user.Username.ToString();
+        userPoints.text = user.Points.ToString();
     }
 
     // Get fat, proteins and carbs values from nutrition page

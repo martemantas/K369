@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6434,7 +6434,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1260059854}
   m_Direction: 0
   m_Value: -0.000000054642033
-  m_Size: 0.44149998
+  m_Size: 0.44149098
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -33218,6 +33218,8 @@ MonoBehaviour:
   currentFatValue: 50
   currentProteinsValue: 30
   currentCarbsValue: 20
+  username: {fileID: 1605103397}
+  userPoints: {fileID: 80479562}
 --- !u!4 &1920711429
 Transform:
   m_ObjectHideFlags: 0

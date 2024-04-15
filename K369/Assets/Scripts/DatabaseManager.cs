@@ -130,6 +130,33 @@ public class DatabaseManager : MonoBehaviour
         });
     }
 
+    public void DeleteMeal(string userId, string mealId)
+    {
+        Debug.Log($"Deleting meal with mealId: {mealId} from user with userId: {userId}");
+
+        databaseReference.Child("Users").Child(userId).Child("Meals").Child(mealId).RemoveValueAsync().ContinueWithOnMainThread(task => {
+            if (task.IsFaulted)
+            {
+                foreach (var exception in task.Exception.Flatten().InnerExceptions)
+                {
+                    FirebaseException firebaseEx = exception as FirebaseException;
+                    if (firebaseEx != null)
+                    {
+                        Debug.LogError($"Error deleting meal: {firebaseEx.ErrorCode} - {firebaseEx.Message}");
+                    }
+                    else
+                    {
+                        Debug.LogError("Error deleting meal: " + exception.Message);
+                    }
+                }
+            }
+            else if (task.IsCompleted)
+            {
+                Debug.Log("Meal deleted successfully.");
+            }
+        });
+    }
+
     public void AddNewTask(string userId, string taskId, string name, string description, string dateAdded, string dateCompleted, string dateExpire, int points, bool completed) {
         Task newTask = new Task(taskId, name, description, dateAdded, dateCompleted, dateExpire, points, completed);
         string json = JsonUtility.ToJson(newTask);

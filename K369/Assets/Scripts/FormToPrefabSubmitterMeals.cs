@@ -27,7 +27,9 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
             DatabaseManager.Instance.AddNewMeal(user.Id, mealId, inputFields[0].text, inputFields[1].text, carbohydrates,
                                 proteins, fats, false, "", "", "", pointsToAdd, kcal);
         }
+
         MealPrefabController controller = instantiatedPrefab.GetComponent<MealPrefabController>();
+        controller.SetMealPrefab(instantiatedPrefab);
         if (controller != null)
         {
             controller.Initialize(mealId, inputFields[0].text, inputFields[1].text, pointsToAdd);

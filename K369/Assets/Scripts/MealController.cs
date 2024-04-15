@@ -12,6 +12,7 @@ public class MealPrefabController : MonoBehaviour
     public Image background;
     private string mealId;
     private int Points;
+    private GameObject mealPrefab;
 
 
     public void Initialize(string id, string name, string description, int points)
@@ -37,9 +38,29 @@ public class MealPrefabController : MonoBehaviour
         if (meal != null)
         {
             meal.Completed = true;
-            DatabaseManager.Instance.MarkTaskAsCompleted(user.Id, mealId);
+            DatabaseManager.Instance.MarkMealAsCompleted(user.Id, mealId);
         }
         MarkCompleted();
+    }
+
+    public void SetMealPrefab(GameObject prefab)
+    {
+        mealPrefab = prefab;
+    }
+
+    public void OnDeleteButton()
+    {
+        User user = UserManager.Instance.CurrentUser;
+        Meal meal = user.Meals.Find(t => t.MealId == mealId);
+        if (meal != null)
+        {
+            DatabaseManager.Instance.DeleteMeal(user.Id, mealId);
+        }
+
+        if (mealPrefab != null)
+        {
+            Destroy(mealPrefab);
+        }
     }
 }
 

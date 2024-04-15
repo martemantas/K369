@@ -35,5 +35,6 @@ public class MealLoader : MonoBehaviour
         {
             Debug.Log("User has no meals or user is null.");
         }
+
     }
 }

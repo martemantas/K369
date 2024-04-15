@@ -21,5 +21,6 @@ public class UserManager : MonoBehaviour
     public void LoginUser(User user)
     {
         CurrentUser = user;
+        Debug.Log("tasks: " + user.Tasks.Count + ", meals: " + user.Meals.Count);
     }
 }
