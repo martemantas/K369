@@ -41,4 +41,15 @@ public class RadioButtonGroup : MonoBehaviour
 
         selectedButton.colors = cb;
     }
+    public string GetSelectedButtonText()
+    {
+        if (selectedButton != null)
+        {
+            return selectedButton.GetComponentInChildren<TextMeshProUGUI>().text;
+        }
+        else
+        {
+            return "";
+        }
+    }
 }
