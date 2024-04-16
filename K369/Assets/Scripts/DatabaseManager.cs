@@ -129,17 +129,58 @@ public class DatabaseManager : MonoBehaviour
 
     public void AddNewMeal(string userId, string mealId, string name, string description, int carbohydrates, int protein, int fat, bool completed, string dateAdded, string dateCompleted, string dateExpire, int points, int calories)
     {
-        Meal newMeal = new Meal(name, description, carbohydrates, protein, fat, completed, dateAdded, dateCompleted, dateExpire, points, calories);
+        Meal newMeal = new Meal(mealId, name, description, carbohydrates, protein, fat, completed, dateAdded, dateCompleted, dateExpire, points, calories);
         string json = JsonUtility.ToJson(newMeal);
+
+        Debug.Log($"Adding meal to path: Users/{userId}/Meals/{mealId} with data: {json}");
 
         databaseReference.Child("Users").Child(userId).Child("Meals").Child(mealId).SetRawJsonValueAsync(json).ContinueWithOnMainThread(task => {
             if (task.IsFaulted)
             {
-                Debug.LogError("Error adding new meal: " + task.Exception);
+                // Log the error
+                foreach (var exception in task.Exception.Flatten().InnerExceptions)
+                {
+                    FirebaseException firebaseEx = exception as FirebaseException;
+                    if (firebaseEx != null)
+                    {
+                        Debug.LogError($"Error adding new meal: {firebaseEx.ErrorCode} - {firebaseEx.Message}");
+                    }
+                    else
+                    {
+                        Debug.LogError("Error adding new meal: " + exception.Message);
+                    }
+                }
             }
             else if (task.IsCompleted)
             {
                 Debug.Log("New meal added successfully for user: " + userId);
+            }
+        });
+    }
+
+    public void DeleteMeal(string userId, string mealId)
+    {
+        Debug.Log($"Deleting meal with mealId: {mealId} from user with userId: {userId}");
+
+        databaseReference.Child("Users").Child(userId).Child("Meals").Child(mealId).RemoveValueAsync().ContinueWithOnMainThread(task => {
+            if (task.IsFaulted)
+            {
+                foreach (var exception in task.Exception.Flatten().InnerExceptions)
+                {
+                    FirebaseException firebaseEx = exception as FirebaseException;
+                    if (firebaseEx != null)
+                    {
+                        Debug.LogError($"Error deleting meal: {firebaseEx.ErrorCode} - {firebaseEx.Message}");
+                    }
+                    else
+                    {
+                        Debug.LogError("Error deleting meal: " + exception.Message);
+                    }
+                }
+            }
+            else if (task.IsCompleted)
+            {
+                Debug.Log("Meal deleted successfully.");
             }
         });
     }
@@ -201,7 +242,7 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
-    
+
     public void UpdateNutrient(string userId, string nutrientId, Dictionary<string, object> updates)
     {
         DatabaseReference nutrientRef = databaseReference.Child("Users").Child(userId).Child("Nutrients").Child(nutrientId);
@@ -230,6 +271,21 @@ public class DatabaseManager : MonoBehaviour
         updates["Description"] = newDescription;
 
         UpdateTask(userId, taskId, updates);
+    }
+
+    public void MarkMealAsCompleted(string userId, string mealId)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["Completed"] = true;
+        UpdateMeal(userId, mealId, updates);
+    }
+    public void UpdateMealDetails(string userId, string mealId, string newName, string newDescription)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["Name"] = newName;
+        updates["Description"] = newDescription;
+
+        UpdateMeal(userId, mealId, updates);
     }
 
     public void UpdateTask(string userId, string taskId, Dictionary<string, object> updates)
@@ -281,56 +337,64 @@ public class DatabaseManager : MonoBehaviour
     }
 
 
-public void GetUserByEmailAndPassword(string email, string password, Action<User> callback)
-{
-    FirebaseDatabase.DefaultInstance
-        .GetReference("Users")
-        .OrderByChild("Email")
-        .EqualTo(email)
-        .GetValueAsync().ContinueWithOnMainThread(task =>
-        {
-            if (task.IsFaulted || !task.IsCompleted)
+    public void GetUserByEmailAndPassword(string email, string password, Action<User> callback)
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("Users")
+            .OrderByChild("Email")
+            .EqualTo(email)
+            .GetValueAsync().ContinueWithOnMainThread(task =>
             {
-                Debug.LogError("Error fetching user: " + task.Exception);
-                callback(null);
-            }
-            else
-            {
-                DataSnapshot snapshot = task.Result;
-                if (snapshot.Exists && snapshot.ChildrenCount > 0)
+                if (task.IsFaulted || !task.IsCompleted)
                 {
-                    foreach (var childSnapshot in snapshot.Children)
-                    {
-
-                        User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
-
-                        if (foundUser.Password == password)
-                        {
-                            foundUser.Tasks.Clear();
-
-                            DataSnapshot tasksSnapshot = childSnapshot.Child("Tasks");
-                            foreach (DataSnapshot taskSnapshot in tasksSnapshot.Children)
-                            {
-                                Task _task = JsonUtility.FromJson<Task>(taskSnapshot.GetRawJsonValue());
-                                foundUser.Tasks.Add(_task);
-                            }
-
-                            foundUser.Id = childSnapshot.Key;
-                            callback(foundUser);
-                            return;
-                        }
-                    }
-                    Debug.Log("No user found with the specified email and password.");
-                    callback(null); // No user found with the specified password
+                    Debug.LogError("Error fetching user: " + task.Exception);
+                    callback(null);
                 }
                 else
                 {
-                    Debug.Log("No user found with the specified email.");
-                    callback(null); // No user found with the specified email
+                    DataSnapshot snapshot = task.Result;
+                    if (snapshot.Exists && snapshot.ChildrenCount > 0)
+                    {
+                        foreach (var childSnapshot in snapshot.Children)
+                        {
+
+                            User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
+
+                            if (foundUser.Password == password)
+                            {
+                                foundUser.Tasks.Clear();
+                                foundUser.Meals.Clear();
+
+                                DataSnapshot tasksSnapshot = childSnapshot.Child("Tasks");
+                                foreach (DataSnapshot taskSnapshot in tasksSnapshot.Children)
+                                {
+                                    Task _task = JsonUtility.FromJson<Task>(taskSnapshot.GetRawJsonValue());
+                                    foundUser.Tasks.Add(_task);
+                                }
+
+                                DataSnapshot mealsSnapshot = childSnapshot.Child("Meals");
+                                foreach (DataSnapshot mealSnapshot in mealsSnapshot.Children)
+                                {
+                                    Meal _meal = JsonUtility.FromJson<Meal>(mealSnapshot.GetRawJsonValue());
+                                    foundUser.Meals.Add(_meal);
+                                }
+
+                                foundUser.Id = childSnapshot.Key;
+                                callback(foundUser);
+                                return;
+                            }
+                        }
+                        Debug.Log("No user found with the specified email and password.");
+                        callback(null); // No user found with the specified password
+                    }
+                    else
+                    {
+                        Debug.Log("No user found with the specified email.");
+                        callback(null); // No user found with the specified email
+                    }
                 }
-            }
-        });
-}
+            });
+    }
 
 
 
@@ -352,6 +416,7 @@ public class User
     public int todayCalories = 0;
     public int Points = 0;
     public List<Task> Tasks = new List<Task>();
+    public List<Meal> Meals = new List<Meal>();
     public int userType = 0; // 0 - guest, 1 - user, 2 - parent
     public int Age;
     public int Height;
@@ -385,6 +450,7 @@ public class User
 [System.Serializable]
 public class Meal
 {
+    public string MealId;
     public string Name;
     public string Description;
     public int Carbohydrates;
@@ -396,9 +462,11 @@ public class Meal
     public string DateExpire;
     public int Points;
     public int Calories;
+    public bool pointsGiven = false;
 
-    public Meal(string name, string description, int carbohydrates, int protein, int fat, bool completed, string dateAdded, string dateCompleted, string dateExpire, int points, int calories)
+    public Meal(string mealId, string name, string description, int carbohydrates, int protein, int fat, bool completed, string dateAdded, string dateCompleted, string dateExpire, int points, int calories)
     {
+        MealId = mealId;
         Name = name;
         Description = description;
         Carbohydrates = carbohydrates;
@@ -424,6 +492,7 @@ public class Task
     public string DateExpire;
     public int Points;
     public bool Completed;
+    public bool pointsGiven = false;
 
     public Task(string taskId, string name, string description, string dateAdded, string dateCompleted, string dateExpire, int points, bool completed)
     {

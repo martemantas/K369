@@ -27,7 +27,7 @@ public class AddFoodScript : MonoBehaviour
     private float kcal;
 
     public TextMeshProUGUI countValueText;
-    private int countValue;
+    private int countValue = 1; // default value
 
     private string[] mealOptions;
     private string selectedAddToOption;
@@ -36,8 +36,7 @@ public class AddFoodScript : MonoBehaviour
     private List<TMP_Dropdown.OptionData> options;
 
     void Start()
-    {
-        countValue = 1; // default value
+    {       
         primary_G_value = int.Parse(servingValueText.text);
         G_value_text = "(" + primary_G_value + " g)";
         primary_OZ_value = Change_G_To_OZ();
