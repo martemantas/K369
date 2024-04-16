@@ -5,6 +5,7 @@ using UnityEngine;
 using Firebase;
 using Firebase.Database;
 using Firebase.Extensions;
+using Unity.VisualScripting;
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -47,9 +48,9 @@ public class DatabaseManager : MonoBehaviour
     }
 
 
-    public void AddNewUser(string userId, string username, string password, string email, string birthday, string registrationDate)
+    public void AddNewUser(string userId, string username, string password, string email, string birthday, string registrationDate, int age, int height, int weight, string gender, string goals)
     {
-        User newUser = new User(userId, username, password, email, birthday, registrationDate, 0, 0, 0, 0, 0,1);
+        User newUser = new User(userId, username, password, email, birthday, registrationDate, 0, 0, 0, 0, 0,1, age, height, weight, gender, goals);
         string json = JsonUtility.ToJson(newUser);
 
         databaseReference.Child("Users").Child(userId).SetRawJsonValueAsync(json).ContinueWithOnMainThread(task => {
@@ -95,10 +96,37 @@ public class DatabaseManager : MonoBehaviour
 
         UpdateUser(userId, updates);
     }
+    public void UpdateUserAge(string userId, int newAge)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["Age"] = newAge;
+
+        UpdateUser(userId, updates);
+    }
+    public void UpdateUserGender(string userId, string newGender)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["Gender"] = newGender;
+
+        UpdateUser(userId, updates);
+    }
+    public void UpdateUserHeight(string userId, int newHeight)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["Height"] = newHeight;
+
+        UpdateUser(userId, updates);
+    }
+    public void UpdateUserWeight(string userId, int newWeight)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["Weight"] = newWeight;
+
+        UpdateUser(userId, updates);
+    }
 
 
 
-    
     public void AddNewMeal(string userId, string mealId, string name, string description, int carbohydrates, int protein, int fat, bool completed, string dateAdded, string dateCompleted, string dateExpire, int points, int calories)
     {
         Meal newMeal = new Meal(name, description, carbohydrates, protein, fat, completed, dateAdded, dateCompleted, dateExpire, points, calories);
@@ -306,7 +334,6 @@ public void GetUserByEmailAndPassword(string email, string password, Action<User
 
 
 
-
 }
 
 [System.Serializable]
@@ -326,8 +353,13 @@ public class User
     public int Points = 0;
     public List<Task> Tasks = new List<Task>();
     public int userType = 0; // 0 - guest, 1 - user, 2 - parent
-    
-    public User(string id, string username, string password, string email, string birthday, string registrationDate, int todayCarbs, int todayProtein, int todayFat, int todayCalories, int points, int type)
+    public int Age;
+    public int Height;
+    public int Weight;
+    public string Gender;
+    public string Goals;
+
+    public User(string id, string username, string password, string email, string birthday, string registrationDate, int todayCarbs, int todayProtein, int todayFat, int todayCalories, int points, int type, int age, int height, int weight, string gender, string goals)
     {
         Id = id;
         Username = username;
@@ -342,6 +374,11 @@ public class User
         this.todayCalories = todayCalories;
         Points = points;
         userType = type;
+        Age = age;
+        Height = height;
+        Weight = weight;
+        Goals = goals;
+        Gender = gender;
     }
 }
 
