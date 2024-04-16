@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.XR;
+using Unity.VisualScripting;
 
 public class FormToPrefabSubmitterMeals : MonoBehaviour
 {
@@ -20,6 +22,16 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
         GameObject instantiatedPrefab = Instantiate(prefabToInstantiate, prefabParent ? prefabParent : null);
         User user = UserManager.Instance.CurrentUser;
         string mealId = Guid.NewGuid().ToString();
+
+        if (inputFields[0].text.Length == 0)
+        {
+            inputFields[0].text = "Meal name";
+        }
+        if (inputFields[1].text.Length == 0)
+        {
+            inputFields[1].text = string.Empty;
+        }
+
         user.Meals.Add(new Meal(mealId, inputFields[0].text, inputFields[1].text, carbohydrates, 
                                 proteins, fats, false, "", "", "", pointsToAdd, kcal));
         if (user.userType != 0)
@@ -35,4 +47,5 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
             controller.Initialize(mealId, inputFields[0].text, inputFields[1].text, pointsToAdd);
         }
     }
+
 }

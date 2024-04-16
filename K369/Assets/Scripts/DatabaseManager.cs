@@ -214,7 +214,7 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
-    
+
     public void UpdateNutrient(string userId, string nutrientId, Dictionary<string, object> updates)
     {
         DatabaseReference nutrientRef = databaseReference.Child("Users").Child(userId).Child("Nutrients").Child(nutrientId);
@@ -309,56 +309,64 @@ public class DatabaseManager : MonoBehaviour
     }
 
 
-public void GetUserByEmailAndPassword(string email, string password, Action<User> callback)
-{
-    FirebaseDatabase.DefaultInstance
-        .GetReference("Users")
-        .OrderByChild("Email")
-        .EqualTo(email)
-        .GetValueAsync().ContinueWithOnMainThread(task =>
-        {
-            if (task.IsFaulted || !task.IsCompleted)
+    public void GetUserByEmailAndPassword(string email, string password, Action<User> callback)
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("Users")
+            .OrderByChild("Email")
+            .EqualTo(email)
+            .GetValueAsync().ContinueWithOnMainThread(task =>
             {
-                Debug.LogError("Error fetching user: " + task.Exception);
-                callback(null);
-            }
-            else
-            {
-                DataSnapshot snapshot = task.Result;
-                if (snapshot.Exists && snapshot.ChildrenCount > 0)
+                if (task.IsFaulted || !task.IsCompleted)
                 {
-                    foreach (var childSnapshot in snapshot.Children)
-                    {
-
-                        User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
-
-                        if (foundUser.Password == password)
-                        {
-                            foundUser.Tasks.Clear();
-
-                            DataSnapshot tasksSnapshot = childSnapshot.Child("Tasks");
-                            foreach (DataSnapshot taskSnapshot in tasksSnapshot.Children)
-                            {
-                                Task _task = JsonUtility.FromJson<Task>(taskSnapshot.GetRawJsonValue());
-                                foundUser.Tasks.Add(_task);
-                            }
-
-                            foundUser.Id = childSnapshot.Key;
-                            callback(foundUser);
-                            return;
-                        }
-                    }
-                    Debug.Log("No user found with the specified email and password.");
-                    callback(null); // No user found with the specified password
+                    Debug.LogError("Error fetching user: " + task.Exception);
+                    callback(null);
                 }
                 else
                 {
-                    Debug.Log("No user found with the specified email.");
-                    callback(null); // No user found with the specified email
+                    DataSnapshot snapshot = task.Result;
+                    if (snapshot.Exists && snapshot.ChildrenCount > 0)
+                    {
+                        foreach (var childSnapshot in snapshot.Children)
+                        {
+
+                            User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
+
+                            if (foundUser.Password == password)
+                            {
+                                foundUser.Tasks.Clear();
+                                foundUser.Meals.Clear();
+
+                                DataSnapshot tasksSnapshot = childSnapshot.Child("Tasks");
+                                foreach (DataSnapshot taskSnapshot in tasksSnapshot.Children)
+                                {
+                                    Task _task = JsonUtility.FromJson<Task>(taskSnapshot.GetRawJsonValue());
+                                    foundUser.Tasks.Add(_task);
+                                }
+
+                                DataSnapshot mealsSnapshot = childSnapshot.Child("Meals");
+                                foreach (DataSnapshot mealSnapshot in mealsSnapshot.Children)
+                                {
+                                    Meal _meal = JsonUtility.FromJson<Meal>(mealSnapshot.GetRawJsonValue());
+                                    foundUser.Meals.Add(_meal);
+                                }
+
+                                foundUser.Id = childSnapshot.Key;
+                                callback(foundUser);
+                                return;
+                            }
+                        }
+                        Debug.Log("No user found with the specified email and password.");
+                        callback(null); // No user found with the specified password
+                    }
+                    else
+                    {
+                        Debug.Log("No user found with the specified email.");
+                        callback(null); // No user found with the specified email
+                    }
                 }
-            }
-        });
-}
+            });
+    }
 
 
 
@@ -417,6 +425,7 @@ public class Meal
     public string DateExpire;
     public int Points;
     public int Calories;
+    public bool pointsGiven = false;
 
     public Meal(string mealId, string name, string description, int carbohydrates, int protein, int fat, bool completed, string dateAdded, string dateCompleted, string dateExpire, int points, int calories)
     {
@@ -446,6 +455,7 @@ public class Task
     public string DateExpire;
     public int Points;
     public bool Completed;
+    public bool pointsGiven = false;
 
     public Task(string taskId, string name, string description, string dateAdded, string dateCompleted, string dateExpire, int points, bool completed)
     {

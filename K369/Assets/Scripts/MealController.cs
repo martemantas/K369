@@ -26,9 +26,7 @@ public class MealPrefabController : MonoBehaviour
     public void MarkCompleted()
     {
         completeButton.GameObject().SetActive(false);
-        background.color = new Color(0.6333f, 0.8392f, 0.5294f, 0.7098f);
-        UserManager.Instance.CurrentUser.Points += Points;
-        DatabaseManager.Instance.UpdateUserPoints(UserManager.Instance.CurrentUser.Id, UserManager.Instance.CurrentUser.Points);
+        background.color = new Color(0.6333f, 0.8392f, 0.5294f, 0.7098f);     
     }
 
     public void OnCompleteButton()
@@ -39,28 +37,26 @@ public class MealPrefabController : MonoBehaviour
         {
             meal.Completed = true;
             DatabaseManager.Instance.MarkMealAsCompleted(user.Id, mealId);
+            if (!meal.pointsGiven)
+            {
+                meal.pointsGiven = true;
+                UserManager.Instance.CurrentUser.Points += Points;
+                DatabaseManager.Instance.UpdateUserPoints(UserManager.Instance.CurrentUser.Id, UserManager.Instance.CurrentUser.Points);
+            }
         }
-        MarkCompleted();
+        MarkCompleted();       
     }
+
 
     public void SetMealPrefab(GameObject prefab)
     {
         mealPrefab = prefab;
     }
 
+    // need to implement
     public void OnDeleteButton()
     {
-        User user = UserManager.Instance.CurrentUser;
-        Meal meal = user.Meals.Find(t => t.MealId == mealId);
-        if (meal != null)
-        {
-            DatabaseManager.Instance.DeleteMeal(user.Id, mealId);
-        }
 
-        if (mealPrefab != null)
-        {
-            Destroy(mealPrefab);
-        }
     }
 }
 

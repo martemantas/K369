@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class TaskPrefabController : MonoBehaviour
 {
@@ -26,8 +27,6 @@ public class TaskPrefabController : MonoBehaviour
     {
         completeButton.GameObject().SetActive(false);
         background.color = new Color(0.6333f, 0.8392f, 0.5294f, 0.7098f);
-        UserManager.Instance.CurrentUser.Points += Points;
-        DatabaseManager.Instance.UpdateUserPoints(UserManager.Instance.CurrentUser.Id, UserManager.Instance.CurrentUser.Points);
     }
 
     public void OnCompleteButton()
@@ -37,7 +36,13 @@ public class TaskPrefabController : MonoBehaviour
         if (task != null)
         {
             task.Completed = true;
-            DatabaseManager.Instance.MarkTaskAsCompleted(user.Id, taskId);
+            DatabaseManager.Instance.MarkMealAsCompleted(user.Id, taskId);
+            if (!task.pointsGiven)
+            {
+                task.pointsGiven = true;
+                UserManager.Instance.CurrentUser.Points += Points;
+                DatabaseManager.Instance.UpdateUserPoints(UserManager.Instance.CurrentUser.Id, UserManager.Instance.CurrentUser.Points);
+            }
         }
         MarkCompleted();
     }
