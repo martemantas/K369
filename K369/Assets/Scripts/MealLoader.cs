@@ -7,6 +7,8 @@ public class MealLoader : MonoBehaviour
     public GameObject prefabToInstantiate;
     public Transform prefabParent;
 
+    private bool isCompleteButtonActive = true;
+
     private void Start()
     {
         SpawnUserMeals();
@@ -24,7 +26,7 @@ public class MealLoader : MonoBehaviour
                 MealPrefabController controller = mealInstance.GetComponent<MealPrefabController>();
                 if (controller != null)
                 {
-                    controller.Initialize(meal.MealId, meal.Name, meal.Description, meal.Points);
+                    controller.Initialize(meal.MealId, meal.Name, meal.Description, meal.Points, isCompleteButtonActive);
                     if (meal.Completed)
                     {
                         controller.MarkCompleted();

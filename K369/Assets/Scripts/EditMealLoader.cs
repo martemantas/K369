@@ -13,6 +13,8 @@ public class EditMealLoader : MonoBehaviour
     public ScrollRect scrollView;
     public Transform contentContainer;
 
+    private bool isRemoveButtonActive = true;
+
     private void Start()
     {
         SpawnUserMeals();
@@ -27,14 +29,11 @@ public class EditMealLoader : MonoBehaviour
             foreach (Meal meal in user.Meals)
             {
                 GameObject mealInstance = Instantiate(prefabToInstantiate, prefabParent);
-                MealPrefabController controller = mealInstance.GetComponent<MealPrefabController>();
+                MealEditPrefabController controller = mealInstance.GetComponent<MealEditPrefabController>();
                 if (controller != null)
                 {
-                    controller.Initialize(meal.MealId, meal.Name, meal.Description, meal.Points);
-                    if (meal.Completed)
-                    {
-                        controller.MarkCompleted();
-                    }
+                    controller.Initialize(meal.MealId, meal.Name, meal.Description, meal.Points, isRemoveButtonActive);
+                    
                 }
             }
         }
@@ -57,7 +56,6 @@ public class EditMealLoader : MonoBehaviour
 
     private void ResetContent()
     {
-        // Loop through all child elements of the content container and destroy them
         foreach (Transform child in contentContainer)
         {
             Destroy(child.gameObject);

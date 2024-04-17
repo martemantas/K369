@@ -18,8 +18,8 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
     private int pointsToAdd = 10;
 
     public EditMealLoader loader;
-    public ScrollRect scrollView; 
-    public Transform contentContainer; 
+    public ScrollRect scrollView;
+    public Transform contentContainer;
 
     public void OnSubmitButtonClick()
     {
@@ -36,7 +36,7 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
             inputFields[1].text = string.Empty;
         }
 
-        user.Meals.Add(new Meal(mealId, inputFields[0].text, inputFields[1].text, carbohydrates, 
+        user.Meals.Add(new Meal(mealId, inputFields[0].text, inputFields[1].text, carbohydrates,
                                 proteins, fats, false, "", "", "", pointsToAdd, kcal));
         if (user.userType != 0)
         {
@@ -48,15 +48,16 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
         controller.SetMealPrefab(instantiatedPrefab);
         if (controller != null)
         {
-            controller.Initialize(mealId, inputFields[0].text, inputFields[1].text, pointsToAdd);
+            controller.Initialize(mealId, inputFields[0].text, inputFields[1].text, pointsToAdd, true);
         }
 
         ResetContent();
+        loader.SpawnUserMeals();
     }
+
 
     private void ResetContent()
     {
-        // Loop through all child elements of the content container and destroy them
         foreach (Transform child in contentContainer)
         {
             Destroy(child.gameObject);
@@ -67,7 +68,6 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
         {
             scrollView.normalizedPosition = Vector2.up;
         }
-        loader.SpawnUserMeals();
     }
 }
 

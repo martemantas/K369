@@ -75,6 +75,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Scripts\FormToPrefabSubmitter.cs" />
     <Compile Include="Assets\Scripts\TogglePasswordVisibility.cs" />
+    <Compile Include="Assets\Scripts\MealEditController.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsInitManager.cs" />
     <Compile Include="Assets\Scripts\HighlightObject.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
