@@ -185,6 +185,31 @@ public class DatabaseManager : MonoBehaviour
         });
     }
 
+    public void GetUserMeals(string userId, Action<List<Meal>> callback)
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("Users/" + userId + "/Meals")
+            .GetValueAsync().ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted || !task.IsCompleted)
+                {
+                    Debug.LogError("Error fetching user meals: " + task.Exception);
+                    callback(null);
+                }
+                else
+                {
+                    DataSnapshot snapshot = task.Result;
+                    List<Meal> meals = new List<Meal>();
+                    foreach (DataSnapshot mealSnapshot in snapshot.Children)
+                    {
+                        Meal _meal = JsonUtility.FromJson<Meal>(mealSnapshot.GetRawJsonValue());
+                        meals.Add(_meal);
+                    }
+                    callback(meals);
+                }
+            });
+    }
+
     public void AddNewTask(string userId, string taskId, string name, string description, string dateAdded, string dateCompleted, string dateExpire, int points, bool completed) {
         Task newTask = new Task(taskId, name, description, dateAdded, dateCompleted, dateExpire, points, completed);
         string json = JsonUtility.ToJson(newTask);

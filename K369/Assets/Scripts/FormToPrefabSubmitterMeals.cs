@@ -45,13 +45,19 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
         }
 
         MealPrefabController controller = instantiatedPrefab.GetComponent<MealPrefabController>();
-        controller.SetMealPrefab(instantiatedPrefab);
         if (controller != null)
         {
             controller.Initialize(mealId, inputFields[0].text, inputFields[1].text, pointsToAdd, true);
         }
 
-        ResetContent();
+        MealEditPrefabController controllerEdit = instantiatedPrefab.GetComponent<MealEditPrefabController>();
+        if (controllerEdit != null)
+        {
+            controllerEdit.Initialize(mealId, inputFields[0].text, inputFields[1].text, pointsToAdd, true);
+            controllerEdit.SetMealId(mealId);
+        }
+
+        ResetContent();      
         loader.SpawnUserMeals();
     }
 
@@ -69,5 +75,8 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
             scrollView.normalizedPosition = Vector2.up;
         }
     }
+
+
+
 }
 

@@ -16,9 +16,10 @@ public class EditMealLoader : MonoBehaviour
     private bool isRemoveButtonActive = true;
 
     private void Start()
-    {
+    {       
         SpawnUserMeals();
     }
+
 
     public void SpawnUserMeals()
     {
@@ -67,5 +68,6 @@ public class EditMealLoader : MonoBehaviour
             scrollView.normalizedPosition = Vector2.up;
         }
     }
+
 
 }

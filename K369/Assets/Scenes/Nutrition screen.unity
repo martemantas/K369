@@ -10536,6 +10536,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabToInstantiate: {fileID: 3431603867780560885, guid: e8113a1b549491548843d659f6ea1d05, type: 3}
   prefabParent: {fileID: 944073801}
+  scrollView: {fileID: 1733865343}
+  contentContainer: {fileID: 944073801}
 --- !u!4 &1000973580
 Transform:
   m_ObjectHideFlags: 0

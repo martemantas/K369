@@ -14,7 +14,6 @@ public class MealPrefabController : MonoBehaviour
     public Image background;
     private string mealId;
     private int Points;
-    private GameObject mealPrefab;
 
 
     public void Initialize(string id, string name, string description, int points, bool isCompleteButtonActive)
@@ -23,16 +22,8 @@ public class MealPrefabController : MonoBehaviour
         nameText.text = name;
         descriptionText.text = description;
         Points = points;
-        if (isCompleteButtonActive)
-        {
-            completeButton.GameObject().SetActive(true);
-            removeButton.GameObject().SetActive(false);
-        }
-        else
-        {
-            completeButton.GameObject().SetActive(false);
-            removeButton.GameObject().SetActive(true);
-        }
+        completeButton.GameObject().SetActive(true);
+        removeButton.GameObject().SetActive(false);
     }
 
     public void MarkCompleted()
@@ -61,10 +52,7 @@ public class MealPrefabController : MonoBehaviour
     }
 
 
-    public void SetMealPrefab(GameObject prefab)
-    {
-        mealPrefab = prefab;
-    }
+
 
 }
 

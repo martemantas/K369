@@ -31,6 +31,7 @@ public class NutritionPage : MonoBehaviour
         SetValues();
     }
 
+
     // Counts nutrition values
     public void SetValues()
     {
