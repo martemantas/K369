@@ -18,6 +18,7 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
     private int pointsToAdd = 10;
 
     public EditMealLoader loader;
+
     public ScrollRect scrollView;
     public Transform contentContainer;
 
@@ -57,11 +58,12 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
             controllerEdit.SetMealId(mealId);
         }
 
+        // Load prefabs
         ResetContent();      
         loader.SpawnUserMeals();
     }
 
-
+    // Delete prefabs
     private void ResetContent()
     {
         foreach (Transform child in contentContainer)

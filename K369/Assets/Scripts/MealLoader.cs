@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class MealLoader : MonoBehaviour
 {
@@ -9,8 +10,12 @@ public class MealLoader : MonoBehaviour
 
     private bool isCompleteButtonActive = true;
 
+    public ScrollRect scrollView;
+    public Transform contentContainer;
+
     private void Start()
     {
+        ResetContent();
         SpawnUserMeals();
     }
 
@@ -40,4 +45,20 @@ public class MealLoader : MonoBehaviour
         }
 
     }
+
+    // Delete prefabs
+    public void ResetContent()
+    {
+        foreach (Transform child in contentContainer)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Optionally, reset the scroll position to the top
+        if (scrollView != null)
+        {
+            scrollView.normalizedPosition = Vector2.up;
+        }
+    }
+
 }

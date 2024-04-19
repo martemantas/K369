@@ -33,8 +33,7 @@ public class EditMealLoader : MonoBehaviour
                 MealEditPrefabController controller = mealInstance.GetComponent<MealEditPrefabController>();
                 if (controller != null)
                 {
-                    controller.Initialize(meal.MealId, meal.Name, meal.Description, meal.Points, isRemoveButtonActive);
-                    
+                    controller.Initialize(meal.MealId, meal.Name, meal.Description, meal.Points, isRemoveButtonActive);                   
                 }
             }
         }
@@ -55,6 +54,7 @@ public class EditMealLoader : MonoBehaviour
         SpawnUserMeals();
     }
 
+    // Delete prefabs
     private void ResetContent()
     {
         foreach (Transform child in contentContainer)

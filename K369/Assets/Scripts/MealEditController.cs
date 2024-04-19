@@ -18,7 +18,7 @@ public class MealEditPrefabController : MonoBehaviour
     private string mealId;
     private int Points;
 
-    private string NutritionScreenName = "Nutrition screen";
+    private string MainScreenName = "Main screen";
 
     public void Initialize(string id, string name, string description, int points, bool isRemoveButtonActive)
     {
@@ -43,7 +43,6 @@ public class MealEditPrefabController : MonoBehaviour
         User user = UserManager.Instance.CurrentUser;
 
         string mealIdToRemove = FindMealToDelete(user, nameText.text, descriptionText.text);
-
         if (mealIdToRemove != null)
         {
             DeleteMealFromDatabase(user.Id, mealIdToRemove);
@@ -52,9 +51,10 @@ public class MealEditPrefabController : MonoBehaviour
             DeletePrefab(user);
         }
 
-        SceneManager.LoadScene(NutritionScreenName);
+        SceneManager.LoadScene(MainScreenName);
     }
 
+    // Delete prefab associated with meal
     private void DeletePrefab(User user)
     {
         // After deleting the meal, update the user's meals
@@ -67,8 +67,7 @@ public class MealEditPrefabController : MonoBehaviour
         });
     }
 
-    
-
+    // Finds meal to delete based on meal name and description
     private string FindMealToDelete(User user, string mealName, string mealDescription)
     {
         string mealId = "";
@@ -90,7 +89,5 @@ public class MealEditPrefabController : MonoBehaviour
     {
         DatabaseManager.Instance.DeleteMeal(userId, mealId);
     }
-
-
 
 }
