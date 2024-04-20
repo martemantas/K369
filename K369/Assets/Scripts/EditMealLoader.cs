@@ -16,7 +16,8 @@ public class EditMealLoader : MonoBehaviour
     private bool isRemoveButtonActive = true;
 
     private void Start()
-    {       
+    {
+        ResetContent();
         SpawnUserMeals();
     }
 
@@ -50,8 +51,14 @@ public class EditMealLoader : MonoBehaviour
 
     public void OnEditButton()
     {
+        User user = UserManager.Instance.CurrentUser;
         ResetContent();
-        SpawnUserMeals();
+
+        // if user is not guest
+        if (user.userType != 0)
+        {           
+            SpawnUserMeals();
+        }
     }
 
     // Delete prefabs

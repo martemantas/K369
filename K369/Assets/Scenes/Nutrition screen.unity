@@ -8061,6 +8061,7 @@ MonoBehaviour:
   YouScreenName: Main screen
   SettingsScreenName: Settings screen
   FoodSearchScreenName: FoodSearch screen
+  scroll: {fileID: 0}
 --- !u!1 &811141542
 GameObject:
   m_ObjectHideFlags: 0
@@ -8419,6 +8420,7 @@ MonoBehaviour:
   YouScreenName: Main screen
   SettingsScreenName: Settings
   FoodSearchScreenName: FoodSearch screen
+  scroll: {fileID: 2067706783}
 --- !u!4 &840359729
 Transform:
   m_ObjectHideFlags: 0
@@ -12893,6 +12895,7 @@ MonoBehaviour:
   YouScreenName: Main screen
   SettingsScreenName: Settings screen
   FoodSearchScreenName: FoodSearch screen
+  scroll: {fileID: 0}
 --- !u!114 &1225198148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18604,6 +18607,7 @@ MonoBehaviour:
   YouScreenName: Main screen
   SettingsScreenName: Settings screen
   FoodSearchScreenName: FoodSearch screen
+  scroll: {fileID: 0}
 --- !u!114 &2105530175
 MonoBehaviour:
   m_ObjectHideFlags: 0

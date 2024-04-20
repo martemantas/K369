@@ -18,7 +18,6 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
     private int pointsToAdd = 10;
 
     public EditMealLoader loader;
-
     public ScrollRect scrollView;
     public Transform contentContainer;
 
@@ -58,21 +57,25 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
             controllerEdit.SetMealId(mealId);
         }
 
-        // Load prefabs
-        ResetContent();      
-        loader.SpawnUserMeals();
+        // if user is not guest
+        if (user.userType != 0)
+        {
+            // Load prefabs
+            ResetContent(contentContainer, scrollView);
+            loader.SpawnUserMeals();
+        }
     }
 
     // Delete prefabs
-    private void ResetContent()
+    private void ResetContent(Transform container, ScrollRect scroll)
     {
-        foreach (Transform child in contentContainer)
+        foreach (Transform child in container)
         {
             Destroy(child.gameObject);
         }
 
         // Optionally, reset the scroll position to the top
-        if (scrollView != null)
+        if (scroll != null)
         {
             scrollView.normalizedPosition = Vector2.up;
         }
