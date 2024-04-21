@@ -17,6 +17,10 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
     private int kcal = 0;
     private int pointsToAdd = 10;
 
+    public EditMealLoader loader;
+    public ScrollRect scrollView;
+    public Transform contentContainer;
+
     public void OnSubmitButtonClick()
     {
         GameObject instantiatedPrefab = Instantiate(prefabToInstantiate, prefabParent ? prefabParent : null);
@@ -32,7 +36,7 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
             inputFields[1].text = string.Empty;
         }
 
-        user.Meals.Add(new Meal(mealId, inputFields[0].text, inputFields[1].text, carbohydrates, 
+        user.Meals.Add(new Meal(mealId, inputFields[0].text, inputFields[1].text, carbohydrates,
                                 proteins, fats, false, "", "", "", pointsToAdd, kcal));
         if (user.userType != 0)
         {
@@ -41,11 +45,43 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
         }
 
         MealPrefabController controller = instantiatedPrefab.GetComponent<MealPrefabController>();
-        controller.SetMealPrefab(instantiatedPrefab);
         if (controller != null)
         {
-            controller.Initialize(mealId, inputFields[0].text, inputFields[1].text, pointsToAdd);
+            controller.Initialize(mealId, inputFields[0].text, inputFields[1].text, pointsToAdd, true);
+        }
+
+        MealEditPrefabController controllerEdit = instantiatedPrefab.GetComponent<MealEditPrefabController>();
+        if (controllerEdit != null)
+        {
+            controllerEdit.Initialize(mealId, inputFields[0].text, inputFields[1].text, pointsToAdd, true);
+            controllerEdit.SetMealId(mealId);
+        }
+
+        // if user is not guest
+        if (user.userType != 0)
+        {
+            // Load prefabs
+            ResetContent(contentContainer, scrollView);
+            loader.SpawnUserMeals();
         }
     }
 
+    // Delete prefabs
+    private void ResetContent(Transform container, ScrollRect scroll)
+    {
+        foreach (Transform child in container)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Optionally, reset the scroll position to the top
+        if (scroll != null)
+        {
+            scrollView.normalizedPosition = Vector2.up;
+        }
+    }
+
+
+
 }
+

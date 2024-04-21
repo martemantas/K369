@@ -8061,6 +8061,7 @@ MonoBehaviour:
   YouScreenName: Main screen
   SettingsScreenName: Settings screen
   FoodSearchScreenName: FoodSearch screen
+  scroll: {fileID: 0}
 --- !u!1 &811141542
 GameObject:
   m_ObjectHideFlags: 0
@@ -8419,6 +8420,7 @@ MonoBehaviour:
   YouScreenName: Main screen
   SettingsScreenName: Settings
   FoodSearchScreenName: FoodSearch screen
+  scroll: {fileID: 2067706783}
 --- !u!4 &840359729
 Transform:
   m_ObjectHideFlags: 0
@@ -10536,6 +10538,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabToInstantiate: {fileID: 3431603867780560885, guid: e8113a1b549491548843d659f6ea1d05, type: 3}
   prefabParent: {fileID: 944073801}
+  scrollView: {fileID: 1733865343}
+  contentContainer: {fileID: 944073801}
 --- !u!4 &1000973580
 Transform:
   m_ObjectHideFlags: 0
@@ -10807,6 +10811,54 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1018308905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1018308907}
+  - component: {fileID: 1018308906}
+  m_Layer: 0
+  m_Name: EditMealsLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1018308906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018308905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67d3b5418377a448a6de6c9a1d116d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabToInstantiate: {fileID: 7300903658390291962, guid: e2e83c365911ada46ac720d8a160b060, type: 3}
+  prefabParent: {fileID: 1415286025}
+  scrollView: {fileID: 2067706783}
+  contentContainer: {fileID: 1415286025}
+--- !u!4 &1018308907
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018308905}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 331.78778, y: 1241.4122, z: 349.34653}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1020895021
 GameObject:
   m_ObjectHideFlags: 0
@@ -12843,6 +12895,7 @@ MonoBehaviour:
   YouScreenName: Main screen
   SettingsScreenName: Settings screen
   FoodSearchScreenName: FoodSearch screen
+  scroll: {fileID: 0}
 --- !u!114 &1225198148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14430,14 +14483,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1664051786}
+  m_Children: []
   m_Father: {fileID: 962679003}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.000061035156, y: 0}
-  m_SizeDelta: {x: -163, y: -833}
+  m_SizeDelta: {x: -1063, y: -1683}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1415286026
 MonoBehaviour:
@@ -14904,6 +14956,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1018308906}
+        m_TargetAssemblyTypeName: EditMealLoader, Assembly-CSharp
+        m_MethodName: OnEditButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -15503,108 +15567,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1652535503}
   m_CullTransparentMesh: 1
---- !u!1001 &1664051785
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1415286025}
-    m_Modifications:
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 900
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 450
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8390553932449524054, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-      propertyPath: m_Name
-      value: EditMealButtonPrefab
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
---- !u!224 &1664051786 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6604034509912282671, guid: 2f85ad9b376e9f143b0d724c24940f3e, type: 3}
-  m_PrefabInstance: {fileID: 1664051785}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1697453290
 GameObject:
   m_ObjectHideFlags: 0
@@ -15958,6 +15920,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1018308906}
+        m_TargetAssemblyTypeName: EditMealLoader, Assembly-CSharp
+        m_MethodName: OnExitButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1742257380
 MonoBehaviour:
@@ -17075,6 +17049,9 @@ MonoBehaviour:
   - {fileID: 1202885306}
   prefabToInstantiate: {fileID: 3431603867780560885, guid: e8113a1b549491548843d659f6ea1d05, type: 3}
   prefabParent: {fileID: 944073801}
+  loader: {fileID: 1018308906}
+  scrollView: {fileID: 2067706783}
+  contentContainer: {fileID: 1415286025}
 --- !u!1 &1910017486
 GameObject:
   m_ObjectHideFlags: 0
@@ -18258,8 +18235,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.999939, y: 141}
-  m_SizeDelta: {x: 1080, y: 1000}
+  m_AnchoredPosition: {x: -11.6822, y: -229.15149}
+  m_SizeDelta: {x: 1080, y: 1700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2067706783
 MonoBehaviour:
@@ -18630,6 +18607,7 @@ MonoBehaviour:
   YouScreenName: Main screen
   SettingsScreenName: Settings screen
   FoodSearchScreenName: FoodSearch screen
+  scroll: {fileID: 0}
 --- !u!114 &2105530175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18812,3 +18790,4 @@ SceneRoots:
   - {fileID: 809037861}
   - {fileID: 840359729}
   - {fileID: 1000973580}
+  - {fileID: 1018308907}

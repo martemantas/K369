@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MealPrefabController : MonoBehaviour
@@ -9,18 +10,20 @@ public class MealPrefabController : MonoBehaviour
     public Text nameText;
     public Text descriptionText;
     public Button completeButton;
+    public Button removeButton;
     public Image background;
     private string mealId;
     private int Points;
-    private GameObject mealPrefab;
 
 
-    public void Initialize(string id, string name, string description, int points)
+    public void Initialize(string id, string name, string description, int points, bool isCompleteButtonActive)
     {
         mealId = id;
         nameText.text = name;
         descriptionText.text = description;
         Points = points;
+        completeButton.GameObject().SetActive(true);
+        removeButton.GameObject().SetActive(false);
     }
 
     public void MarkCompleted()
@@ -31,6 +34,7 @@ public class MealPrefabController : MonoBehaviour
 
     public void OnCompleteButton()
     {
+        Debug.Log("Complete pressed");
         User user = UserManager.Instance.CurrentUser;
         Meal meal = user.Meals.Find(t => t.MealId == mealId);
         if (meal != null)
@@ -48,15 +52,9 @@ public class MealPrefabController : MonoBehaviour
     }
 
 
-    public void SetMealPrefab(GameObject prefab)
-    {
-        mealPrefab = prefab;
-    }
 
-    // need to implement
-    public void OnDeleteButton()
-    {
 
-    }
 }
+
+
 

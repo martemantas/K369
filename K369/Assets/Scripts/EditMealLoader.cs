@@ -1,23 +1,26 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class MealLoader : MonoBehaviour
+public class EditMealLoader : MonoBehaviour
 {
     public GameObject prefabToInstantiate;
     public Transform prefabParent;
 
-    private bool isCompleteButtonActive = true;
-
+    private string NutritionScreenName = "Nutrition screen";
     public ScrollRect scrollView;
     public Transform contentContainer;
+
+    private bool isRemoveButtonActive = true;
 
     private void Start()
     {
         ResetContent();
         SpawnUserMeals();
     }
+
 
     public void SpawnUserMeals()
     {
@@ -28,14 +31,10 @@ public class MealLoader : MonoBehaviour
             foreach (Meal meal in user.Meals)
             {
                 GameObject mealInstance = Instantiate(prefabToInstantiate, prefabParent);
-                MealPrefabController controller = mealInstance.GetComponent<MealPrefabController>();
+                MealEditPrefabController controller = mealInstance.GetComponent<MealEditPrefabController>();
                 if (controller != null)
                 {
-                    controller.Initialize(meal.MealId, meal.Name, meal.Description, meal.Points, isCompleteButtonActive);
-                    if (meal.Completed)
-                    {
-                        controller.MarkCompleted();
-                    }
+                    controller.Initialize(meal.MealId, meal.Name, meal.Description, meal.Points, isRemoveButtonActive);                   
                 }
             }
         }
@@ -43,11 +42,27 @@ public class MealLoader : MonoBehaviour
         {
             Debug.Log("User has no meals or user is null.");
         }
+    }
 
+    public void OnExitButton()
+    {
+        SceneManager.LoadScene(NutritionScreenName);
+    }
+
+    public void OnEditButton()
+    {
+        User user = UserManager.Instance.CurrentUser;
+        ResetContent();
+
+        // if user is not guest
+        if (user.userType != 0)
+        {           
+            SpawnUserMeals();
+        }
     }
 
     // Delete prefabs
-    public void ResetContent()
+    private void ResetContent()
     {
         foreach (Transform child in contentContainer)
         {
@@ -60,5 +75,6 @@ public class MealLoader : MonoBehaviour
             scrollView.normalizedPosition = Vector2.up;
         }
     }
+
 
 }
