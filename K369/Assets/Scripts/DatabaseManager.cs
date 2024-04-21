@@ -6,6 +6,8 @@ using Firebase;
 using Firebase.Database;
 using Firebase.Extensions;
 using Unity.VisualScripting;
+using System.Threading.Tasks;
+
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -18,6 +20,8 @@ public class DatabaseManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // Prevents the UserManager from being destroyed when changing scenes
+            StartCoroutine(CheckAndRemoveCompletedTasks());
+
         }
         else
         {
@@ -232,8 +236,74 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
+    private IEnumerator CheckAndRemoveCompletedTasks()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(10f); // Wait for 10 seconds
 
-    
+            var userId = UserManager.Instance.CurrentUser.Id; // Assuming you have a UserManager to get the current user's ID
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                Debug.LogWarning("User ID is null or empty.");
+                continue;
+            }
+
+            var taskQuery = databaseReference.Child("Users").Child(userId).Child("Tasks").OrderByChild("Completed").EqualTo(true);
+            var taskSnapshotTask = taskQuery.GetValueAsync();
+
+            yield return new WaitUntil(() => taskSnapshotTask.IsCompleted);
+
+            if (taskSnapshotTask.IsFaulted)
+            {
+                Debug.LogError("Error fetching completed tasks: " + taskSnapshotTask.Exception);
+            }
+            else if (taskSnapshotTask.IsCompleted)
+            {
+                DataSnapshot taskSnapshot = taskSnapshotTask.Result;
+                if (taskSnapshot != null && taskSnapshot.Exists)
+                {
+                    foreach (var task in taskSnapshot.Children)
+                    {
+                        string taskId = task.Key;
+                        RemoveTaskFromDatabase(taskId);
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    private void RemoveTaskFromDatabase(string taskId)
+    {
+        Debug.Log("Removing task from database: " + taskId);
+        string userId = UserManager.Instance.CurrentUser.Id; // Assuming you have a UserManager to get the current user's ID
+        if (string.IsNullOrEmpty(userId))
+        {
+            Debug.LogWarning("User ID is null or empty. Cannot remove task.");
+            return;
+        }
+
+        DatabaseReference taskRef = databaseReference.Child("Users").Child(userId).Child("Tasks").Child(taskId);
+        taskRef.RemoveValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError("Error removing task: " + task.Exception);
+            }
+            else if (task.IsCompleted)
+            {
+                Debug.Log("Task removed successfully: " + taskId);
+            }
+        });
+    }
+
+
+
+
+
 
     public void AddNewNutrientRecord(string userId, string nutrientId, string date, int protein, int fat, int carbohydrates, int calories)
     {

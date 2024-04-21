@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\manto\\Documents\\K369\\K369\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\registerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\registerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|c:\\users\\manto\\documents\\k369\\k369\\assets\\scripts\\databasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\databasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\databasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\guestusernameinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\guestusernameinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\radiobuttongroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\radiobuttongroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|c:\\users\\manto\\documents\\k369\\k369\\assets\\scripts\\taskloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\taskloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\settingsmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,6 +21,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\usermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\usermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\mealcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mealcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\editmealloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\editmealloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\registerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\registerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,11 +42,61 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
+              "Title": "TaskLoader.cs",
+              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\TaskLoader.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\TaskLoader.cs",
+              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\TaskLoader.cs",
+              "RelativeToolTip": "Assets\\Scripts\\TaskLoader.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAwAsAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-21T18:44:38.075Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EditMealLoader.cs",
+              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\EditMealLoader.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\EditMealLoader.cs",
+              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\EditMealLoader.cs",
+              "RelativeToolTip": "Assets\\Scripts\\EditMealLoader.cs",
+              "ViewState": "AQIAADcAAAAAAAAAAAAkwEAAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-21T18:42:31.441Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MealController.cs",
+              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\MealController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MealController.cs",
+              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\MealController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MealController.cs",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAwwDwAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-21T17:50:09.517Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TaskController.cs",
+              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\TaskController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\TaskController.cs",
+              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\TaskController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\TaskController.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAYwCUAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-21T17:42:38.603Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "SettingsManager.cs",
               "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\SettingsManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SettingsManager.cs",
@@ -46,47 +104,19 @@
               "RelativeToolTip": "Assets\\Scripts\\SettingsManager.cs",
               "ViewState": "AQIAAD0AAAAAAAAAAAAtwBgAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-14T21:55:08.428Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-14T21:55:08.428Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "UserManager.cs",
               "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\UserManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UserManager.cs",
               "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\UserManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\UserManager.cs",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAIwCYAAAAjAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAsAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-14T21:51:57.955Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "RadioButtonGroup.cs",
-              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\RadioButtonGroup.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\RadioButtonGroup.cs",
-              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\RadioButtonGroup.cs",
-              "RelativeToolTip": "Assets\\Scripts\\RadioButtonGroup.cs",
-              "ViewState": "AQIAAB0AAAAAAAAAAAAswBkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-14T19:49:45.804Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GuestUsernameInput.cs",
-              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\GuestUsernameInput.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\GuestUsernameInput.cs",
-              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\GuestUsernameInput.cs",
-              "RelativeToolTip": "Assets\\Scripts\\GuestUsernameInput.cs",
-              "ViewState": "AQIAAFQAAAAAAAAAAAAAADgAAAB5AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-14T18:57:03.349Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-14T21:51:57.955Z"
             },
             {
               "$type": "Document",
@@ -96,23 +126,22 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\DatabaseManager.cs",
               "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DatabaseManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\DatabaseManager.cs",
-              "ViewState": "AQIAAFsBAAAAAAAAAAAAwG8AAAAFAAAA",
+              "ViewState": "AQIAAAoBAAAAAAAAAADwvxsBAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-14T18:35:36.936Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "RegisterForm.cs",
               "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\RegisterForm.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\RegisterForm.cs",
               "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\RegisterForm.cs",
               "RelativeToolTip": "Assets\\Scripts\\RegisterForm.cs",
-              "ViewState": "AQIAAIUAAAAAAAAAAAAkwD4AAAAmAAAA",
+              "ViewState": "AQIAAIUAAAAAAAAAAAA5wD4AAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-14T18:30:08.728Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-14T18:30:08.728Z"
             }
           ]
         }

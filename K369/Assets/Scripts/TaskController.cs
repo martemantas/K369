@@ -36,7 +36,7 @@ public class TaskPrefabController : MonoBehaviour
         if (task != null)
         {
             task.Completed = true;
-            DatabaseManager.Instance.MarkMealAsCompleted(user.Id, taskId);
+            DatabaseManager.Instance.MarkTaskAsCompleted(user.Id, taskId);
             if (!task.pointsGiven)
             {
                 task.pointsGiven = true;
