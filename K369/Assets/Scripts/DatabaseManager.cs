@@ -20,7 +20,8 @@ public class DatabaseManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // Prevents the UserManager from being destroyed when changing scenes
-            StartCoroutine(CheckAndRemoveCompletedTasks());
+            StartCoroutine(CheckAndRemoveCompletedItems("Tasks"));
+            StartCoroutine(CheckAndRemoveCompletedItems("Meals"));
 
         }
         else
@@ -236,13 +237,13 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
-    private IEnumerator CheckAndRemoveCompletedTasks()
+    private IEnumerator CheckAndRemoveCompletedItems(string itemType)
     {
         while (true)
         {
             yield return new WaitForSeconds(10f); // Wait for 10 seconds
 
-            var userId = UserManager.Instance.CurrentUser.Id; // Assuming you have a UserManager to get the current user's ID
+            var userId = UserManager.Instance.CurrentUser.Id;
 
             if (string.IsNullOrEmpty(userId))
             {
@@ -250,52 +251,44 @@ public class DatabaseManager : MonoBehaviour
                 continue;
             }
 
-            var taskQuery = databaseReference.Child("Users").Child(userId).Child("Tasks").OrderByChild("Completed").EqualTo(true);
-            var taskSnapshotTask = taskQuery.GetValueAsync();
+            var itemQuery = databaseReference.Child("Users").Child(userId).Child(itemType).OrderByChild("Completed").EqualTo(true);
+            var itemSnapshotTask = itemQuery.GetValueAsync();
 
-            yield return new WaitUntil(() => taskSnapshotTask.IsCompleted);
+            yield return new WaitUntil(() => itemSnapshotTask.IsCompleted);
 
-            if (taskSnapshotTask.IsFaulted)
+            if (itemSnapshotTask.IsFaulted)
             {
-                Debug.LogError("Error fetching completed tasks: " + taskSnapshotTask.Exception);
+                Debug.LogError($"Error fetching completed {itemType}: " + itemSnapshotTask.Exception);
             }
-            else if (taskSnapshotTask.IsCompleted)
+            else if (itemSnapshotTask.IsCompleted)
             {
-                DataSnapshot taskSnapshot = taskSnapshotTask.Result;
-                if (taskSnapshot != null && taskSnapshot.Exists)
+                DataSnapshot itemSnapshot = itemSnapshotTask.Result;
+                if (itemSnapshot != null && itemSnapshot.Exists)
                 {
-                    foreach (var task in taskSnapshot.Children)
+                    foreach (var item in itemSnapshot.Children)
                     {
-                        string taskId = task.Key;
-                        RemoveTaskFromDatabase(taskId);
+                        string itemId = item.Key;
+                        RemoveItemFromDatabase(userId, itemType, itemId);
                     }
                 }
             }
         }
     }
 
-
-
-    private void RemoveTaskFromDatabase(string taskId)
+    private void RemoveItemFromDatabase(string userId, string itemType, string itemId)
     {
-        Debug.Log("Removing task from database: " + taskId);
-        string userId = UserManager.Instance.CurrentUser.Id; // Assuming you have a UserManager to get the current user's ID
-        if (string.IsNullOrEmpty(userId))
-        {
-            Debug.LogWarning("User ID is null or empty. Cannot remove task.");
-            return;
-        }
+        Debug.Log($"Removing {itemType} from database: " + itemId);
 
-        DatabaseReference taskRef = databaseReference.Child("Users").Child(userId).Child("Tasks").Child(taskId);
-        taskRef.RemoveValueAsync().ContinueWithOnMainThread(task =>
+        DatabaseReference itemRef = databaseReference.Child("Users").Child(userId).Child(itemType).Child(itemId);
+        itemRef.RemoveValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.IsFaulted)
             {
-                Debug.LogError("Error removing task: " + task.Exception);
+                Debug.LogError($"Error removing {itemType}: " + task.Exception);
             }
             else if (task.IsCompleted)
             {
-                Debug.Log("Task removed successfully: " + taskId);
+                Debug.Log($"{itemType} removed successfully: " + itemId);
             }
         });
     }
