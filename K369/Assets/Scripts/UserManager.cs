@@ -38,6 +38,28 @@ public class UserManager : MonoBehaviour
         SetPlayerHeight(user.Height);
         SetPlayerWeight(user.Weight);
     }
+    public void DeleteMeal(string mealId)
+    {
+        if (CurrentUser != null && CurrentUser.Meals != null)
+        {
+            Meal mealToDelete = CurrentUser.Meals.Find(m => m.MealId == mealId);
+            if (mealToDelete != null)
+            {
+                CurrentUser.Meals.Remove(mealToDelete);
+            }
+        }
+    }
+    public void DeleteTask(string taskId)
+    {
+        if (CurrentUser != null && CurrentUser.Tasks != null)
+        {
+            Task taskToDelete = CurrentUser.Tasks.Find(t => t.TaskId == taskId);
+            if (taskToDelete != null)
+            {
+                CurrentUser.Tasks.Remove(taskToDelete);
+            }
+        }
+    }
     public void SetPlayerAge(int age)
     {
         playerAge = age;

@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 5017179098678360226}
   m_Layer: 5
   m_Name: Meal
-  m_TagString: Untagged
+  m_TagString: Meal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -418,7 +418,9 @@ MonoBehaviour:
   nameText: {fileID: 2269702035102645098}
   descriptionText: {fileID: 7114925537399228274}
   completeButton: {fileID: 734028058044529187}
+  removeButton: {fileID: 0}
   background: {fileID: 8657755140807788392}
+  mealId: 
 --- !u!1 &6042243346398148661
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ using Firebase;
 using Firebase.Database;
 using Firebase.Extensions;
 using Unity.VisualScripting;
+using System.Threading.Tasks;
+
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -18,6 +20,9 @@ public class DatabaseManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // Prevents the UserManager from being destroyed when changing scenes
+            StartCoroutine(CheckAndRemoveCompletedItems("Tasks"));
+            StartCoroutine(CheckAndRemoveCompletedItems("Meals"));
+
         }
         else
         {
@@ -232,8 +237,130 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
+    private IEnumerator CheckAndRemoveCompletedItems(string itemType)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(7 * 24 * 3600f); // Wait for a week (7 days * 24 hours * 3600 seconds)
 
-    
+            var userId = UserManager.Instance.CurrentUser.Id;
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                Debug.LogWarning("User ID is null or empty.");
+                continue;
+            }
+
+            var itemQuery = databaseReference.Child("Users").Child(userId).Child(itemType).OrderByChild("Completed").EqualTo(true);
+            var itemSnapshotTask = itemQuery.GetValueAsync();
+
+            yield return new WaitUntil(() => itemSnapshotTask.IsCompleted);
+
+            if (itemSnapshotTask.IsFaulted)
+            {
+                Debug.LogError($"Error fetching completed {itemType}: " + itemSnapshotTask.Exception);
+            }
+            else if (itemSnapshotTask.IsCompleted)
+            {
+                DataSnapshot itemSnapshot = itemSnapshotTask.Result;
+                if (itemSnapshot != null && itemSnapshot.Exists)
+                {
+                    foreach (var item in itemSnapshot.Children)
+                    {
+                        string itemId = item.Key;
+                        RemoveItemFromDatabase(userId, itemType, itemId);
+                    }
+                }
+            }
+        }
+    }
+
+    private void RemoveItemFromDatabase(string userId, string itemType, string itemId)
+    {
+        Debug.Log($"Removing {itemType} from database: " + itemId);
+
+        DatabaseReference itemRef = databaseReference.Child("Users").Child(userId).Child(itemType).Child(itemId);
+        itemRef.RemoveValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError($"Error removing {itemType}: " + task.Exception);
+            }
+            else if (task.IsCompleted)
+            {
+                Debug.Log($"{itemType} removed successfully: " + itemId);
+
+                if (itemType == "Tasks")
+                {
+                    UserManager.Instance.DeleteTask(itemId);
+                    GameObject taskGameObject = FindTaskGameObject(itemId);
+                    if (taskGameObject != null)
+                    {
+                        Destroy(taskGameObject);
+                        Debug.Log("Task GameObject destroyed");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Task GameObject reference is null.");
+                    }
+                }
+                else if (itemType == "Meals")
+                {
+                    UserManager.Instance.DeleteMeal(itemId);
+                    GameObject mealGameObject = FindMealGameObject(itemId);
+                    if (mealGameObject != null)
+                    {
+                        Destroy(mealGameObject);
+                        Debug.Log("Meal GameObject destroyed");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Meal GameObject reference is null.");
+                    }
+                }
+            }
+        });
+    }
+    private GameObject FindMealGameObject(string mealId)
+    {
+        foreach (GameObject mealGameObject in GameObject.FindGameObjectsWithTag("Meal"))
+        {
+
+            MealPrefabController mealController = mealGameObject.GetComponent<MealPrefabController>();
+            if (mealController != null && mealController.mealId == mealId)
+            {
+                return mealGameObject;
+            }
+            else
+            {
+                Debug.Log("No meals found");
+            }
+        }
+
+        return null; 
+    }
+    private GameObject FindTaskGameObject(string taskId)
+    {
+        foreach (GameObject taskGameObject in GameObject.FindGameObjectsWithTag("Task"))
+        {
+
+            TaskPrefabController taskController = taskGameObject.GetComponent<TaskPrefabController>();
+            if (taskController != null && taskController.taskId == taskId)
+            {
+                return taskGameObject;
+            }
+            else
+            {
+                Debug.Log("No tasks found");
+            }
+        }
+
+        return null;
+    }
+
+
+
+
 
     public void AddNewNutrientRecord(string userId, string nutrientId, string date, int protein, int fat, int carbohydrates, int calories)
     {

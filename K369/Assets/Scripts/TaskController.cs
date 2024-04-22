@@ -11,7 +11,7 @@ public class TaskPrefabController : MonoBehaviour
     public Text descriptionText;
     public Button completeButton;
     public Image background;
-    private string taskId;
+    public string taskId;
     private int Points;
     
 
@@ -36,7 +36,7 @@ public class TaskPrefabController : MonoBehaviour
         if (task != null)
         {
             task.Completed = true;
-            DatabaseManager.Instance.MarkMealAsCompleted(user.Id, taskId);
+            DatabaseManager.Instance.MarkTaskAsCompleted(user.Id, taskId);
             if (!task.pointsGiven)
             {
                 task.pointsGiven = true;

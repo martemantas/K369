@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 3518668617431732136}
   m_Layer: 5
   m_Name: Task
-  m_TagString: Untagged
+  m_TagString: Task
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -419,6 +419,7 @@ MonoBehaviour:
   descriptionText: {fileID: 7114925537399228274}
   completeButton: {fileID: 734028058044529187}
   background: {fileID: 8657755140807788392}
+  taskId: 
 --- !u!1 &6042243346398148661
 GameObject:
   m_ObjectHideFlags: 0
