@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 9792
+  controlID: 13030
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -83,8 +83,8 @@ MonoBehaviour:
     - UnityEditor.DeviceSimulation.ApplicationSettingsPlugin
     pluginStates:
     - '{}'
-    scale: 10
-    fitToScreenEnabled: 1
+    scale: 23
+    fitToScreenEnabled: 0
     rotationDegree: 0
     highlightSafeAreaEnabled: 0
     friendlyName: Apple iPhone 12
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 9738
+  controlID: 12979
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 50}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 9732
+  controlID: 12973
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -161,8 +161,8 @@ MonoBehaviour:
     y: 0
     width: 231.2
     height: 424
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -207,7 +207,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 4c8dffff0c90ffff589bffff4c9ffffffab3ffff94c3ffff04cfffff8ad1ffffaad2ffff2cfbffff9a1c01004e3101004e320100cc3201008433010078340100c6340100964a0100964b0100144c0100cc4c0100c04d01000e4e0100a8670100a868010026690100de690100d26a0100206b010020a3010020a4010056a501004aa6010098a60100cceb0100ccec01004aed010002ee0100f6ee010044ef0100c8f70100c8f8010046f90100fef90100f2fa010040fb0100
+      m_ExpandedIDs: 2a60ffff4c8dffff0c90ffff589bffff4c9ffffffab3ffff94c3ffff04cfffff8ad1ffffaad2ffff2cfbffff9a1c01004e3101004e320100cc3201008433010078340100c6340100964a0100964b0100144c0100cc4c0100c04d01000e4e0100a8670100a868010026690100de690100d26a0100206b010020a3010020a4010056a501004aa6010098a60100cceb0100ccec01004aed010002ee0100f6ee010044ef0100c8f70100c8f8010046f90100fef90100f2fa010040fb01007e170300341803009c190300501a0300a21c0300
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -250,8 +250,8 @@ MonoBehaviour:
     y: 0
     width: 527.2
     height: 424
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 8}
   m_Panes:
   - {fileID: 8}
@@ -626,9 +626,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 285.44327, y: 1178.9583, z: -14.989714}
+    m_Target: {x: 7.3342814, y: -24.228142, z: -0.9869466}
     speed: 2
-    m_Value: {x: 285.44327, y: 1178.9583, z: -14.989714}
+    m_Value: {x: 7.3342814, y: -24.228142, z: -0.9869466}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -678,9 +678,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1508.9756
+    m_Target: 108.70092
     speed: 2
-    m_Value: 1508.9756
+    m_Value: 108.70092
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -724,8 +724,8 @@ MonoBehaviour:
     y: 0
     width: 404.79993
     height: 424
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 10}
@@ -902,7 +902,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Assets/Prefabs
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -910,16 +910,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Assets/Prefabs
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\manto\Documents\K369\K369
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 180}
-    m_SelectedIDs: d05e0000
-    m_LastClickedID: 24272
-    m_ExpandedIDs: 00000000b45e0000b65e000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: c4350100
+    m_LastClickedID: 79300
+    m_ExpandedIDs: 00000000b45e0000b65e0000c05e000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

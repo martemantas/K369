@@ -49,6 +49,17 @@ public class UserManager : MonoBehaviour
             }
         }
     }
+    public void DeleteTask(string taskId)
+    {
+        if (CurrentUser != null && CurrentUser.Tasks != null)
+        {
+            Task taskToDelete = CurrentUser.Tasks.Find(t => t.TaskId == taskId);
+            if (taskToDelete != null)
+            {
+                CurrentUser.Tasks.Remove(taskToDelete);
+            }
+        }
+    }
     public void SetPlayerAge(int age)
     {
         playerAge = age;

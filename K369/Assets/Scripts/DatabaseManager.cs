@@ -241,7 +241,7 @@ public class DatabaseManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(10f); // Wait for 10 seconds
+            yield return new WaitForSeconds(7 * 24 * 3600f); // Wait for a week (7 days * 24 hours * 3600 seconds)
 
             var userId = UserManager.Instance.CurrentUser.Id;
 
@@ -289,21 +289,20 @@ public class DatabaseManager : MonoBehaviour
             else if (task.IsCompleted)
             {
                 Debug.Log($"{itemType} removed successfully: " + itemId);
-                Debug.Log(itemType);
 
                 if (itemType == "Tasks")
                 {
-                    Debug.Log(itemType + " is task");
-
-                    /*GameObject taskGameObject = FindTaskGameObject(itemId);
+                    UserManager.Instance.DeleteTask(itemId);
+                    GameObject taskGameObject = FindTaskGameObject(itemId);
                     if (taskGameObject != null)
                     {
                         Destroy(taskGameObject);
+                        Debug.Log("Task GameObject destroyed");
                     }
                     else
                     {
                         Debug.LogWarning("Task GameObject reference is null.");
-                    }*/
+                    }
                 }
                 else if (itemType == "Meals")
                 {
@@ -340,7 +339,24 @@ public class DatabaseManager : MonoBehaviour
 
         return null; 
     }
+    private GameObject FindTaskGameObject(string taskId)
+    {
+        foreach (GameObject taskGameObject in GameObject.FindGameObjectsWithTag("Task"))
+        {
 
+            TaskPrefabController taskController = taskGameObject.GetComponent<TaskPrefabController>();
+            if (taskController != null && taskController.taskId == taskId)
+            {
+                return taskGameObject;
+            }
+            else
+            {
+                Debug.Log("No tasks found");
+            }
+        }
+
+        return null;
+    }
 
 
 

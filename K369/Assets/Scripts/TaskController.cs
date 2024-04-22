@@ -11,7 +11,7 @@ public class TaskPrefabController : MonoBehaviour
     public Text descriptionText;
     public Button completeButton;
     public Image background;
-    private string taskId;
+    public string taskId;
     private int Points;
     
 
