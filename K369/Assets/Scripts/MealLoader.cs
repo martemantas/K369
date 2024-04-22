@@ -15,12 +15,13 @@ public class MealLoader : MonoBehaviour
 
     private void Start()
     {
-        ResetContent();
         SpawnUserMeals();
     }
 
     public void SpawnUserMeals()
     {
+        ResetContent();
+        
         User user = UserManager.Instance.CurrentUser;
 
         if (user != null && user.Meals != null && user.Meals.Count > 0)
@@ -53,12 +54,11 @@ public class MealLoader : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-
         // Optionally, reset the scroll position to the top
         if (scrollView != null)
         {
             scrollView.normalizedPosition = Vector2.up;
         }
     }
-
+    
 }

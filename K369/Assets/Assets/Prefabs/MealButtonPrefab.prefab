@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 2673011189677580519}
   m_Layer: 5
   m_Name: MealButtonPrefab
-  m_TagString: Untagged
+  m_TagString: Meal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -343,6 +343,7 @@ MonoBehaviour:
   completeButton: {fileID: 6740548660064984554}
   removeButton: {fileID: 1857618448101931872}
   background: {fileID: 920744442268255309}
+  mealId: 
 --- !u!114 &2673011189677580519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,7 +361,6 @@ MonoBehaviour:
   completeButton: {fileID: 6740548660064984554}
   removeButton: {fileID: 1857618448101931872}
   background: {fileID: 920744442268255309}
-  loader: {fileID: 0}
 --- !u!1 &5501447108738553801
 GameObject:
   m_ObjectHideFlags: 0

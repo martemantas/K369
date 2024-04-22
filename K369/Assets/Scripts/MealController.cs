@@ -12,7 +12,7 @@ public class MealPrefabController : MonoBehaviour
     public Button completeButton;
     public Button removeButton;
     public Image background;
-    private string mealId;
+    public string mealId;
     private int Points;
 
 

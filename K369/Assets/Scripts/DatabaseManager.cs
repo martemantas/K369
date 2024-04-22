@@ -289,8 +289,56 @@ public class DatabaseManager : MonoBehaviour
             else if (task.IsCompleted)
             {
                 Debug.Log($"{itemType} removed successfully: " + itemId);
+                Debug.Log(itemType);
+
+                if (itemType == "Tasks")
+                {
+                    Debug.Log(itemType + " is task");
+
+                    /*GameObject taskGameObject = FindTaskGameObject(itemId);
+                    if (taskGameObject != null)
+                    {
+                        Destroy(taskGameObject);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Task GameObject reference is null.");
+                    }*/
+                }
+                else if (itemType == "Meals")
+                {
+                    UserManager.Instance.DeleteMeal(itemId);
+                    GameObject mealGameObject = FindMealGameObject(itemId);
+                    if (mealGameObject != null)
+                    {
+                        Destroy(mealGameObject);
+                        Debug.Log("Meal GameObject destroyed");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Meal GameObject reference is null.");
+                    }
+                }
             }
         });
+    }
+    private GameObject FindMealGameObject(string mealId)
+    {
+        foreach (GameObject mealGameObject in GameObject.FindGameObjectsWithTag("Meal"))
+        {
+
+            MealPrefabController mealController = mealGameObject.GetComponent<MealPrefabController>();
+            if (mealController != null && mealController.mealId == mealId)
+            {
+                return mealGameObject;
+            }
+            else
+            {
+                Debug.Log("No meals found");
+            }
+        }
+
+        return null; 
     }
 
 
