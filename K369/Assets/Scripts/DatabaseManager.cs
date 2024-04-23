@@ -70,6 +70,60 @@ public class DatabaseManager : MonoBehaviour
         });
     }
     
+    public void DeleteTask(string userId, string taskId)
+    {
+        Debug.Log($"Deleting task with taskId: {taskId} from user with userId: {userId}");
+
+        databaseReference.Child("Users").Child(userId).Child("Tasks").Child(taskId).RemoveValueAsync().ContinueWithOnMainThread(task => {
+            if (task.IsFaulted)
+            {
+                foreach (var exception in task.Exception.Flatten().InnerExceptions)
+                {
+                    FirebaseException firebaseEx = exception as FirebaseException;
+                    if (firebaseEx != null)
+                    {
+                        Debug.LogError($"Error deleting task: {firebaseEx.ErrorCode} - {firebaseEx.Message}");
+                    }
+                    else
+                    {
+                        Debug.LogError("Error deleting task: " + exception.Message);
+                    }
+                }
+            }
+            else if (task.IsCompleted)
+            {
+                Debug.Log("Task deleted successfully.");
+            }
+        });
+    }
+
+    public void UpdateTaskDetails(string userId, string taskId, string newName, string newDescription, string newDateAdded, string newDateCompleted, string newDateExpire, int newPoints, bool newCompleted)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>()
+        {
+            {"Name", newName},
+            {"Description", newDescription},
+            {"DateAdded", newDateAdded},
+            {"DateCompleted", newDateCompleted},
+            {"DateExpire", newDateExpire},
+            {"Points", newPoints},
+            {"Completed", newCompleted}
+        };
+
+        DatabaseReference taskRef = databaseReference.Child("Users").Child(userId).Child("Tasks").Child(taskId);
+        taskRef.UpdateChildrenAsync(updates).ContinueWithOnMainThread(task => {
+            if (task.IsFaulted)
+            {
+                Debug.LogError("Error updating task: " + task.Exception);
+            }
+            else if (task.IsCompleted)
+            {
+                Debug.Log("Task updated successfully for user: " + userId);
+            }
+        });
+    }
+
+    
     public void UpdateUserDetails(string userId, string newUsername, string newEmail, string newBirthday)
     {
         Dictionary<string, object> updates = new Dictionary<string, object>();

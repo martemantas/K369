@@ -26,5 +26,8 @@ public class FormToPrefabSubmitter : MonoBehaviour
         {
             controller.Initialize(taskId, inputFields[0].text, inputFields[1].text, 10);
         }
+
+        inputFields[0].text = "";
+        inputFields[1].text = "";
     }
 }

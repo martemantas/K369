@@ -13,7 +13,7 @@ public class TaskLoader : MonoBehaviour
 
     public void SpawnUserTasks()
     {
-        User user = UserManager.Instance.CurrentUser;
+        User user = UserManager.Instance?.CurrentUser;
 
         if (user != null && user.Tasks != null && user.Tasks.Count > 0)
         {
@@ -24,7 +24,7 @@ public class TaskLoader : MonoBehaviour
                 if (controller != null)
                 {
                     controller.Initialize(task.TaskId, task.Name, task.Description, task.Points);
-                    if(task.Completed)
+                    if (task.Completed)
                     {
                         controller.MarkCompleted();
                     }
@@ -35,5 +35,6 @@ public class TaskLoader : MonoBehaviour
         {
             Debug.Log("User has no tasks or user is null.");
         }
+
     }
 }
