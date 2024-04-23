@@ -7,6 +7,7 @@ public class TaskEditor : MonoBehaviour
     private string currentTaskId;
     public GameObject form;
     public TaskPrefabController controller;
+    private int pointsToAdd = 15;
 
     public void InitializeForm()
     {
@@ -36,7 +37,7 @@ public class TaskEditor : MonoBehaviour
             taskToUpdate.Name = inputFields[0].text;
             taskToUpdate.Description = inputFields[1].text;
         }
-        controller.Initialize(controller.taskId,inputFields[0].text,inputFields[1].text, 10);
+        controller.Initialize(controller.taskId,inputFields[0].text,inputFields[1].text, pointsToAdd);
         form.SetActive(false);
     }
 }

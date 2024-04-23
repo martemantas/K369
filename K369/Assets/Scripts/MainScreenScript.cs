@@ -43,7 +43,7 @@ public class MainScreenScript : MonoBehaviour
     {
         User user = UserManager.Instance.CurrentUser;
         username.text = user.Username.ToString();
-        userPoints.text = user.Points.ToString() + " XP";
+        userPoints.text = user.Points.ToString();
     }
 
     // Get fat, proteins and carbs values from nutrition page
