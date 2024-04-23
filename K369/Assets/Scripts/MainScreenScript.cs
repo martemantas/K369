@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class MainScreenScript : MonoBehaviour
 {
-
     public string ScheduleScreenName = "Timetable screen";
     public string FoodPlanScreenName = "Nutrition screen";
     public string SettingsScreenName = "Settings";
@@ -44,13 +43,14 @@ public class MainScreenScript : MonoBehaviour
     {
         User user = UserManager.Instance.CurrentUser;
         username.text = user.Username.ToString();
-        userPoints.text = user.Points.ToString();
+        userPoints.text = user.Points.ToString() + " XP";
     }
 
     // Get fat, proteins and carbs values from nutrition page
     void SetBars()
     {
-        
+        // Fill bars with example
+        UpdateStatusBars();
     }
 
     void UpdateStatusBars()
@@ -87,12 +87,6 @@ public class MainScreenScript : MonoBehaviour
     public void FoodPlanButtonAction()
     {
         SceneManager.LoadScene(FoodPlanScreenName);
-    }
-    
-    // Need to implement
-    public void ShopButtonAction()
-    {
-
     }
 
     public void SettingsButtonAction()
