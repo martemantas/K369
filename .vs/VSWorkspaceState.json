@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\K369",
+    "\\K369\\Assets",
+    "\\K369\\Assets\\Scripts"
   ],
-  "SelectedNode": "\\D:\\PVP\\1",
+  "SelectedNode": "\\K369\\Assets\\Scripts\\MealLoader.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -19,7 +19,7 @@ public class FormToPrefabSubmitter : MonoBehaviour
         if (user.userType != 0)
         {
             DatabaseManager.Instance.AddNewTask(user.Id, taskId, inputFields[0].text, inputFields[1].text, "", "", "",
-                0,
+                pointsToAdd,
                 false);
         }
         TaskPrefabController controller = instantiatedPrefab.GetComponent<TaskPrefabController>();
