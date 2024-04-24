@@ -8,13 +8,14 @@ public class FormToPrefabSubmitter : MonoBehaviour
     public TMP_InputField[] inputFields;
     public GameObject prefabToInstantiate;
     public Transform prefabParent;
+    private int pointsToAdd = 15;
     
     public void OnSubmitButtonClick()
     {
         GameObject instantiatedPrefab = Instantiate(prefabToInstantiate, prefabParent ? prefabParent : null);
         User user = UserManager.Instance.CurrentUser;
         string taskId = Guid.NewGuid().ToString();
-        user.Tasks.Add(new Task(taskId,inputFields[0].text, inputFields[1].text, "", "", "",10,false));
+        user.Tasks.Add(new Task(taskId,inputFields[0].text, inputFields[1].text, "", "", "",pointsToAdd,false));
         if (user.userType != 0)
         {
             DatabaseManager.Instance.AddNewTask(user.Id, taskId, inputFields[0].text, inputFields[1].text, "", "", "",
@@ -24,7 +25,7 @@ public class FormToPrefabSubmitter : MonoBehaviour
         TaskPrefabController controller = instantiatedPrefab.GetComponent<TaskPrefabController>();
         if (controller != null)
         {
-            controller.Initialize(taskId, inputFields[0].text, inputFields[1].text, 10);
+            controller.Initialize(taskId, inputFields[0].text, inputFields[1].text, pointsToAdd);
         }
 
         inputFields[0].text = "";

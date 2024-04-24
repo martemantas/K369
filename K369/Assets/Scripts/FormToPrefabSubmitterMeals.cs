@@ -15,7 +15,7 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
     private int proteins = 0;
     private int fats = 0;
     private int kcal = 0;
-    private int pointsToAdd = 10;
+    private int pointsToAdd = 15;
 
     public EditMealLoader loader;
     public ScrollRect scrollView;
