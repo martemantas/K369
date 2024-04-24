@@ -38,10 +38,8 @@ public class MealEditPrefabController : MonoBehaviour
 
 
     public void OnDeleteButton()
-    {
-        Debug.Log("Delete pressed");        
+    {       
         User user = UserManager.Instance.CurrentUser;
-
         string mealIdToRemove = FindMealToDelete(user, nameText.text, descriptionText.text);
         if (mealIdToRemove != null)
         {

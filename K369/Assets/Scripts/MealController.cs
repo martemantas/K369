@@ -34,7 +34,6 @@ public class MealPrefabController : MonoBehaviour
 
     public void OnCompleteButton()
     {
-        Debug.Log("Complete pressed");
         User user = UserManager.Instance.CurrentUser;
         Meal meal = user.Meals.Find(t => t.MealId == mealId);
         if (meal != null)
