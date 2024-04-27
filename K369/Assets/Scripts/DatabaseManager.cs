@@ -483,6 +483,7 @@ public class DatabaseManager : MonoBehaviour
     {
         Dictionary<string, object> updates = new Dictionary<string, object>();
         updates["Completed"] = true;
+        updates["DateCompleted"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
         UpdateMeal(userId, mealId, updates);
     }
     public void UpdateMealDetails(string userId, string mealId, string newName, string newDescription)
