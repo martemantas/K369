@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -28,14 +30,17 @@ public class MealLoader : MonoBehaviour
         {
             foreach (Meal meal in user.Meals)
             {
-                GameObject mealInstance = Instantiate(prefabToInstantiate, prefabParent);
-                MealPrefabController controller = mealInstance.GetComponent<MealPrefabController>();
-                if (controller != null)
+                if (ConvertToDate(meal.DateAdded).Day == DateTime.Now.Day) // spawn only today's meals
                 {
-                    controller.Initialize(meal.MealId, meal.Name, meal.Description, meal.Points, isCompleteButtonActive);
-                    if (meal.Completed)
+                    GameObject mealInstance = Instantiate(prefabToInstantiate, prefabParent);
+                    MealPrefabController controller = mealInstance.GetComponent<MealPrefabController>();
+                    if (controller != null)
                     {
-                        controller.MarkCompleted();
+                        controller.Initialize(meal.MealId, meal.Name, meal.Description, meal.Points, isCompleteButtonActive);
+                        if (meal.Completed)
+                        {
+                            controller.MarkCompleted();
+                        }
                     }
                 }
             }
@@ -45,6 +50,20 @@ public class MealLoader : MonoBehaviour
             Debug.Log("User has no meals or user is null.");
         }
 
+    }
+
+    private DateTime ConvertToDate(string dateString)
+    {
+        DateTime result;
+        if (DateTime.TryParseExact(dateString, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out result))
+        {
+            return result;
+        }
+        else
+        {
+            Debug.Log("Cannot convert date to spawn today's meals.");
+            return DateTime.Now;
+        }
     }
 
     // Delete prefabs
