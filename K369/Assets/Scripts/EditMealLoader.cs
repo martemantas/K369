@@ -26,7 +26,7 @@ public class EditMealLoader : MonoBehaviour
     {
         User user = UserManager.Instance.CurrentUser;
 
-        if (user != null && user.Meals != null && user.Meals.Count > 0)
+        if (user != null && user.Meals != null && user.Meals.Count > 0) // spawn all meals
         {
             foreach (Meal meal in user.Meals)
             {

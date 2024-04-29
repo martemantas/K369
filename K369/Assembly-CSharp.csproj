@@ -141,6 +141,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Scripts\AvatarScript.cs" />
     <Compile Include="Assets\Scripts\ReverseSetActive.cs" />
+    <Compile Include="Assets\Scripts\TimeValidator.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\InputSystemWarning.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\CloudAndroid\Scripts\PurchasePage.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
