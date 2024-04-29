@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +20,25 @@ public class TaskLoader : MonoBehaviour
 
         if (user != null && user.Tasks != null && user.Tasks.Count > 0)
         {
-            foreach (Task task in user.Tasks)
+            List<Task> sortedTasks = new List<Task>();
+
+            foreach (var task in user.Tasks)
+            {
+                DateTime expireDate;
+                if (DateTime.TryParse(task.DateExpire, out expireDate))
+                {
+                    sortedTasks.Add(task);
+                }
+                else
+                {
+                    Debug.LogError("Failed to parse DateExpire for task: " + task.TaskId);
+                    sortedTasks.Add(task);
+                }
+            }
+
+            sortedTasks = sortedTasks.OrderBy(task => task.DateExpire).ToList();
+
+            foreach (Task task in sortedTasks)
             {
                 GameObject taskInstance = Instantiate(prefabToInstantiate, prefabParent);
                 TaskPrefabController controller = taskInstance.GetComponent<TaskPrefabController>();
@@ -35,6 +56,6 @@ public class TaskLoader : MonoBehaviour
         {
             Debug.Log("User has no tasks or user is null.");
         }
-
     }
+
 }
