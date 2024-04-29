@@ -37,7 +37,7 @@ public class DisplayInfo : MonoBehaviour
         // Clamp the totalCarbs value between 0 and 1
         totalCarbs = Mathf.Clamp01(totalCarbs);
 
-        carbImage.fillAmount = totalCarbs;
+        //carbImage.fillAmount = totalCarbs;
     }
     public void displayProtein()
     {
@@ -53,6 +53,6 @@ public class DisplayInfo : MonoBehaviour
 
         totalFat = Mathf.Clamp01(totalFat);
 
-        fatImage.fillAmount = totalFat;
+        //fatImage.fillAmount = totalFat;
     }
 }

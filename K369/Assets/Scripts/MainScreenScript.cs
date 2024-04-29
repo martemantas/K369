@@ -56,16 +56,16 @@ public class MainScreenScript : MonoBehaviour
     void UpdateStatusBars()
     {
         // Update fatBar
-        float fatFillAmount = Mathf.Clamp01(currentFatValue / maxFatValue);
-        fatBarFilling.fillAmount = fatFillAmount;
+        //float fatFillAmount = Mathf.Clamp01(currentFatValue / maxFatValue);
+        //fatBarFilling.fillAmount = fatFillAmount;
 
         // Update proteinsBar
         float proteinsFillAmount = Mathf.Clamp01(currentProteinsValue / maxProteinsValue);
         proteinsBarFilling.fillAmount = proteinsFillAmount;
 
         // Update carbsBar
-        float carbsFillAmount = Mathf.Clamp01(currentCarbsValue / maxCarbsValue);
-        carbsBarFilling.fillAmount = carbsFillAmount;
+        //float carbsFillAmount = Mathf.Clamp01(currentCarbsValue / maxCarbsValue);
+        //carbsBarFilling.fillAmount = carbsFillAmount;
     }
 
     // Example method to update values for all status bars
