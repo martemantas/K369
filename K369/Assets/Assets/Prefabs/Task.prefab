@@ -7906,6 +7906,7 @@ MonoBehaviour:
   completeButton: {fileID: 734028058044529187}
   background: {fileID: 8657755140807788392}
   taskId: 
+  _cookiePopupText: {fileID: 5124683173943972853, guid: 25820491e6cf16843ba49f103b583fe2, type: 3}
 --- !u!114 &5577818511397922469
 MonoBehaviour:
   m_ObjectHideFlags: 0

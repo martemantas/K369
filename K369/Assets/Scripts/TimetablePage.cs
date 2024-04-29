@@ -5,6 +5,8 @@ public class CreatePrefabOnClick : MonoBehaviour
 {
     public GameObject prefabToInstantiate; // Reference to the prefab to instantiate
     public Transform contentPanel; // Reference to the content panel where the prefab will be instantiated
+    
+  
 
     void Start()
     {

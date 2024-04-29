@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.XR;
 
@@ -13,7 +14,8 @@ public class TaskPrefabController : MonoBehaviour
     public Image background;
     public string taskId;
     private int Points;
-    
+
+    [FormerlySerializedAs("_cookiePopupText")] [SerializeField] private GameObject _PopupText;
 
     public void Initialize(string id, string name, string description, int points)
     {
@@ -45,6 +47,9 @@ public class TaskPrefabController : MonoBehaviour
             }
         }
         MarkCompleted();
+        
+        GameObject textPrefab = Instantiate(_PopupText, gameObject.transform);
+        textPrefab.GetComponent<PopupText>().Setup(Points);
     }
 }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4440221, g: 0.49316514, b: 0.5722316, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3639,6 +3639,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabToInstantiate: {fileID: 5916260268947223263, guid: 0224b4f21a31aa542864c3af1af9d75b, type: 3}
   contentPanel: {fileID: 488186261}
+  _cookiePopupText: {fileID: 5124683173943972853, guid: 25820491e6cf16843ba49f103b583fe2, type: 3}
+  _mainGameCanvas: {fileID: 364931040}
 --- !u!114 &488186263
 MonoBehaviour:
   m_ObjectHideFlags: 0
