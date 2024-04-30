@@ -8,7 +8,7 @@ public class FormToPrefabSubmitter : MonoBehaviour
     public GameObject prefabToInstantiate;
     public Transform prefabParent;
     public TMP_Text errorLabel;
-    public DateTimePicker dateTimePicker; // Reference to the DateTimePicker script
+    public DateTimePicker dateTimePicker;
     private int pointsToAdd = 15;
     public GameObject timetableScreen;
 
@@ -37,10 +37,13 @@ public class FormToPrefabSubmitter : MonoBehaviour
                 false);
         }
 
-        TaskPrefabController controller = instantiatedPrefab.GetComponent<TaskPrefabController>();
-        if (controller != null)
+        if (dateTimePicker.GetSelectedDateTime().ToString().StartsWith(DateTime.Today.ToString()))
         {
-            controller.Initialize(taskId, inputFields[0].text, inputFields[1].text, pointsToAdd);
+            TaskPrefabController controller = instantiatedPrefab.GetComponent<TaskPrefabController>();
+            if (controller != null)
+            {
+                controller.Initialize(taskId, inputFields[0].text, inputFields[1].text, pointsToAdd);
+            }
         }
 
         inputFields[0].text = "";

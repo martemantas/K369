@@ -13,17 +13,17 @@ public class DropDownPopulator : MonoBehaviour
     {
         PopulateMonthDropdown();
         int currentMonth = System.DateTime.Now.Month;
-        monthDropdown.value = currentMonth - 1;  // Dropdown values are 0-indexed
+        monthDropdown.value = currentMonth - 1;  
 
         int daysInCurrentMonth = System.DateTime.DaysInMonth(System.DateTime.Now.Year, currentMonth);
         PopulateDayDropdown(daysInCurrentMonth);
-        dayDropdown.value = System.DateTime.Now.Day - 1;  // Set default to today
+        dayDropdown.value = System.DateTime.Now.Day - 1;  
 
         PopulateHourDropdown();
-        hourDropdown.value = 23;  // Set default hour to 23
+        hourDropdown.value = 23;  
 
         PopulateMinuteDropdown();
-        minuteDropdown.value = 59;  // Set default minute to 59
+        minuteDropdown.value = 59;  
 
         monthDropdown.onValueChanged.AddListener(delegate { UpdateDayDropdown(); });
     }
@@ -52,7 +52,7 @@ public class DropDownPopulator : MonoBehaviour
         List<string> hours = new List<string>();
         for (int i = 0; i < 24; i++)
         {
-            hours.Add(i.ToString("D2"));  // Formats the hour to two digits
+            hours.Add(i.ToString("D2"));  
         }
         hourDropdown.ClearOptions();
         hourDropdown.AddOptions(hours);
@@ -63,7 +63,7 @@ public class DropDownPopulator : MonoBehaviour
         List<string> minutes = new List<string>();
         for (int i = 0; i < 60; i++)
         {
-            minutes.Add(i.ToString("D2"));  // Formats the minute to two digits
+            minutes.Add(i.ToString("D2"));  
         }
         minuteDropdown.ClearOptions();
         minuteDropdown.AddOptions(minutes);
@@ -75,6 +75,6 @@ public class DropDownPopulator : MonoBehaviour
         int year = System.DateTime.Now.Year;
         int daysInMonth = System.DateTime.DaysInMonth(year, month);
         PopulateDayDropdown(daysInMonth);
-        dayDropdown.value = System.DateTime.Now.Day - 1;  // Reset to today when month changes
+        dayDropdown.value = System.DateTime.Now.Day - 1;
     }
 }

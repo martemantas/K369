@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; // Make sure to include the TMPro namespace
+using TMPro; 
 
 public class InfiniteScroll : MonoBehaviour
 {
     public RectTransform contentPanel;
     public GameObject hourPrefab;
-    public float itemHeight = 60; // Adjust according to your prefab size
-    public int totalItems = 24; // Total hours
+    public float itemHeight = 60;
+    public int totalItems = 24; 
     private ScrollRect scrollRect;
     private int currentIndex = 0;
 

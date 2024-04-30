@@ -11,7 +11,7 @@ public class DateTimePicker : MonoBehaviour
 
     public DateTime GetSelectedDateTime()
     {
-        int year = DateTime.Now.Year; // Assuming current year or provide a way to select year
+        int year = DateTime.Now.Year; 
         int month = monthDropdown.value + 1;
         int day = dayDropdown.value + 1;
         int hour = hourDropdown.value;

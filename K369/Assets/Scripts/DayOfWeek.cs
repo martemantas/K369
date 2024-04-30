@@ -5,8 +5,8 @@ using System;
 public class DayOfWeekAbbreviation : MonoBehaviour
 {
     public TMP_Text textDisplay;
-    public bool dayFlag = true; // Default to adding days
-    public bool stringFlag = true; // Default to returning abbreviated day as string
+    public bool dayFlag = true; 
+    public bool stringFlag = true; 
     public int daysOff = 0;
 
     void Start()
@@ -19,10 +19,8 @@ public class DayOfWeekAbbreviation : MonoBehaviour
     {
         if (stringFlag)
         {
-            // Get today's day of the week
             DayOfWeek today = System.DateTime.Today.DayOfWeek;
 
-            // Adjust the day based on the dayFlag and daysOff parameters
             if (dayFlag)
             {
                 today = (DayOfWeek)(((int)today + daysOff) % 7);
@@ -32,11 +30,10 @@ public class DayOfWeekAbbreviation : MonoBehaviour
                 today = (DayOfWeek)(((int)today - daysOff) % 7);
                 if (today < 0)
                 {
-                    today += 7; // Ensures the result is a positive value
+                    today += 7; 
                 }
             }
 
-            // Convert the adjusted day to its abbreviated form
             switch (today)
             {
                 case DayOfWeek.Sunday:
@@ -59,7 +56,6 @@ public class DayOfWeekAbbreviation : MonoBehaviour
         }
         else
         {
-            // Adjust the day of the month based on daysOff
             int dayOfMonth = System.DateTime.Today.Day;
 
             if (dayFlag)
@@ -71,7 +67,6 @@ public class DayOfWeekAbbreviation : MonoBehaviour
                 dayOfMonth -= daysOff;
                 if (dayOfMonth < 1)
                 {
-                    // Calculate the correct day for previous month
                     System.DateTime previousMonth = System.DateTime.Today.AddMonths(-1);
                     int daysInPreviousMonth = System.DateTime.DaysInMonth(previousMonth.Year, previousMonth.Month);
                     dayOfMonth += daysInPreviousMonth;
