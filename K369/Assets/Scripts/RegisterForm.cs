@@ -20,6 +20,9 @@ public class RegisterForm : MonoBehaviour
     public TMP_InputField ageInputField;
     public GameObject GenderButtons;
     public GameObject GoalsButtons;
+    public TMP_InputField weightInput;
+    public TMP_InputField heightInput;
+    public Toggle parent;
 
     private void Start()
     {
@@ -61,16 +64,17 @@ public class RegisterForm : MonoBehaviour
         string registrationDate = DateTime.Now.ToString("yyyy-MM-dd");
         string dob = GetFormattedDateOfBirth();
         int age = GetAgeFromInputField();
-        int height = 0; // GetHeightFromInputField();
-        int weight = 0; // GetWeightFromInputField();
+        int height = heightInput.text == "" ? 0 : int.Parse(heightInput.text);
+        int weight = weightInput.text == "" ? 0 : int.Parse(weightInput.text);
+        int userType = parent.isOn ? 2 : 1;
         string gender = GetSelectedGender();
         string goals = GetSelectedGoals();
         UserManager userManager = UserManager.Instance;
         userManager.SetPlayerAge(age);
-        DatabaseManager.Instance.AddNewUser(userId, usernameField.text, passwordField.text, emailField.text, dob, registrationDate, age, height, weight, gender, goals);
-        UserManager.Instance.LoginUser(new User(userId, usernameField.text,"" , emailField.text, dob, registrationDate,0,0,0,0,0,1, age, height, weight, gender, goals));
+        DatabaseManager.Instance.AddNewUser(userId, usernameField.text, passwordField.text, emailField.text, dob, registrationDate, age, height, weight, gender, goals, userType);
+        UserManager.Instance.LoginUser(new User(userId, usernameField.text,"" , emailField.text, dob, registrationDate,0,0,0,0,0,userType, age, height, weight, gender, goals));
+        UserManager.Instance.SetFirstTimeUser(true);
         SceneManager.LoadScene("Main screen");
-
     }
 
     
