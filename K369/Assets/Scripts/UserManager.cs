@@ -16,6 +16,7 @@ public class UserManager : MonoBehaviour
     private int playerHeight;
     private int playerWeight;
     private string playerGender;
+    private bool freshRegistration = false;
 
     private void Awake()
     {
@@ -63,6 +64,16 @@ public class UserManager : MonoBehaviour
     public void SetPlayerAge(int age)
     {
         playerAge = age;
+    }
+    
+    public bool IsFirstTimeUser()
+    {
+        return freshRegistration;
+    }
+    
+    public void SetFirstTimeUser(bool value)
+    {
+        freshRegistration = value;
     }
 
     public int GetPlayerAge()

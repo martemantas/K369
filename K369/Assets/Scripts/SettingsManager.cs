@@ -62,6 +62,8 @@ public class SettingsManager : MonoBehaviour
     }
     private int GetGenderIndex(string gender)
     {
+        if (gender == null)
+            return 0;
         switch (gender.ToLower())
         {
             case "male":
