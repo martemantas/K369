@@ -388,7 +388,6 @@ public class DatabaseManager : MonoBehaviour
     }
     public void AddNewTaskForChild(string childId, string taskId, string name, string description, string dateAdded, string dateCompleted, string dateExpire, int points, bool completed)
     {
-        Debug.Log("child id " + childId);
         DatabaseReference usersRef = databaseReference.Child("Users");
         usersRef.GetValueAsync().ContinueWithOnMainThread(task =>
         {
@@ -402,10 +401,7 @@ public class DatabaseManager : MonoBehaviour
             // Iterate through the children to find the user with the matching child ID
             foreach (DataSnapshot userSnapshot in snapshot.Children)
             {
-                Debug.Log("userSnapshot " + userSnapshot);
-
                 IDictionary<string, object> userData = (IDictionary<string, object>)userSnapshot.Value;
-                Debug.Log("userData " + userData);
 
                 // Check if the user data contains a field named "ChildId" and its value matches the provided childId
                 if (userData != null && userData.ContainsKey("childID") && userData["childID"].ToString() == childId)
