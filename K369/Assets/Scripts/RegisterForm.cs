@@ -71,8 +71,14 @@ public class RegisterForm : MonoBehaviour
         string goals = GetSelectedGoals();
         UserManager userManager = UserManager.Instance;
         userManager.SetPlayerAge(age);
-        DatabaseManager.Instance.AddNewUser(userId, usernameField.text, passwordField.text, emailField.text, dob, registrationDate, age, height, weight, gender, goals, userType);
-        UserManager.Instance.LoginUser(new User(userId, usernameField.text,"" , emailField.text, dob, registrationDate,0,0,0,0,0,userType, age, height, weight, gender, goals));
+        userManager.SetPlayerType(userType);
+
+        DatabaseManager.Instance.AddNewUser(userId, usernameField.text, passwordField.text, emailField.text, dob, registrationDate,
+                                            age, height, weight, gender, goals, userType);
+        string childID = userManager.GetPlayerChildID();
+        UserManager.Instance.LoginUser(new User(userId, usernameField.text, "", emailField.text, dob, registrationDate, 0, 0, 0, 0, 0,
+                                                userType, age, height, weight, gender, goals, childID));
+
         UserManager.Instance.SetFirstTimeUser(true);
         SceneManager.LoadScene("Main screen");
     }
