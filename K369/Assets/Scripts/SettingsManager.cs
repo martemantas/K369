@@ -7,6 +7,8 @@ public class SettingsManager : MonoBehaviour
     public TMP_Dropdown genderDropdown;
     public TMP_InputField heightInputField;
     public TMP_InputField weightInputField;
+    public TMP_Text childID;
+    public GameObject childIDobject;
 
     private UserManager userManager;
 
@@ -14,6 +16,7 @@ public class SettingsManager : MonoBehaviour
     {
         userManager = UserManager.Instance;
         PopulateFields();
+        SetChildID();
     }
     void PopulateFields()
     {
@@ -74,6 +77,19 @@ public class SettingsManager : MonoBehaviour
                 return 2;
             default:
                 return 0;
+        }
+    }
+
+    private void SetChildID()
+    {
+        User user = userManager.CurrentUser;
+        if (user.userType == 2 || user.userType == 0) // parent or guest
+        {
+            childIDobject.SetActive(false);
+        }
+        else if (user.userType == 1) // child
+        {
+            childID.text = user.childID;
         }
     }
 }
