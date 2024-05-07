@@ -1,6 +1,9 @@
+using Firebase.Database;
+using Firebase.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,9 +12,30 @@ public class TaskLoader : MonoBehaviour
     public GameObject prefabToInstantiate;
     public Transform prefabParent;
 
+    private string childID;
+    private DatabaseManager databaseManager;
+
     private void Start()
     {
-        SpawnUserTasks();
+        databaseManager = new DatabaseManager();
+        Spawn();
+    }
+
+    public async void Spawn()
+    {
+        User currentUser = UserManager.Instance.CurrentUser;
+        if (currentUser.userType == 2) // parent
+        {
+            childID = UserManager.Instance.GetSelectedChildToViewID();
+            User userChild = await FindUserChild();
+            Debug.Log("Task loader: spawning tasks for user (childID): " + userChild.childID);
+            SpawnUserTasks(userChild);
+        }
+        else
+        {
+            SpawnUserTasks(currentUser);
+        }
+
     }
 
     public void ClearTasks()
@@ -22,9 +46,22 @@ public class TaskLoader : MonoBehaviour
         }
     }
 
-    public void LoadTasksForDate(DateTime date)
+    public async void LoadTasksForDate(DateTime date)
     {
-        User user = UserManager.Instance?.CurrentUser;
+        User user;
+        User currentUser = UserManager.Instance?.CurrentUser;
+        if (currentUser.userType == 2) // parent
+        {
+            childID = UserManager.Instance.GetSelectedChildToViewID();
+            User userChild = await FindUserChild();
+            Debug.Log("Task loader: spawning tasks for date for user (childID): " + userChild.childID);
+
+            user = userChild;
+        }
+        else
+        {
+            user = currentUser;
+        }
         if (user != null && user.Tasks != null && user.Tasks.Count > 0)
         {
             var dateFormatted = date.ToString("yyyy-MM-dd");
@@ -41,41 +78,68 @@ public class TaskLoader : MonoBehaviour
         }
     }
 
-    public void SpawnUserTasks()
+    public void SpawnUserTasks(User user)
     {
         DateTime today = DateTime.Today;
         var todayFormatted = today.ToString("yyyy-MM-dd");
-
-        User user = UserManager.Instance?.CurrentUser;
-        if (user != null && user.Tasks != null && user.Tasks.Count > 0)
+        databaseManager.GetUserTasks(user.Id, (List<Task> tasks) =>
         {
-            var sortedTasks = user.Tasks
-                .Where(task => task.DateExpire.StartsWith(todayFormatted))
-                .OrderBy(task => task.DateExpire)
-                .ToList();
+            if (user != null && user.Tasks != null && user.Tasks.Count > 0)
+            {
+                var sortedTasks = user.Tasks
+                    .Where(task => task.DateExpire.StartsWith(todayFormatted))
+                    .OrderBy(task => task.DateExpire)
+                    .ToList();
 
-            CreateTaskInstances(sortedTasks);
+                CreateTaskInstances(sortedTasks);
+            }
+            else
+            {
+                Debug.Log("User has no tasks or user is null.");
+            }
+        });
+    }
+
+    
+
+    private async void CreateTaskInstances(List<Task> tasks)
+    {
+        User user;
+        User currentUser = UserManager.Instance?.CurrentUser;
+        if (currentUser.userType == 2) // parent
+        {
+            childID = UserManager.Instance.GetSelectedChildToViewID();
+            User userChild = await FindUserChild();
+            Debug.Log("Task loader: spawning tasks for date for user (childID): " + userChild.childID);
+            user = userChild;
         }
         else
         {
-            Debug.Log("User has no tasks or user is null.");
+            user = currentUser;
         }
-    }
-
-    private void CreateTaskInstances(List<Task> tasks)
-    {
-        foreach (Task task in tasks)
+        databaseManager.GetUserTasks(user.Id, (List<Task> tasks) =>
         {
-            GameObject taskInstance = Instantiate(prefabToInstantiate, prefabParent);
-            TaskPrefabController controller = taskInstance.GetComponent<TaskPrefabController>();
-            if (controller != null)
+            foreach (Task task in tasks)
             {
-                controller.Initialize(task.TaskId, task.Name, task.Description, task.Points);
-                if (task.Completed)
+                GameObject taskInstance = Instantiate(prefabToInstantiate, prefabParent);
+                TaskPrefabController controller = taskInstance.GetComponent<TaskPrefabController>();
+                if (controller != null)
                 {
-                    controller.MarkCompleted();
+                    controller.Initialize(task.TaskId, task.Name, task.Description, task.Points);
+                    if (task.Completed)
+                    {
+                        controller.MarkCompleted();
+                    }
                 }
             }
-        }
+        });
     }
+
+    public async Task<User> FindUserChild()
+    {
+        User user = await databaseManager.FindUserByChildID(childID);
+        return user;
+
+    }
+
 }

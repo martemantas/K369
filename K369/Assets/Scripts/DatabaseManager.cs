@@ -53,6 +53,7 @@ public class DatabaseManager : MonoBehaviour
     }
 
 
+
     public void AddNewUser(string userId, string username, string password, string email, string birthday, string registrationDate, int age, int height, int weight, string gender, string goals, int type)
     {
         UserManager userManager = UserManager.Instance;
@@ -88,15 +89,17 @@ public class DatabaseManager : MonoBehaviour
         {
             return "";
         }
-        DateTime now = DateTime.Now;
-        string minutesAndSeconds = now.ToString("mmss");
-        char firstUsernameChar = username.Length > 0 ? username[0] : GenerateRandomChar();
-        char secondUsernameChar = username.Length > 1 ? username[1] : GenerateRandomChar();
-        char thirdUsernameChar = username.Length > 2 ? username[2] : GenerateRandomChar();
+        //DateTime now = DateTime.Now;
+        //string minutesAndSeconds = now.ToString("mmss");
+        //char firstUsernameChar = username.Length > 0 ? username[0] : GenerateRandomChar();
+        //char secondUsernameChar = username.Length > 1 ? username[1] : GenerateRandomChar();
+        //char thirdUsernameChar = username.Length > 2 ? username[2] : GenerateRandomChar();
 
-        string childID = $"{firstUsernameChar}{minutesAndSeconds[2]}{secondUsernameChar}" +
-                         $"{minutesAndSeconds[1]}{thirdUsernameChar}{minutesAndSeconds[0]}";
-        return childID;
+        //string childID = $"{firstUsernameChar}{minutesAndSeconds[2]}{secondUsernameChar}" +
+        //                 $"{minutesAndSeconds[1]}{thirdUsernameChar}{minutesAndSeconds[0]}";
+        Random random = new Random();
+        int childID = random.Next(10000, 99999);
+        return childID.ToString();
     }
 
     private static char GenerateRandomChar()
@@ -301,6 +304,31 @@ public class DatabaseManager : MonoBehaviour
                         meals.Add(_meal);
                     }
                     callback(meals);
+                }
+            });
+    }
+
+    public void GetUserTasks(string userId, Action<List<Task>> callback)
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("Users/" + userId + "/Tasks")
+            .GetValueAsync().ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted || !task.IsCompleted)
+                {
+                    Debug.LogError("Error fetching user tasks: " + task.Exception);
+                    callback(null);
+                }
+                else
+                {
+                    DataSnapshot snapshot = task.Result;
+                    List<Task> tasks = new List<Task>();
+                    foreach (DataSnapshot taskSnapshot in snapshot.Children)
+                    {
+                        Task _task = JsonUtility.FromJson<Task>(taskSnapshot.GetRawJsonValue());
+                        tasks.Add(_task);
+                    }
+                    callback(tasks);
                 }
             });
     }
@@ -580,8 +608,79 @@ public class DatabaseManager : MonoBehaviour
             });
     }
 
+    //public void FindUserByChildID(string id, Action<User> callback)
+    //{
+    //    FirebaseDatabase.DefaultInstance
+    //        .GetReference("Users")
+    //        .OrderByChild("childID")
+    //        .EqualTo(id)
+    //        .GetValueAsync().ContinueWithOnMainThread(task => {
+    //            if (task.IsFaulted || !task.IsCompleted)
+    //            {
+    //                Debug.LogError("Error fetching user: " + task.Exception);
+    //                callback(null);
+    //            }
+    //            else
+    //            {
+    //                DataSnapshot snapshot = task.Result;
+    //                if (snapshot.Exists && snapshot.ChildrenCount > 0)
+    //                {
+    //                    foreach (var childSnapshot in snapshot.Children)
+    //                    {
+    //                        User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
+    //                        callback(foundUser);
+    //                        return;
+    //                    }
+    //                }
+    //                else
+    //                {
+    //                    Debug.Log("No user found with the specified childID.");
+    //                    callback(null);
+    //                }
+    //            }
+    //        });
+    //}
 
-public void GetUserByEmailAndPassword(string email, string password, Action<User> callback)
+    public Task<User> FindUserByChildID(string id)
+    {
+        TaskCompletionSource<User> tcs = new TaskCompletionSource<User>();
+
+        FirebaseDatabase.DefaultInstance
+            .GetReference("Users")
+            .OrderByChild("childID")
+            .EqualTo(id)
+            .GetValueAsync().ContinueWithOnMainThread(task => {
+                if (task.IsFaulted || !task.IsCompleted)
+                {
+                    Debug.LogError("Error fetching user: " + task.Exception);
+                    tcs.SetResult(null);
+                }
+                else
+                {
+                    DataSnapshot snapshot = task.Result;
+                    if (snapshot.Exists && snapshot.ChildrenCount > 0)
+                    {
+                        foreach (var childSnapshot in snapshot.Children)
+                        {
+                            User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
+                            tcs.SetResult(foundUser);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("No user found with the specified childID.");
+                        tcs.SetResult(null);
+                    }
+                }
+            });
+
+        return tcs.Task;
+    }
+
+
+
+    public void GetUserByEmailAndPassword(string email, string password, Action<User> callback)
 {
     FirebaseDatabase.DefaultInstance
         .GetReference("Users")

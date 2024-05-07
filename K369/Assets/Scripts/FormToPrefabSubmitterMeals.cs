@@ -184,7 +184,7 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
         {
             // Load prefabs
             ResetContent(contentContainer, scrollView);
-            loader.SpawnUserMeals();
+            loader.Spawn();
         }
     }
 

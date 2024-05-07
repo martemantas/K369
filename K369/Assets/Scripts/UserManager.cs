@@ -19,6 +19,7 @@ public class UserManager : MonoBehaviour
     private bool freshRegistration = false;
     private int userType;
     private string childID;
+    private string selectedChildToView;
 
     private void Awake()
     {
@@ -131,5 +132,15 @@ public class UserManager : MonoBehaviour
     public string GetPlayerChildID()
     {
         return childID;
+    }
+
+    public void SetSelectedChildToViewID(string id)
+    {
+        selectedChildToView = id;
+    }
+
+    public string GetSelectedChildToViewID()
+    {
+        return selectedChildToView;
     }
 }
