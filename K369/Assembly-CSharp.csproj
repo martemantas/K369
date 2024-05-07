@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\PasswordReset.cs" />
     <Compile Include="Assets\Scripts\FoodSearchScript.cs" />
+    <Compile Include="Assets\Scripts\DateTimePicker.cs" />
     <Compile Include="Assets\Scripts\LoginPageScript.cs" />
     <Compile Include="Assets\Scripts\MealLoader.cs" />
     <Compile Include="Assets\Scripts\AddFoodScript.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\LogView.cs" />
     <Compile Include="Assets\Scripts\UserManager.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsGraphAPIManager.cs" />
+    <Compile Include="Assets\Scripts\PopupText.cs" />
     <Compile Include="Assets\Scripts\RadioButtonGroup.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Scripts\FormToPrefabSubmitter.cs" />
@@ -86,8 +88,10 @@
     <Compile Include="Assets\Scripts\DatabaseManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
+    <Compile Include="Assets\Scripts\Mover.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\SubMenus\GraphRequest.cs" />
+    <Compile Include="Assets\Scripts\DayClicker.cs" />
     <Compile Include="Assets\Scripts\ButtonObjectManager.cs" />
     <Compile Include="Assets\Scripts\TimetablePage.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsExampleTabsManager.cs" />
@@ -95,13 +99,14 @@
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\SubMenus\UploadToMediaLibrary.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\CloudAndroid\Scripts\Menu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+    <Compile Include="Assets\Scripts\InfiniteScroll.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\ConsoleBase.cs" />
+    <Compile Include="Assets\Scripts\DropdownHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsPhysicalGamepadManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsVirtualGamepadManager.cs" />
-    <Compile Include="Assets\DropdownHandler.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\CloudAndroid\Prefabs\ProductRowPrefab.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\CloudAndroid\Scripts\MainPage.cs" />
     <Compile Include="Assets\Scripts\LoginForm.cs" />
@@ -116,6 +121,7 @@
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\MenuBase.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\SubMenus\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\ChildLoader.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\CloudAndroid\Scripts\UIState.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\SubMenus\AccessTokenMenu.cs" />
     <Compile Include="Assets\Scripts\GuestUsernameInput.cs" />
@@ -135,6 +141,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\Scripts\MealController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\Scripts\ChildPrefabController.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\CloudAndroid\Scripts\LogScroller.cs" />
     <Compile Include="Assets\Scripts\TaskLoader.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsLogsManager.cs" />
@@ -142,6 +149,7 @@
     <Compile Include="Assets\Scripts\AvatarScript.cs" />
     <Compile Include="Assets\Scripts\ReverseSetActive.cs" />
     <Compile Include="Assets\Scripts\TimeValidator.cs" />
+    <Compile Include="Assets\Scripts\ShowForParent.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\InputSystemWarning.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\CloudAndroid\Scripts\PurchasePage.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
@@ -153,7 +161,9 @@
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsFriendsManager.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsReferralsManager.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\SubMenus\DialogShare.cs" />
+    <Compile Include="Assets\Scripts\SceneLoader.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
+    <Compile Include="Assets\Scripts\DropDownPopulator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\CloudAndroid\Prefabs\PurchaseRowPrefab.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\CloudAndroid\Scripts\SettingsMenu.cs" />
@@ -163,9 +173,11 @@
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\SubMenus\TournamentsMenu.cs" />
     <Compile Include="Assets\Scripts\RegisterForm.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsA2UNotificationsManager.cs" />
+    <Compile Include="Assets\Scripts\InstantiatePrefab.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\SubMenus\AppRequests.cs" />
-    <Compile Include="Assets\TaskEditor.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsPurchaseManager.cs" />
+    <Compile Include="Assets\Scripts\ChildController.cs" />
+    <Compile Include="Assets\Scripts\TaskEditor.cs" />
     <Compile Include="Assets\Scripts\RandomMoveAndScaleUI.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\CloudAndroid\Scripts\Utility.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />

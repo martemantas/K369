@@ -8,6 +8,7 @@ public class InstantiatePrefab : MonoBehaviour
     public GameObject prefabToInstantiate;
     public Transform prefabParent;
     public TMP_InputField IdInput;
+
     public void InstantiatePrefabMethod()
     {
         DatabaseManager.Instance.AddChildToUser(UserManager.Instance.CurrentUser.Id, int.Parse(IdInput.text));

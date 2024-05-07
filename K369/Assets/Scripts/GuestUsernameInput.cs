@@ -54,7 +54,7 @@ public class GuestUsernameInput : MonoBehaviour
         ValidateButtonAction();
         if (canEnter)
         {
-            UserManager.Instance.LoginUser(new User(username.text,username.text,"","","","",0,0,0,0,0,0,0,0,0 , "", ""));
+            UserManager.Instance.LoginUser(new User(username.text,username.text,"","","","",0,0,0,0,0,0,0,0,0 , "", "", ""));
             SceneManager.LoadScene(MainMenuScreenName);
         }
         else

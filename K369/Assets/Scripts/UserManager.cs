@@ -17,6 +17,9 @@ public class UserManager : MonoBehaviour
     private int playerWeight;
     private string playerGender;
     private bool freshRegistration = false;
+    private int userType;
+    private string childID;
+    private string selectedChildToView;
 
     private void Awake()
     {
@@ -38,6 +41,8 @@ public class UserManager : MonoBehaviour
         SetPlayerGender(user.Gender);
         SetPlayerHeight(user.Height);
         SetPlayerWeight(user.Weight);
+        SetPlayerType(user.userType);
+        SetPlayerChildID(user.childID);
     }
     public void DeleteMeal(string mealId)
     {
@@ -107,5 +112,35 @@ public class UserManager : MonoBehaviour
     public int GetPlayerWeight()
     {
         return playerWeight;
+    }
+
+    public void SetPlayerType(int type)
+    {
+        userType = type;
+    }
+
+    public int GetPlayerType()
+    {
+        return userType;
+    }
+
+    public void SetPlayerChildID(string id)
+    {
+        childID = id;
+    }
+
+    public string GetPlayerChildID()
+    {
+        return childID;
+    }
+
+    public void SetSelectedChildToViewID(string id)
+    {
+        selectedChildToView = id;
+    }
+
+    public string GetSelectedChildToViewID()
+    {
+        return selectedChildToView;
     }
 }

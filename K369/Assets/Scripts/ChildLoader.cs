@@ -19,6 +19,11 @@ public class ChildLoader : MonoBehaviour
         UserManager.Instance.CurrentUser.children.ForEach(child =>
         {
             GameObject instantiatedPrefab = Instantiate(prefabToInstantiate, prefabParent ? prefabParent : null);
+            ChildPrefabController controller = instantiatedPrefab.GetComponent<ChildPrefabController>();
+            if (controller != null)
+            {
+                controller.Initialize(child.ToString());
+            }
         });
     }
 }
