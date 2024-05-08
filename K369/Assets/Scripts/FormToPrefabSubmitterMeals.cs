@@ -160,9 +160,14 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
 
         user.Meals.Add(new Meal(mealId, mealName, mealDescription, carbohydrates,
                                 proteins, fats, false, dateAdded, "", dateExpire, pointsToAdd, kcal));
-        if (user.userType != 0)
+        if (user.userType == 1)
         {
             DatabaseManager.Instance.AddNewMeal(user.Id, mealId, mealName, mealDescription, carbohydrates,
+                                proteins, fats, false, dateAdded, "", dateExpire, pointsToAdd, kcal);
+        }
+        else if (user.userType == 2)
+        {
+            DatabaseManager.Instance.AddNewMealForChild(user.children[0].ToString(), mealId, mealName, mealDescription, carbohydrates,
                                 proteins, fats, false, dateAdded, "", dateExpire, pointsToAdd, kcal);
         }
 

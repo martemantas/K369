@@ -255,6 +255,37 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
+    public void AddNewMealForChild(string childId, string mealId, string name, string description, int carbohydrates, int protein, int fat, bool completed, string dateAdded, string dateCompleted, string dateExpire, int points, int calories)
+    {
+        DatabaseReference usersRef = databaseReference.Child("Users");
+        usersRef.GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError("Error fetching users: " + task.Exception);
+                return;
+            }
+
+            DataSnapshot snapshot = task.Result;
+            // Iterate through the children to find the user with the matching child ID
+            foreach (DataSnapshot userSnapshot in snapshot.Children)
+            {
+                IDictionary<string, object> userData = (IDictionary<string, object>)userSnapshot.Value;
+                // Check if the user data contains a field named "ChildId" and its value matches the provided childId
+                if (userData != null && userData.ContainsKey("childID") && userData["childID"].ToString() == childId)
+                {
+                    string userId = userData["Id"].ToString();
+                    Debug.Log($"Found user with child ID {childId}. User name: {userId}");
+                    AddNewMeal(userId, mealId, name, description, carbohydrates, protein, fat, completed, dateAdded, dateCompleted, dateExpire, points, calories);
+                    return;
+                }
+            }
+
+            Debug.LogWarning("No user found with child ID: " + childId);
+        });
+    }
+
+
 
     public void DeleteMeal(string userId, string mealId)
     {
@@ -355,6 +386,38 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
+    public void AddNewTaskForChild(string childId, string taskId, string name, string description, string dateAdded, string dateCompleted, string dateExpire, int points, bool completed)
+    {
+        DatabaseReference usersRef = databaseReference.Child("Users");
+        usersRef.GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError("Error fetching users: " + task.Exception);
+                return;
+            }
+
+            DataSnapshot snapshot = task.Result;
+            // Iterate through the children to find the user with the matching child ID
+            foreach (DataSnapshot userSnapshot in snapshot.Children)
+            {
+                IDictionary<string, object> userData = (IDictionary<string, object>)userSnapshot.Value;
+
+                // Check if the user data contains a field named "ChildId" and its value matches the provided childId
+                if (userData != null && userData.ContainsKey("childID") && userData["childID"].ToString() == childId)
+                {
+                    string userId = userData["Id"].ToString();
+                    Debug.Log($"Found user with child ID {childId}. User name: {userId}");
+                    AddNewTask(userId, taskId, name, description, dateAdded, dateCompleted, dateExpire, points, completed);
+                    return;
+                }
+            }
+
+            Debug.LogWarning("No user found with child ID: " + childId);
+        });
+    }
+
+
     private IEnumerator CheckAndRemoveCompletedItems(string itemType)
     {
         while (true)
