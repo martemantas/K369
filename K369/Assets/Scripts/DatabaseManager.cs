@@ -58,7 +58,7 @@ public class DatabaseManager : MonoBehaviour
     {
         UserManager userManager = UserManager.Instance;
         int userType = userManager.GetPlayerType();
-        string childID = GenerateChildID(userType, username);
+        string childID = GenerateChildID(userType);
         userManager.SetPlayerChildID(childID);
 
         User newUser = new User(userId, username, password, email, birthday, registrationDate, 0, 0, 0, 0, 0, userType, age,
@@ -83,31 +83,23 @@ public class DatabaseManager : MonoBehaviour
     /// <param name="userType"></param>
     /// <param name="username"></param>
     /// <returns></returns>
-    private static string GenerateChildID(int userType, string username)
+    private static string GenerateChildID(int userType)
     {
         if (userType != 1)
         {
             return "";
         }
-        //DateTime now = DateTime.Now;
-        //string minutesAndSeconds = now.ToString("mmss");
-        //char firstUsernameChar = username.Length > 0 ? username[0] : GenerateRandomChar();
-        //char secondUsernameChar = username.Length > 1 ? username[1] : GenerateRandomChar();
-        //char thirdUsernameChar = username.Length > 2 ? username[2] : GenerateRandomChar();
-
-        //string childID = $"{firstUsernameChar}{minutesAndSeconds[2]}{secondUsernameChar}" +
-        //                 $"{minutesAndSeconds[1]}{thirdUsernameChar}{minutesAndSeconds[0]}";
+        DateTime currentDate = DateTime.Now;
         Random random = new Random();
-        int childID = random.Next(10000, 99999);
+        string part0 = random.Next(0, 9).ToString();
+        string part1 = currentDate.Minute.ToString("00");
+        string part2 = currentDate.Second.ToString("00");
+        string part3 = random.Next(0, 9).ToString();
+        int childID = int.Parse(part0 + part1 + part2 + part3);
+        Debug.Log("genereated childid: " + childID);
         return childID.ToString();
     }
 
-    private static char GenerateRandomChar()
-    {
-        // Generate a random character between 'a' and 'z'
-        Random random = new Random();
-        return (char)random.Next('a', 'z' + 1);
-    }
 
     public void DeleteTask(string userId, string taskId)
     {
@@ -670,39 +662,6 @@ public class DatabaseManager : MonoBehaviour
                 }
             });
     }
-
-    //public void FindUserByChildID(string id, Action<User> callback)
-    //{
-    //    FirebaseDatabase.DefaultInstance
-    //        .GetReference("Users")
-    //        .OrderByChild("childID")
-    //        .EqualTo(id)
-    //        .GetValueAsync().ContinueWithOnMainThread(task => {
-    //            if (task.IsFaulted || !task.IsCompleted)
-    //            {
-    //                Debug.LogError("Error fetching user: " + task.Exception);
-    //                callback(null);
-    //            }
-    //            else
-    //            {
-    //                DataSnapshot snapshot = task.Result;
-    //                if (snapshot.Exists && snapshot.ChildrenCount > 0)
-    //                {
-    //                    foreach (var childSnapshot in snapshot.Children)
-    //                    {
-    //                        User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
-    //                        callback(foundUser);
-    //                        return;
-    //                    }
-    //                }
-    //                else
-    //                {
-    //                    Debug.Log("No user found with the specified childID.");
-    //                    callback(null);
-    //                }
-    //            }
-    //        });
-    //}
 
     public Task<User> FindUserByChildID(string id)
     {
