@@ -38,7 +38,8 @@ public class FormToPrefabSubmitter : MonoBehaviour
         }
         else if (user.userType == 2)
         {
-            DatabaseManager.Instance.AddNewTaskForChild(user.children[0].ToString(), taskId, inputFields[0].text, inputFields[1].text, DateTime.Now.ToString(), "", formattedDate,
+            string childID = UserManager.Instance.GetSelectedChildToViewID();
+            DatabaseManager.Instance.AddNewTaskForChild(childID, taskId, inputFields[0].text, inputFields[1].text, DateTime.Now.ToString(), "", formattedDate,
                 pointsToAdd,
                 false);
         }

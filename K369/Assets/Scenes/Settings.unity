@@ -4308,8 +4308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ff20d4b4dd00d47a658f2f71a8c4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  childID: {fileID: 734889709}
-  childList: {fileID: 2109922672}
+  childID: {fileID: 0}
 --- !u!1 &1178161744
 GameObject:
   m_ObjectHideFlags: 0
@@ -7228,8 +7227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ff20d4b4dd00d47a658f2f71a8c4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  childID: {fileID: 734889709}
-  childList: {fileID: 2109922672}
+  childID: {fileID: 1543486675}
 --- !u!4 &1628654464
 Transform:
   m_ObjectHideFlags: 0

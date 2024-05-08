@@ -83,7 +83,7 @@ public class DatabaseManager : MonoBehaviour
     /// <param name="userType"></param>
     /// <param name="username"></param>
     /// <returns></returns>
-    private static string GenerateChildID(int userType)
+    private static string GenerateChildID(int userType) 
     {
         if (userType != 1)
         {
