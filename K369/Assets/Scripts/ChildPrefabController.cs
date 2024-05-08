@@ -18,13 +18,9 @@ public class ChildPrefabController : MonoBehaviour
 
     public void OnClick()
     {
-        UserManager.Instance.SetSelectedChildToViewID(nameText.text);     
+        UserManager.Instance.SetSelectedChildToViewID(nameText.text);
         SceneManager.LoadScene(SceneToLoad);
     }
-
-
-
-
 
 }
 

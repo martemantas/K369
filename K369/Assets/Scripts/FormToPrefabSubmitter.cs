@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class FormToPrefabSubmitter : MonoBehaviour
 {
@@ -21,6 +24,8 @@ public class FormToPrefabSubmitter : MonoBehaviour
             return;
         }
 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload screen
+
         DateTime selectedDateTime = dateTimePicker.GetSelectedDateTime();
         string formattedDate = selectedDateTime.ToString("yyyy-MM-dd HH:mm:ss");
 
@@ -38,7 +43,8 @@ public class FormToPrefabSubmitter : MonoBehaviour
         }
         else if (user.userType == 2)
         {
-            DatabaseManager.Instance.AddNewTaskForChild(user.children[0].ToString(), taskId, inputFields[0].text, inputFields[1].text, DateTime.Now.ToString(), "", formattedDate,
+            string childID = UserManager.Instance.GetSelectedChildToViewID();
+            DatabaseManager.Instance.AddNewTaskForChild(childID, taskId, inputFields[0].text, inputFields[1].text, DateTime.Now.ToString(), "", formattedDate,
                 pointsToAdd,
                 false);
         }
@@ -56,4 +62,5 @@ public class FormToPrefabSubmitter : MonoBehaviour
         inputFields[1].text = "";
         timetableScreen.SetActive(true);
     }
+
 }

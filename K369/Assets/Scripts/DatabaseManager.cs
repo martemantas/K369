@@ -83,7 +83,7 @@ public class DatabaseManager : MonoBehaviour
     /// <param name="userType"></param>
     /// <param name="username"></param>
     /// <returns></returns>
-    private static string GenerateChildID(int userType)
+    private static string GenerateChildID(int userType) 
     {
         if (userType != 1)
         {
@@ -96,7 +96,6 @@ public class DatabaseManager : MonoBehaviour
         string part2 = currentDate.Second.ToString("00");
         string part3 = random.Next(0, 9).ToString();
         int childID = int.Parse(part0 + part1 + part2 + part3);
-        Debug.Log("genereated childid: " + childID);
         return childID.ToString();
     }
 

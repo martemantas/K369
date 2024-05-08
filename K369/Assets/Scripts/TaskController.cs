@@ -34,22 +34,26 @@ public class TaskPrefabController : MonoBehaviour
     public void OnCompleteButton()
     {
         User user = UserManager.Instance.CurrentUser;
-        Task task = user.Tasks.Find(t => t.TaskId == taskId);
-        if (task != null)
+
+        if (user.userType == 1) // child
         {
-            task.Completed = true;
-            DatabaseManager.Instance.MarkTaskAsCompleted(user.Id, taskId);
-            if (!task.pointsGiven)
+            Task task = user.Tasks.Find(t => t.TaskId == taskId);
+            if (task != null)
             {
-                task.pointsGiven = true;
-                UserManager.Instance.CurrentUser.Points += Points;
-                DatabaseManager.Instance.UpdateUserPoints(UserManager.Instance.CurrentUser.Id, UserManager.Instance.CurrentUser.Points);
+                task.Completed = true;
+                DatabaseManager.Instance.MarkTaskAsCompleted(user.Id, taskId);
+                if (!task.pointsGiven)
+                {
+                    task.pointsGiven = true;
+                    UserManager.Instance.CurrentUser.Points += Points;
+                    DatabaseManager.Instance.UpdateUserPoints(UserManager.Instance.CurrentUser.Id, UserManager.Instance.CurrentUser.Points);
+                }
             }
+            MarkCompleted();
+
+            GameObject textPrefab = Instantiate(_PopupText, gameObject.transform);
+            textPrefab.GetComponent<PopupText>().Setup(Points);
         }
-        MarkCompleted();
-        
-        GameObject textPrefab = Instantiate(_PopupText, gameObject.transform);
-        textPrefab.GetComponent<PopupText>().Setup(Points);
     }
 }
 

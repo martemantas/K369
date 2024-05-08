@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class ChildController : MonoBehaviour
 {
-    public TMP_InputField childID;
+    public TMP_Text childID;
 
     public void OnAddButton()
     {
