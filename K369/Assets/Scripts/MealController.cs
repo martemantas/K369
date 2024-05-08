@@ -35,19 +35,23 @@ public class MealPrefabController : MonoBehaviour
     public void OnCompleteButton()
     {
         User user = UserManager.Instance.CurrentUser;
-        Meal meal = user.Meals.Find(t => t.MealId == mealId);
-        if (meal != null)
+
+        if (user.userType == 1) // child
         {
-            meal.Completed = true;
-            DatabaseManager.Instance.MarkMealAsCompleted(user.Id, mealId);
-            if (!meal.pointsGiven)
+            Meal meal = user.Meals.Find(t => t.MealId == mealId);
+            if (meal != null)
             {
-                meal.pointsGiven = true;
-                UserManager.Instance.CurrentUser.Points += Points;
-                DatabaseManager.Instance.UpdateUserPoints(UserManager.Instance.CurrentUser.Id, UserManager.Instance.CurrentUser.Points);
+                meal.Completed = true;
+                DatabaseManager.Instance.MarkMealAsCompleted(user.Id, mealId);
+                if (!meal.pointsGiven)
+                {
+                    meal.pointsGiven = true;
+                    UserManager.Instance.CurrentUser.Points += Points;
+                    DatabaseManager.Instance.UpdateUserPoints(UserManager.Instance.CurrentUser.Id, UserManager.Instance.CurrentUser.Points);
+                }
             }
+            MarkCompleted();
         }
-        MarkCompleted();       
     }
 
 
