@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class FormToPrefabSubmitter : MonoBehaviour
 {
@@ -20,6 +23,8 @@ public class FormToPrefabSubmitter : MonoBehaviour
             errorLabel.text = "Task name cannot be empty";
             return;
         }
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload screen
 
         DateTime selectedDateTime = dateTimePicker.GetSelectedDateTime();
         string formattedDate = selectedDateTime.ToString("yyyy-MM-dd HH:mm:ss");
@@ -57,4 +62,5 @@ public class FormToPrefabSubmitter : MonoBehaviour
         inputFields[1].text = "";
         timetableScreen.SetActive(true);
     }
+
 }
