@@ -752,6 +752,26 @@ public class DatabaseManager : MonoBehaviour
                                     foundUser.children.Add(childId);
                                 }
                             }
+                            
+                            DataSnapshot boughtItemsSnapshot = childSnapshot.Child("boughtItems");
+                            if (boughtItemsSnapshot.Exists)
+                            {
+                                foreach (DataSnapshot BoughtItemIdSnapshot in boughtItemsSnapshot.Children)
+                                {
+                                    int childId = int.Parse(BoughtItemIdSnapshot.Value.ToString());
+                                    foundUser.boughtItems.Add(childId);
+                                }
+                            }
+                            
+                            DataSnapshot equippedItemsSnapshot = childSnapshot.Child("equippedItems");
+                            if (equippedItemsSnapshot.Exists)
+                            {
+                                foreach (DataSnapshot EquippedItemIdSnapshot in equippedItemsSnapshot.Children)
+                                {
+                                    int childId = int.Parse(EquippedItemIdSnapshot.Value.ToString());
+                                    foundUser.equipped.Add(childId);
+                                }
+                            }
 
                             foundUser.Id = childSnapshot.Key;
                             callback(foundUser);
@@ -808,9 +828,126 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
+    
+    public void BuyItemForUser(string userId, int itemId)
+    {
+        DatabaseReference userItemsRef = databaseReference.Child("Users").Child(userId).Child("boughtItems");
+        userItemsRef.GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError("Error retrieving bought items: " + task.Exception);
+            }
+            else if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                List<int> items = new List<int>();
+                if (snapshot.Exists && snapshot.ChildrenCount > 0)
+                {
+                    foreach (DataSnapshot childSnapshot in snapshot.Children)
+                    {
+                        int existingBoughtItemId = int.Parse(childSnapshot.Value.ToString());
+                        items.Add(existingBoughtItemId);
+                    }
+                }
+                items.Add(itemId);
 
+                userItemsRef.SetValueAsync(items).ContinueWithOnMainThread(updateTask =>
+                {
+                    if (updateTask.IsFaulted)
+                    {
+                        Debug.LogError("Error updating bought items: " + updateTask.Exception);
+                    }
+                    else if (updateTask.IsCompleted)
+                    {
+                        Debug.Log("Bought item added successfully to user: " + userId);
+                    }
+                });
+            }
+        });
+    }
+    
+    
 
+    public void EquipItemForUser(string userId, int itemId)
+    {
+        DatabaseReference userItemsRef = databaseReference.Child("Users").Child(userId).Child("equippedItems");
+        userItemsRef.GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError("Error retrieving equipped items: " + task.Exception);
+            }
+            else if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                List<int> items = new List<int>();
+                if (snapshot.Exists && snapshot.ChildrenCount > 0)
+                {
+                    foreach (DataSnapshot childSnapshot in snapshot.Children)
+                    {
+                        int existingEquippedItemId = int.Parse(childSnapshot.Value.ToString());
+                        items.Add(existingEquippedItemId);
+                    }
+                }
+                items.Add(itemId);
 
+                userItemsRef.SetValueAsync(items).ContinueWithOnMainThread(updateTask =>
+                {
+                    if (updateTask.IsFaulted)
+                    {
+                        Debug.LogError("Error updating equipped items: " + updateTask.Exception);
+                    }
+                    else if (updateTask.IsCompleted)
+                    {
+                        Debug.Log("Equipped item added successfully to user: " + userId);
+                    }
+                });
+            }
+        });
+    }
+    
+    public void UnequipItemForUser(string userId, int itemId)
+    {
+        DatabaseReference userItemsRef = databaseReference.Child("Users").Child(userId).Child("equippedItems");
+        userItemsRef.GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError("Error retrieving equipped items: " + task.Exception);
+                return;
+            }
+        
+            if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                List<int> items = new List<int>();
+                if (snapshot.Exists && snapshot.ChildrenCount > 0)
+                {
+                    foreach (DataSnapshot childSnapshot in snapshot.Children)
+                    {
+                        int currentItemId = int.Parse(childSnapshot.Value.ToString());
+                        if (currentItemId != itemId) 
+                        {
+                            items.Add(currentItemId);
+                        }
+                    }
+                }
+
+                userItemsRef.SetValueAsync(items).ContinueWithOnMainThread(updateTask =>
+                {
+                    if (updateTask.IsFaulted)
+                    {
+                        Debug.LogError("Error updating equipped items: " + updateTask.Exception);
+                    }
+                    else if (updateTask.IsCompleted)
+                    {
+                        Debug.Log("Equipped item removed successfully from user: " + userId);
+                    }
+                });
+            }
+        });
+    }
 
 }
 
@@ -839,6 +976,10 @@ public class User
     public string Goals;
     public List<int> children = new List<int>();
     public string childID;
+    public List<int> boughtItems = new List<int>();
+    public List<int> equipped = new List<int>();
+
+
 
     public User(string id, string username, string password, string email, string birthday, string registrationDate, int todayCarbs, int todayProtein, int todayFat, int todayCalories, int points, int type, int age, int height, int weight, string gender, string goals, string newChildID)
     {
