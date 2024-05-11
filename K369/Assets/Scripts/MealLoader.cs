@@ -3,6 +3,7 @@ using Firebase.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ public class MealLoader : MonoBehaviour
     private DatabaseManager databaseManager;
 
     private string childID;
+    private int dayOffset = 0;
 
     private void Start()
     {
@@ -37,17 +39,17 @@ public class MealLoader : MonoBehaviour
             {
                 User userChild = await FindUserChild();
                 Debug.Log("Meal loader: spawning today's meals for user (childID): " + userChild.childID);
-                SpawnUserMeals(userChild);
+                SpawnUserMeals(userChild, 0);
             }
         }
         else
         {
-            SpawnUserMeals(currentUser);
+            SpawnUserMeals(currentUser, 0);
         }
 
     }
 
-    public void SpawnUserMeals(User user)
+    public void SpawnUserMeals(User user, int offset)
     {
         ResetContent();
         if (user != null)
@@ -58,7 +60,8 @@ public class MealLoader : MonoBehaviour
                 {
                     foreach (Meal meal in meals)
                     {
-                        if (ConvertToDate(meal.DateAdded).Day == DateTime.Now.Day) // spawn only today's meals
+                        DateTime mealDate = ConvertToDate(meal.DateAdded);
+                        if (mealDate.Date.Day == DateTime.Now.Day + offset) // Spawn meals for the specified date
                         {
                             GameObject mealInstance = Instantiate(prefabToInstantiate, prefabParent);
                             MealPrefabController controller = mealInstance.GetComponent<MealPrefabController>();
@@ -83,6 +86,20 @@ public class MealLoader : MonoBehaviour
         {
             Debug.Log("User is null.");
         }
+    }
+    
+    public void ClickAction(bool isNextDay)
+    {
+        if (isNextDay)
+        {
+            dayOffset++;
+        }
+        else
+        {
+            dayOffset--;
+        }
+
+        SpawnUserMeals(UserManager.Instance.CurrentUser, dayOffset);
     }
 
     private DateTime ConvertToDate(string dateString)
