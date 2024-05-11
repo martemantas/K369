@@ -26,10 +26,10 @@ public class MealLoader : MonoBehaviour
     private void Start()
     {
         databaseManager = new DatabaseManager();
-        Spawn();
+        Spawn(dayOffset);
     }
 
-    public async void Spawn()
+    public async void Spawn(int dayOffset)
     {
         User currentUser = UserManager.Instance.CurrentUser;
         if (currentUser.userType == 2) // parent
@@ -39,12 +39,12 @@ public class MealLoader : MonoBehaviour
             {
                 User userChild = await FindUserChild();
                 Debug.Log("Meal loader: spawning today's meals for user (childID): " + userChild.childID);
-                SpawnUserMeals(userChild, 0);
+                SpawnUserMeals(userChild, dayOffset);
             }
         }
         else
         {
-            SpawnUserMeals(currentUser, 0);
+            SpawnUserMeals(currentUser, dayOffset);
         }
 
     }
@@ -99,7 +99,7 @@ public class MealLoader : MonoBehaviour
             dayOffset--;
         }
 
-        SpawnUserMeals(UserManager.Instance.CurrentUser, dayOffset);
+        Spawn(dayOffset);
     }
 
     private DateTime ConvertToDate(string dateString)

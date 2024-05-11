@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\manto\\Documents\\K369\\K369\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|c:\\users\\manto\\documents\\k369\\k369\\assets\\scripts\\daychangermeals.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\daychangermeals.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\mealloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mealloader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,16 +11,12 @@
       "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\databasemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\dayclicker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dayclicker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\mover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\TaskLoader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:Assets\\Scripts\\TaskLoader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\assets\\scripts\\mover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mover.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{380CDCD9-D18A-0793-4455-7AA823BB8A61}|Assembly-CSharp.csproj|C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\MealController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,36 +38,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DayChangerMeals.cs",
-              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DayChangerMeals.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\DayChangerMeals.cs",
-              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DayChangerMeals.cs",
-              "RelativeToolTip": "Assets\\Scripts\\DayChangerMeals.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T20:15:07.515Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DayClicker.cs",
-              "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DayClicker.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\DayClicker.cs",
-              "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DayClicker.cs",
-              "RelativeToolTip": "Assets\\Scripts\\DayClicker.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T20:10:13.294Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "Mover.cs",
               "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\Mover.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Mover.cs",
@@ -83,24 +50,25 @@
               "RelativeToolTip": "Assets\\Scripts\\Mover.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T20:08:39.443Z"
+              "WhenOpened": "2024-05-08T20:08:39.443Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MealLoader.cs",
               "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\MealLoader.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MealLoader.cs",
               "ToolTip": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\MealLoader.cs",
               "RelativeToolTip": "Assets\\Scripts\\MealLoader.cs",
-              "ViewState": "AQIAAFEAAAAAAAAAAAAAAGEAAAAJAAAA",
+              "ViewState": "AQIAABkAAAAAAAAAAAAzwB8AAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-22T14:52:13.828Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "DatabaseManager.cs",
               "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\DatabaseManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\DatabaseManager.cs",
@@ -113,7 +81,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "TaskLoader.cs",
               "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\TaskLoader.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\TaskLoader.cs",
@@ -125,7 +93,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "MealController.cs",
               "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\MealController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MealController.cs",
@@ -137,7 +105,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "TaskController.cs",
               "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\TaskController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\TaskController.cs",
@@ -149,7 +117,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "UserManager.cs",
               "DocumentMoniker": "C:\\Users\\manto\\Documents\\K369\\K369\\Assets\\Scripts\\UserManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UserManager.cs",
