@@ -49,7 +49,7 @@ public class MealLoader : MonoBehaviour
 
     }
 
-    public void SpawnUserMeals(User user, int offset)
+    public void SpawnUserMeals(User user, int dayOffset)
     {
         ResetContent();
         if (user != null)
@@ -61,7 +61,7 @@ public class MealLoader : MonoBehaviour
                     foreach (Meal meal in meals)
                     {
                         DateTime mealDate = ConvertToDate(meal.DateAdded);
-                        if (mealDate.Date.Day == DateTime.Now.Day + offset) // Spawn meals for the specified date
+                        if (mealDate.Date.Day == DateTime.Now.Day + dayOffset) // Spawn meals for the specified date
                         {
                             GameObject mealInstance = Instantiate(prefabToInstantiate, prefabParent);
                             MealPrefabController controller = mealInstance.GetComponent<MealPrefabController>();
