@@ -95,6 +95,8 @@ public class ItemController : MonoBehaviour
         ItemList.SetActive(true);
         UserManager.Instance.CurrentUser.boughtItems.Add(index);
         DatabaseManager.Instance.BuyItemForUser(UserManager.Instance.CurrentUser.Id,index);
+        DatabaseManager.Instance.UpdateUserPoints(UserManager.Instance.CurrentUser.Id, UserManager.Instance.CurrentUser.Points);
+
     }
 
     //Kazkada gal turesim actual itema, kolkas pakeičiam spalvą
