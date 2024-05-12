@@ -3,6 +3,7 @@ using Firebase.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,14 +21,15 @@ public class MealLoader : MonoBehaviour
     private DatabaseManager databaseManager;
 
     private string childID;
+    private int dayOffset = 0;
 
     private void Start()
     {
         databaseManager = new DatabaseManager();
-        Spawn();
+        Spawn(dayOffset);
     }
 
-    public async void Spawn()
+    public async void Spawn(int dayOffset)
     {
         User currentUser = UserManager.Instance.CurrentUser;
         if (currentUser.userType == 2) // parent
@@ -37,17 +39,17 @@ public class MealLoader : MonoBehaviour
             {
                 User userChild = await FindUserChild();
                 Debug.Log("Meal loader: spawning today's meals for user (childID): " + userChild.childID);
-                SpawnUserMeals(userChild);
+                SpawnUserMeals(userChild, dayOffset);
             }
         }
         else
         {
-            SpawnUserMeals(currentUser);
+            SpawnUserMeals(currentUser, dayOffset);
         }
 
     }
 
-    public void SpawnUserMeals(User user)
+    public void SpawnUserMeals(User user, int dayOffset)
     {
         ResetContent();
         if (user != null)
@@ -58,7 +60,8 @@ public class MealLoader : MonoBehaviour
                 {
                     foreach (Meal meal in meals)
                     {
-                        if (ConvertToDate(meal.DateAdded).Day == DateTime.Now.Day) // spawn only today's meals
+                        DateTime mealDate = ConvertToDate(meal.DateAdded);
+                        if (mealDate.Date.Day == DateTime.Now.Day + dayOffset) // Spawn meals for the specified date
                         {
                             GameObject mealInstance = Instantiate(prefabToInstantiate, prefabParent);
                             MealPrefabController controller = mealInstance.GetComponent<MealPrefabController>();
@@ -83,6 +86,20 @@ public class MealLoader : MonoBehaviour
         {
             Debug.Log("User is null.");
         }
+    }
+    
+    public void ClickAction(bool isNextDay)
+    {
+        if (isNextDay)
+        {
+            dayOffset++;
+        }
+        else
+        {
+            dayOffset--;
+        }
+
+        Spawn(dayOffset);
     }
 
     private DateTime ConvertToDate(string dateString)
