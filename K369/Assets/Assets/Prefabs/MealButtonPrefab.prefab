@@ -344,6 +344,7 @@ MonoBehaviour:
   removeButton: {fileID: 1857618448101931872}
   background: {fileID: 920744442268255309}
   mealId: 
+  _PopupText: {fileID: 5124683173943972853, guid: 25820491e6cf16843ba49f103b583fe2, type: 3}
 --- !u!114 &2673011189677580519
 MonoBehaviour:
   m_ObjectHideFlags: 0

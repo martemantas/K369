@@ -214,7 +214,89 @@ public class DatabaseManager : MonoBehaviour
         UpdateUser(userId, updates);
     }
 
+    public void AddNewNutrientToMeal(string userId, string mealId, Nutrient food)
+    {
+        Debug.Log("Recieved values: userid " + userId + ", mealid " + mealId + ", foodId " + food.Id);
+        string json = JsonUtility.ToJson(food);
 
+        string path = "Users/" + userId + "/Meals/" + mealId + "/Nutrients/" + food.Id;
+
+        // Update the path to include the meal ID
+        //DatabaseReference nutrientRef = databaseReference.Child(path);
+        DatabaseReference nutrientRef = FirebaseDatabase.DefaultInstance.RootReference.Child(path);
+
+        nutrientRef.SetRawJsonValueAsync(json).ContinueWithOnMainThread(task => {
+            if (task.IsFaulted)
+            {
+                Debug.LogError("Error adding new nutrient record: " + task.Exception);
+            }
+            else if (task.IsCompleted)
+            {
+                Debug.Log("New nutrient record added successfully for user: " + userId + " in meal: " + mealId);
+            }
+        });
+    }
+
+    // Updates meal (adds values of added food information to meal)
+    public void UpdateMealDescriptionAndValues(string userId, string mealId, string descriptionAddition, int kcal, int proteins, int fats, int carbs)
+    {
+
+        DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+        databaseReference.Child("Users").Child(userId).Child("Meals").Child(mealId).GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError("Error retrieving meal details: " + task.Exception);
+                return;
+            }
+
+            DataSnapshot mealSnapshot = task.Result;
+            if (mealSnapshot.Exists)
+            {
+                // Retrieve individual field values
+                string currentDescription = mealSnapshot.Child("Description").Value.ToString();
+                int currentCalories = int.Parse(mealSnapshot.Child("Calories").Value.ToString());
+                int currentProteins = int.Parse(mealSnapshot.Child("Protein").Value.ToString());
+                int currentFats = int.Parse(mealSnapshot.Child("Fat").Value.ToString());
+                int currentCarbs = int.Parse(mealSnapshot.Child("Carbohydrates").Value.ToString());
+
+                // Update values based on the inputs
+                string updatedDescription = currentDescription + descriptionAddition;
+                int updatedCalories = currentCalories + kcal;
+                int updatedProteins = currentProteins + proteins;
+                int updatedFats = currentFats + fats;
+                int updatedCarbs = currentCarbs + carbs;
+
+                // Create a dictionary with the updated values
+                Dictionary<string, object> updates = new Dictionary<string, object>
+                {
+                    { "Description", updatedDescription },
+                    { "Calories", updatedCalories },
+                    { "Protein", updatedProteins },
+                    { "Fat", updatedFats },
+                    { "Carbohydrates", updatedCarbs }
+                };
+
+                // Update the meal with the updated values
+                DatabaseReference mealRef = databaseReference.Child("Users").Child(userId).Child("Meals").Child(mealId);
+                mealRef.UpdateChildrenAsync(updates).ContinueWithOnMainThread(updateTask =>
+                {
+                    if (updateTask.IsFaulted)
+                    {
+                        Debug.LogError("Error updating meal: " + updateTask.Exception);
+                    }
+                    else if (updateTask.IsCompleted)
+                    {
+                        Debug.Log("Meal updated successfully for user: " + userId);
+                    }
+                });
+            }
+            else
+            {
+                Debug.LogError("Meal not found.");
+            }
+        });
+    }
 
     public void AddNewMeal(string userId, string mealId, string name, string description, int carbohydrates, int protein, int fat, bool completed, string dateAdded, string dateCompleted, string dateExpire, int points, int calories)
     {
@@ -528,27 +610,6 @@ public class DatabaseManager : MonoBehaviour
         }
 
         return null;
-    }
-
-
-
-
-
-    public void AddNewNutrientRecord(string userId, string nutrientId, string date, int protein, int fat, int carbohydrates, int calories)
-    {
-        Nutrient newNutrient = new Nutrient(date, protein, fat, carbohydrates, calories);
-        string json = JsonUtility.ToJson(newNutrient);
-
-        databaseReference.Child("Users").Child(userId).Child("Nutrients").Child(nutrientId).SetRawJsonValueAsync(json).ContinueWithOnMainThread(task => {
-            if (task.IsFaulted)
-            {
-                Debug.LogError("Error adding new nutrient record: " + task.Exception);
-            }
-            else if (task.IsCompleted)
-            {
-                Debug.Log("New nutrient record added successfully for user: " + userId);
-            }
-        });
     }
 
     
@@ -1007,6 +1068,8 @@ public class User
     public string childID;
     public List<int> boughtItems = new List<int>();
     public List<int> equipped = new List<int>();
+    public Nutrient selectedFood;   // save selected food
+    public User child;              // save selected child
 
 
 
@@ -1097,19 +1160,30 @@ public class Task
 [System.Serializable]
 public class Nutrient
 {
+    public string Id;
+    public string Name;
     public string Date;
     public int Protein;
     public int Fat;
     public int Carbohydrates;
     public int Calories;
+    public float Serving;
+    public int Count;
+    public string MealName;
 
-    public Nutrient(string date, int protein, int fat, int carbohydrates, int calories)
+    public Nutrient(string id, string name, string date, int protein, int fat, int carbohydrates, int calories,
+                    float serving, int count, string mealName)
     {
+        Id = id;
+        Name = name;
         Date = date;
         Protein = protein;
         Fat = fat;
         Carbohydrates = carbohydrates;
         Calories = calories;
+        Serving = serving;
+        Count = count;
+        MealName = mealName;
     }
 }
 
