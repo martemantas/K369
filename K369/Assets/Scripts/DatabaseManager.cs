@@ -948,6 +948,35 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
+    
+    public void CheckIfChildIdExists(int childId, Action<bool> callback)
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("Users")
+            .OrderByChild("childID")
+            .EqualTo(childId.ToString())
+            .GetValueAsync().ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted || !task.IsCompleted)
+                {
+                    Debug.LogError("Error checking childId: " + task.Exception);
+                    callback(false);
+                }
+                else
+                {
+                    DataSnapshot snapshot = task.Result;
+                    if (snapshot.Exists && snapshot.ChildrenCount > 0)
+                    {
+                        callback(true); 
+                    }
+                    else
+                    {
+                        callback(false);
+                    }
+                }
+            });
+    }
+
 
 }
 
