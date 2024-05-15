@@ -94,7 +94,7 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
 
         mealDescription = "Complete until ";
         if (allDay.isOn)
-        {           
+        {
             mealDescription += "midnight";
         }
         else
@@ -102,6 +102,10 @@ public class FormToPrefabSubmitterMeals : MonoBehaviour
             mealDescription += endHour.PadLeft(2, '0') + ":" + endMinutes.PadLeft(2, '0');
         }
         mealDescription += "\n" + inputFields[1].text;
+        if (inputFields[1].text.Length != 0)
+        {
+            mealDescription += "\n";
+        }
 
     }
 

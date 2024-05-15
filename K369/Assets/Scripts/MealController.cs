@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MealPrefabController : MonoBehaviour
@@ -14,6 +15,8 @@ public class MealPrefabController : MonoBehaviour
     public Image background;
     public string mealId;
     private int Points;
+
+    [FormerlySerializedAs("_cookiePopupText")][SerializeField] private GameObject _PopupText;
 
 
     public void Initialize(string id, string name, string description, int points, bool isCompleteButtonActive)
@@ -51,6 +54,9 @@ public class MealPrefabController : MonoBehaviour
                 }
             }
             MarkCompleted();
+
+            GameObject textPrefab = Instantiate(_PopupText, gameObject.transform);
+            textPrefab.GetComponent<PopupText>().Setup(Points);
         }
     }
 
