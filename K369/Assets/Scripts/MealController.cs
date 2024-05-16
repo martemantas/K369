@@ -51,6 +51,16 @@ public class MealPrefabController : MonoBehaviour
                     meal.pointsGiven = true;
                     UserManager.Instance.CurrentUser.Points += Points;
                     DatabaseManager.Instance.UpdateUserPoints(UserManager.Instance.CurrentUser.Id, UserManager.Instance.CurrentUser.Points);
+
+                    UserManager.Instance.CurrentUser.todayCalories += meal.Calories;
+                    UserManager.Instance.CurrentUser.todayProtein += meal.Protein;
+                    UserManager.Instance.CurrentUser.todayFat += meal.Fat;
+                    UserManager.Instance.CurrentUser.todayCarbs += meal.Carbohydrates;
+                    DatabaseManager.Instance.UpdateUserNutritionalValues(UserManager.Instance.CurrentUser.Id, 
+                                                                         UserManager.Instance.CurrentUser.todayCalories,
+                                                                         UserManager.Instance.CurrentUser.todayProtein,
+                                                                         UserManager.Instance.CurrentUser.todayFat,
+                                                                         UserManager.Instance.CurrentUser.todayCarbs);
                 }
             }
             MarkCompleted();

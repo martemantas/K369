@@ -6,6 +6,8 @@ using TMPro;
 using System;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Globalization;
 
 public class AddFoodScript : MonoBehaviour
 {
@@ -15,11 +17,13 @@ public class AddFoodScript : MonoBehaviour
     private float primary_G_value;
     private float primary_OZ_value;
 
+    public Image[] imagesPieChart;
     public TextMeshProUGUI nutritionLabel;
     public TextMeshProUGUI carbsText;
     public TextMeshProUGUI proteinsText;
     public TextMeshProUGUI fatText;
     public TextMeshProUGUI kcalText;
+
     private string carbsPrimaryValue;
     private string proteinsPrimaryValue;
     private string fatPrimaryValue;
@@ -53,6 +57,19 @@ public class AddFoodScript : MonoBehaviour
         mealOptions = GetUserMeals(userToAddFood);       // Adds only uncompleted meals
     }
 
+    private void PieChartCalculation(float[] values, string kcal)
+    {
+        kcalText.text = kcal;
+        float total = values.Sum();
+        float runningPercentage = 0f;
+        for (int i = 0; i < values.Length; i++)
+        {
+            float percentage = values[i] / total;
+            runningPercentage += percentage;
+            imagesPieChart[i].fillAmount = runningPercentage;
+        }
+    }
+
     // Set user by its type - child or parent
     private void SetUser()
     {
@@ -84,6 +101,9 @@ public class AddFoodScript : MonoBehaviour
         fatPrimaryValue = fatText.text;
         kcalPrimaryValue = kcalText.text;
         servingPrimaryValue = servingValueText.text;
+
+        float[] values = { float.Parse(fatPrimaryValue), float.Parse(carbsPrimaryValue), float.Parse(proteinsPrimaryValue) };
+        PieChartCalculation(values, kcalText.text);
     }
 
     // Make selection options
@@ -277,6 +297,9 @@ public class AddFoodScript : MonoBehaviour
         {
             servingValueText.text = (Change_G_To_OZ(servingPrimaryValue) * int.Parse(count)).ToString("0.00");
         }
+
+        float[] values = { float.Parse(fatText.text), float.Parse(carbsText.text), float.Parse(proteinsText.text) };
+        PieChartCalculation(values, kcalText.text);
     }
 
 

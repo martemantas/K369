@@ -164,6 +164,18 @@ public class DatabaseManager : MonoBehaviour
         UpdateUser(userId, updates);
     }
 
+    public void UpdateUserNutritionalValues(string userId, float newKcalToday, float newProteinsToday, 
+                                            float newFatsToday, float newCarbsToday)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["todayCalories"] = newKcalToday;
+        updates["todayCarbs"] = newCarbsToday;
+        updates["todayFat"] = newFatsToday;
+        updates["todayProtein"] = newProteinsToday;
+
+        UpdateUser(userId, updates);
+    }
+
     public void UpdateUser(string userId, Dictionary<string, object> updates)
     {
         DatabaseReference userRef = databaseReference.Child("Users").Child(userId);
@@ -1051,10 +1063,17 @@ public class User
     public string Birthday;
     public string SaveData = "";
     public string RegistrationDate;
-    public int todayCarbs = 0;
-    public int todayProtein = 0;
-    public int todayFat = 0;
-    public int todayCalories = 0;
+    public float todayCarbs = 0;
+    public float todayProtein = 0;
+    public float todayFat = 0;
+    public float todayCalories = 0;
+
+    public float requiredCarbs;
+    public float requiredProtein;
+    public float requiredFat;
+    public float requiredCalories;
+    public DateTime nutritionalValuesUpdated;
+
     public int Points = 0;
     public List<Task> Tasks = new List<Task>();
     public List<Meal> Meals = new List<Meal>();
@@ -1073,7 +1092,9 @@ public class User
 
 
 
-    public User(string id, string username, string password, string email, string birthday, string registrationDate, int todayCarbs, int todayProtein, int todayFat, int todayCalories, int points, int type, int age, int height, int weight, string gender, string goals, string newChildID)
+    public User(string id, string username, string password, string email, string birthday, string registrationDate, 
+                float todayCarbs, float todayProtein, float todayFat, float todayCalories, int points, int type, int age,
+                int height, int weight, string gender, string goals, string newChildID)
     {
         Id = id;
         Username = username;
