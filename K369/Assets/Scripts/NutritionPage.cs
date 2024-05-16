@@ -22,8 +22,8 @@ public class NutritionPage : MonoBehaviour
     private int age;
     private string gender;
     private string program;
-    private float height;
-    private float weight;
+    private int height;
+    private int weight;
     private float fatValue;
     private float carbsValue;
     private float proteinsValue;
@@ -47,7 +47,7 @@ public class NutritionPage : MonoBehaviour
         SetUserValues();
         SetRequiredNutritionalValues();
         SetTodaysNutritionalValues();
-        SetChartValues();
+        //SetChartValues();
     }
 
     // Displays nutrition values
@@ -69,26 +69,6 @@ public class NutritionPage : MonoBehaviour
 
         float[] values = { fatValue, carbsValue, proteinsValue };
         PieChartCalculation(values);
-    }
-
-    public float GetKCalValue()
-    {
-        return kcalValue;
-    }
-
-    public float GetFatValue()
-    {
-        return fatValue;
-    }
-
-    public float GetCarbsValue()
-    {
-        return carbsValue;
-    }
-
-    public float GetProteinsValue()
-    {
-        return proteinsValue;
     }
 
     // Calculates pie chart values
@@ -172,6 +152,12 @@ public class NutritionPage : MonoBehaviour
             height = 175;
             weight = 75;
         }
+
+        DatabaseManager.Instance.UpdateUserHeight(user.Id, height);
+        DatabaseManager.Instance.UpdateUserWeight(user.Id, weight);
+        DatabaseManager.Instance.UpdateUserAge(user.Id, age);
+        DatabaseManager.Instance.UpdateUserGender(user.Id, gender);
+
     }
 
     /// <summary>
@@ -219,18 +205,25 @@ public class NutritionPage : MonoBehaviour
         requiredFats = _03;
         user.requiredCarbs = _04;
         requiredCarbs = _04;
+
+        DatabaseManager.Instance.UpdateUserRequiredNutritionalValues(user.Id, requiredKCal, requiredProteins, requiredFats, requiredCarbs);
     }
 
 
     private void SetTodaysNutritionalValues()
     {
         dateUpdated = DateTime.Now;
-
-        // if date was never updated or today is the new day, update date and reset values
-        if (user.nutritionalValuesUpdated == null ||
-            dateUpdated.Day != user.nutritionalValuesUpdated.Day)
+        DateTime nutritionalValuesDate;
+        if (!DateTime.TryParse(user.nutritionalValuesUpdated, out nutritionalValuesDate) ||
+            user.nutritionalValuesUpdated.Length == 0)
         {
-            user.nutritionalValuesUpdated = dateUpdated;
+            Debug.Log("cannot convert string to datetime.");
+            nutritionalValuesDate = dateUpdated;
+        }
+        // if date was never updated or today is the new day, update date and reset values
+        if (nutritionalValuesDate.Day != dateUpdated.Day)
+        {
+            user.nutritionalValuesUpdated = dateUpdated.ToString("yyyy-MM-dd");
             user.todayProtein = 0;
             user.todayCarbs = 0;
             user.todayCalories = 0;
@@ -241,5 +234,9 @@ public class NutritionPage : MonoBehaviour
         proteinsValue = user.todayProtein;
         carbsValue = user.todayCarbs;
         kcalValue = user.todayCalories;
+
+        DatabaseManager.Instance.UpdateUserNutritionalValues(user.Id, kcalValue, proteinsValue, fatValue, carbsValue);
     }
+
+
 }
