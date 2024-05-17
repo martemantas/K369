@@ -61,7 +61,6 @@ public class MealPrefabController : MonoBehaviour
                         user.Points += Points;
                         DatabaseManager.Instance.UpdateUserPoints(user.Id, user.Points);
 
-                        Debug.Log("meal calories: " + meal.Calories);
                         user.todayCalories += meal.Calories;
                         user.todayProtein += meal.Protein;
                         user.todayFat += meal.Fat;

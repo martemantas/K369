@@ -44,13 +44,7 @@ public class FoodLoader : MonoBehaviour
         {
             controller.Initialize(n.Id, n.Name, n.Calories.ToString(), n.Protein.ToString(),
                                   n.Fat.ToString(), n.Carbohydrates.ToString());
-            Debug.Log("controller not null");
         }
-        else
-        {
-            Debug.Log("controller null");
-        }
-
     }
 
     public void OnSearchInputChanged()

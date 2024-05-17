@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using System.Linq;
 using Unity.VisualScripting;
 using System;
+using UnityEngine.XR;
 
 public class NutritionPage : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class NutritionPage : MonoBehaviour
     public string YouScreenName = "Main screen";
     public string SettingsScreenName = "Settings";
     public string FoodSearchScreenName = "FoodSearch screen";
-    public GameObject emptyPieChartBackgorund;
+    public GameObject emptyPieChartBackground; // show empty chart if values are 0
 
 
     void Start()
@@ -47,7 +48,7 @@ public class NutritionPage : MonoBehaviour
         SetUserValues();
         SetRequiredNutritionalValues();
         SetTodaysNutritionalValues();
-        //SetChartValues();
+        SetChartValues();
     }
 
     // Displays nutrition values
@@ -55,7 +56,7 @@ public class NutritionPage : MonoBehaviour
     {
         if (kcalValue > 0)
         {
-            emptyPieChartBackgorund.SetActive(false); // disable background to display pie chart
+            emptyPieChartBackground.SetActive(false); // disable background to display pie chart
         }
         string kcalBalance = kcalValue.ToString() + "/" + requiredKCal.ToString("0");
         string fatBalance = fatValue.ToString() + "/" + requiredFats.ToString("0");
@@ -69,6 +70,7 @@ public class NutritionPage : MonoBehaviour
 
         float[] values = { fatValue, carbsValue, proteinsValue };
         PieChartCalculation(values);
+
     }
 
     // Calculates pie chart values
@@ -212,30 +214,67 @@ public class NutritionPage : MonoBehaviour
 
     private void SetTodaysNutritionalValues()
     {
+        //dateUpdated = DateTime.Now;
+        //if (user.nutritionalValuesUpdated.Length == 0)
+        //{
+        //    Debug.Log("values are updated first time.");
+        //    user.nutritionalValuesUpdated = dateUpdated.ToString("yyyy-MM-dd");
+        //}
+        //// if date was never updated or today is the new day, update date and reset values
+        //else if (DateTime.Parse(user.nutritionalValuesUpdated).Day != dateUpdated.Day)
+        //{
+        //    user.nutritionalValuesUpdated = dateUpdated.ToString("yyyy-MM-dd");
+        //    user.todayProtein = 0;
+        //    user.todayCarbs = 0;
+        //    user.todayCalories = 0;
+        //    user.todayFat = 0;
+        //    DatabaseManager.Instance.UpdateUserNutritionalValues(user.Id, 0, 0, 0, 0);
+        //}
+
         dateUpdated = DateTime.Now;
-        DateTime nutritionalValuesDate;
-        if (!DateTime.TryParse(user.nutritionalValuesUpdated, out nutritionalValuesDate) ||
-            user.nutritionalValuesUpdated.Length == 0)
+
+        if (string.IsNullOrEmpty(user.nutritionalValuesUpdated))
         {
-            Debug.Log("cannot convert string to datetime.");
-            nutritionalValuesDate = dateUpdated;
-        }
-        // if date was never updated or today is the new day, update date and reset values
-        if (nutritionalValuesDate.Day != dateUpdated.Day)
-        {
+            Debug.Log("Values are updated for the first time.");
             user.nutritionalValuesUpdated = dateUpdated.ToString("yyyy-MM-dd");
-            user.todayProtein = 0;
-            user.todayCarbs = 0;
-            user.todayCalories = 0;
-            user.todayFat = 0;
+        }
+        else
+        {
+            DateTime nutritionalValuesDate;
+            bool parseSuccess = DateTime.TryParse(user.nutritionalValuesUpdated, out nutritionalValuesDate);
+
+            if (!parseSuccess)
+            {
+                Debug.LogError("Failed to parse the date from user.nutritionalValuesUpdated.");
+                // Handle the parsing error as needed, e.g., by resetting the date
+                nutritionalValuesDate = dateUpdated;
+                user.nutritionalValuesUpdated = dateUpdated.ToString("yyyy-MM-dd");
+            }
+
+            // If today is a new day compared to the last update, reset the values
+            if (nutritionalValuesDate.Date != dateUpdated.Date)
+            {
+                Debug.Log("New day detected. Resetting nutritional values.");
+                user.nutritionalValuesUpdated = dateUpdated.ToString("yyyy-MM-dd");
+                user.todayProtein = 0;
+                user.todayCarbs = 0;
+                user.todayCalories = 0;
+                user.todayFat = 0;
+                DatabaseManager.Instance.UpdateUserNutritionalValues(user.Id, 0, 0, 0, 0);
+            }
         }
 
-        fatValue = user.todayFat;
-        proteinsValue = user.todayProtein;
-        carbsValue = user.todayCarbs;
-        kcalValue = user.todayCalories;
+        Action<User> userCallback = (updatedUser) =>
+        {
+            fatValue = updatedUser.todayFat;
+            proteinsValue = updatedUser.todayProtein;
+            carbsValue = updatedUser.todayCarbs;
+            kcalValue = updatedUser.todayCalories;
+        };
+        DatabaseManager.Instance.GetUserByEmail(user.Email, userCallback);
 
         DatabaseManager.Instance.UpdateUserNutritionalValues(user.Id, kcalValue, proteinsValue, fatValue, carbsValue);
+        DatabaseManager.Instance.UpdateUserNutritionUpdateTime(user.Id, user.nutritionalValuesUpdated);
     }
 
 

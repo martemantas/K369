@@ -232,6 +232,16 @@ public class DatabaseManager : MonoBehaviour
 
         UpdateUser(userId, updates);
     }
+
+
+    public void UpdateUserNutritionUpdateTime(string userId, string newDate)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["nutritionalValuesUpdated"] = newDate;
+
+        UpdateUser(userId, updates);
+    }
+
     public void UpdateUserRequiredNutritionalValues(string userId, float newKcalToday, float newProteinsToday,
                                             float newFatsToday, float newCarbsToday)
     {
@@ -1164,6 +1174,8 @@ public class User
         Goals = goals;
         Gender = gender;
         childID = newChildID;
+
+        nutritionalValuesUpdated = "";
     }
 }
 
