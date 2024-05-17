@@ -65,7 +65,6 @@ public class FoodDatabaseManager : MonoBehaviour
 
     if (jsonObject == null || jsonObject["FoundationFoods"] == null)
     {
-        Debug.LogError("Invalid JSON response");
         return nutrients;
     }
 
@@ -75,7 +74,6 @@ public class FoodDatabaseManager : MonoBehaviour
     {
         if (foodItem == null || foodItem["description"] == null || foodItem["foodNutrients"] == null)
         {
-            Debug.LogError("Invalid food item in JSON response");
             continue;
         }
 
@@ -86,14 +84,13 @@ public class FoodDatabaseManager : MonoBehaviour
             Date = "",
             Serving = 100,
             Count = 1,
-            MealName = "" // You can change this based on your context
+            MealName = ""
         };
 
         foreach (var nutrientInfo in foodItem["foodNutrients"])
         {
             if (nutrientInfo == null || nutrientInfo["nutrient"] == null || nutrientInfo["nutrient"]["id"] == null || nutrientInfo["amount"] == null)
             {
-                Debug.LogError("Invalid nutrient info in food item");
                 continue;
             }
 
@@ -104,17 +101,31 @@ public class FoodDatabaseManager : MonoBehaviour
                 {
                     case 1003: // Protein
                         nutrient.Protein = (int)nutrientAmount;
+                        if (nutrient.Calories == 0)
+                        {
+                            nutrient.Calories += nutrient.Protein * 4; // 1 gram of protein = 4 kcal
+                        }
                         break;
+                    case 1085: // Total fat (NLEA)
                     case 1004: // Total lipid (fat)
                         nutrient.Fat = (int)nutrientAmount;
+                        if (nutrient.Calories == 0)
+                        {
+                            nutrient.Calories = nutrient.Fat * 9; // 1 gram of fat = 9 kcal
+                        }
                         break;
                     case 1005: // Carbohydrate, by difference
                         nutrient.Carbohydrates = (int)nutrientAmount;
+                        if (nutrient.Calories == 0)
+                        {
+                            nutrient.Calories += nutrient.Carbohydrates * 4; // 1 gram of carbohydrate = 4 kcal
+                        }
                         break;
                     case 1008: // Energy
                         nutrient.Calories = (int)nutrientAmount;
                         break;
                 }
+                
             }
         }
 
