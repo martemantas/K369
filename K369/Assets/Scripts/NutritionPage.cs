@@ -36,17 +36,32 @@ public class NutritionPage : MonoBehaviour
     public string SettingsScreenName = "Settings";
     public string FoodSearchScreenName = "FoodSearch screen";
 
+    public GameObject parentMessage;
+    public GameObject selectChildMessage;
+
     void Start()
     {
-
         SetUser();
-        SetUserValues();
-        SetRequiredNutritionalValues();
-        SetTodaysNutritionalValues();
-        SetChartValues();
+        if (user != null) // null is possible when parent has not selected child 
+        {
+            SetUserValues(); 
+            SetRequiredNutritionalValues();
+            SetTodaysNutritionalValues();
+            SetChartValues();
+        }
     }
 
-    // Displays nutrition values
+    private void Update()
+    {
+        if (user != null) 
+        {
+            SetChartValues(); // Show updated values
+        }
+    }
+
+    /// <summary>
+    /// Displays nutrition values
+    /// </summary>
     public void SetChartValues()
     {
         string kcalBalance = user.todayCalories.ToString() + "/" + requiredKCal.ToString("0");
@@ -66,7 +81,10 @@ public class NutritionPage : MonoBehaviour
         }
     }
 
-    // Calculates pie chart values
+    /// <summary>
+    /// Calculates pie chart values
+    /// </summary>
+    /// <param name="values">Values</param>
     public void PieChartCalculation(float[] values)
     {
         float total = values.Sum();
@@ -106,7 +124,15 @@ public class NutritionPage : MonoBehaviour
         User currentUser = UserManager.Instance.CurrentUser;
         if (currentUser.userType == 2) // parent
         {
-            user = currentUser.child;
+            parentMessage.SetActive(true); // message for parent (can't complete meals)
+            if (currentUser.child == null)
+            {
+                selectChildMessage.SetActive(true); // show link to settings to select child
+            }
+            else
+            {
+                user = currentUser.child;
+            }
         }
         else
         {
@@ -114,6 +140,9 @@ public class NutritionPage : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets values for nutrition values calculation; if missing - sets default values
+    /// </summary>
     private void SetUserValues()
     {
         if (user.userType == 0) // for guest, set default values
@@ -122,6 +151,7 @@ public class NutritionPage : MonoBehaviour
             program = "For fun";
             gender = "male";
         }
+
         if (gender == null)
         {
             gender = "male";
@@ -142,7 +172,7 @@ public class NutritionPage : MonoBehaviour
         gender = user.Gender;
         if (height <= 0 || weight <= 0) // set default values
         {
-            // According to https://www.worlddata.info/average-bodyheight.php , lets say that average person
+            // According to https://www.worlddata.info/average-bodyheight.php , lets say the average person
             // is 175cm height and 75kg weight
             height = 175;
             weight = 75;
@@ -156,7 +186,7 @@ public class NutritionPage : MonoBehaviour
     }
 
     /// <summary>
-    /// Set values by Harris-Benedict equation
+    /// Set required nutritional values by Harris-Benedict equation
     /// </summary>
     private void SetRequiredNutritionalValues()
     {
@@ -204,6 +234,9 @@ public class NutritionPage : MonoBehaviour
         DatabaseManager.Instance.UpdateUserRequiredNutritionalValues(user.Id, requiredKCal, requiredProteins, requiredFats, requiredCarbs);
     }
 
+    /// <summary>
+    /// Sets nutritional values which was earned today
+    /// </summary>
     private void SetTodaysNutritionalValues()
     {
         DateTime dateNow = DateTime.Now;
@@ -221,75 +254,6 @@ public class NutritionPage : MonoBehaviour
             DatabaseManager.Instance.UpdateUserNutritionUpdateTime(user.Id, user.nutritionalValuesUpdated);
         }
     }
-
-    //private void SetTodaysNutritionalValues()
-    //{
-    //    //dateUpdated = DateTime.Now;
-    //    //if (user.nutritionalValuesUpdated.Length == 0)
-    //    //{
-    //    //    Debug.Log("values are updated first time.");
-    //    //    user.nutritionalValuesUpdated = dateUpdated.ToString("yyyy-MM-dd");
-    //    //}
-    //    //// if date was never updated or today is the new day, update date and reset values
-    //    //else if (DateTime.Parse(user.nutritionalValuesUpdated).Day != dateUpdated.Day)
-    //    //{
-    //    //    user.nutritionalValuesUpdated = dateUpdated.ToString("yyyy-MM-dd");
-    //    //    user.todayProtein = 0;
-    //    //    user.todayCarbs = 0;
-    //    //    user.todayCalories = 0;
-    //    //    user.todayFat = 0;
-    //    //    DatabaseManager.Instance.UpdateUserNutritionalValues(user.Id, 0, 0, 0, 0);
-    //    //}
-
-    //    dateUpdated = DateTime.Now;
-
-    //    if (string.IsNullOrEmpty(user.nutritionalValuesUpdated))
-    //    {
-    //        Debug.Log("Values are updated for the first time.");
-    //        user.nutritionalValuesUpdated = dateUpdated.ToString("yyyy-MM-dd");
-    //    }
-    //    else
-    //    {
-    //        DateTime nutritionalValuesDate;
-    //        bool parseSuccess = DateTime.TryParse(user.nutritionalValuesUpdated, out nutritionalValuesDate);
-
-    //        if (!parseSuccess)
-    //        {
-    //            Debug.LogError("Failed to parse the date from user.nutritionalValuesUpdated.");
-    //            nutritionalValuesDate = dateUpdated;
-    //            user.nutritionalValuesUpdated = dateUpdated.ToString("yyyy-MM-dd");
-    //        }
-
-    //        Debug.Log("nutritionalValuesDate day: " + nutritionalValuesDate.Day);
-    //        Debug.Log("date upadted day: " + dateUpdated.Day);
-
-    //        // If today is a new day compared to the last update, reset the values
-    //        if (nutritionalValuesDate.Day != dateUpdated.Day)
-    //        {
-    //            Debug.Log("New day detected. Resetting nutritional values.");
-    //            //user.nutritionalValuesUpdated = dateUpdated.ToString("yyyy-MM-dd");
-    //            //user.todayProtein = 0;
-    //            //user.todayCarbs = 0;
-    //            //user.todayCalories = 0;
-    //            //user.todayFat = 0;
-    //            //DatabaseManager.Instance.UpdateUserNutritionalValues(user.Id, 0, 0, 0, 0);
-    //        }
-    //    }
-
-    //    Action<User> userCallback = (updatedUser) =>
-    //    {
-    //        fatValue = updatedUser.todayFat;
-    //        proteinsValue = updatedUser.todayProtein;
-    //        carbsValue = updatedUser.todayCarbs;
-    //        kcalValue = updatedUser.todayCalories;
-    //    };
-    //    DatabaseManager.Instance.GetUserByEmail(user.Email, userCallback);
-    //    Debug.Log("upadted proteins: " + proteinsValue);
-
-
-    //   // DatabaseManager.Instance.UpdateUserNutritionalValues(user.Id, kcalValue, proteinsValue, fatValue, carbsValue);
-    //    DatabaseManager.Instance.UpdateUserNutritionUpdateTime(user.Id, user.nutritionalValuesUpdated);
-    //}
 
 
 }

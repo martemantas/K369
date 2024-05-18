@@ -1131,7 +1131,7 @@ public class User
     public float requiredProtein;
     public float requiredFat;
     public float requiredCalories;
-    public string nutritionalValuesUpdated;
+    public string nutritionalValuesUpdated; // time when nutritional values were updated
 
     public int Points = 0;
     public List<Task> Tasks = new List<Task>();
