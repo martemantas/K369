@@ -31,7 +31,6 @@ public class FoodLoader : MonoBehaviour
     {
         foreach (Nutrient n in list)
         {
-            Debug.Log("food id " + n.Id);
             CreateFoodInstance(n);
         }
     }
