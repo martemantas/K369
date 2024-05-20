@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -37,27 +38,46 @@ public class MealPrefabController : MonoBehaviour
 
     public void OnCompleteButton()
     {
-        User user = UserManager.Instance.CurrentUser;
+        User user;
+        User currentUser = UserManager.Instance.CurrentUser;
 
-        if (user.userType == 1) // child
+        if (currentUser.userType == 2) // parent
         {
-            Meal meal = user.Meals.Find(t => t.MealId == mealId);
-            if (meal != null)
-            {
-                meal.Completed = true;
-                DatabaseManager.Instance.MarkMealAsCompleted(user.Id, mealId);
-                if (!meal.pointsGiven)
-                {
-                    meal.pointsGiven = true;
-                    UserManager.Instance.CurrentUser.Points += Points;
-                    DatabaseManager.Instance.UpdateUserPoints(UserManager.Instance.CurrentUser.Id, UserManager.Instance.CurrentUser.Points);
-                }
-            }
-            MarkCompleted();
-
-            GameObject textPrefab = Instantiate(_PopupText, gameObject.transform);
-            textPrefab.GetComponent<PopupText>().Setup(Points);
+            user = currentUser.child;
         }
+        else // child or guest
+        {
+            user = currentUser;
+
+            Action<Meal> mealCallback = (meal) =>
+            {
+                if (meal != null)
+                {
+                    meal.Completed = true;
+                    DatabaseManager.Instance.MarkMealAsCompleted(user.Id, mealId);
+                    if (!meal.pointsGiven)
+                    {
+                        meal.pointsGiven = true;
+                        user.Points += Points;
+                        DatabaseManager.Instance.UpdateUserPoints(user.Id, user.Points);
+
+                        user.todayCalories += meal.Calories;
+                        user.todayProtein += meal.Protein;
+                        user.todayFat += meal.Fat;
+                        user.todayCarbs += meal.Carbohydrates;
+                        DatabaseManager.Instance.UpdateUserNutritionalValues(user.Id, user.todayCalories, user.todayProtein,
+                                                                             user.todayFat, user.todayCarbs);
+                    }
+                }
+                MarkCompleted();
+
+                GameObject textPrefab = Instantiate(_PopupText, gameObject.transform);
+                textPrefab.GetComponent<PopupText>().Setup(Points);
+            };
+            DatabaseManager.Instance.GetMealById(user.Id, mealId, mealCallback);
+        }
+
+        
     }
 
 

@@ -164,6 +164,18 @@ public class DatabaseManager : MonoBehaviour
         UpdateUser(userId, updates);
     }
 
+    public void UpdateUserNutritionalValues(string userId, float newKcalToday, float newProteinsToday, 
+                                            float newFatsToday, float newCarbsToday)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["todayCalories"] = newKcalToday;
+        updates["todayCarbs"] = newCarbsToday;
+        updates["todayFat"] = newFatsToday;
+        updates["todayProtein"] = newProteinsToday;
+
+        UpdateUser(userId, updates);
+    }
+
     public void UpdateUser(string userId, Dictionary<string, object> updates)
     {
         DatabaseReference userRef = databaseReference.Child("Users").Child(userId);
@@ -210,6 +222,34 @@ public class DatabaseManager : MonoBehaviour
     {
         Dictionary<string, object> updates = new Dictionary<string, object>();
         updates["Weight"] = newWeight;
+
+        UpdateUser(userId, updates);
+    }
+    public void UpdateUserGoals(string userId, int newGoal)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["Goals"] = newGoal;
+
+        UpdateUser(userId, updates);
+    }
+
+
+    public void UpdateUserNutritionUpdateTime(string userId, string newDate)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["nutritionalValuesUpdated"] = newDate;
+
+        UpdateUser(userId, updates);
+    }
+
+    public void UpdateUserRequiredNutritionalValues(string userId, float newKcalToday, float newProteinsToday,
+                                            float newFatsToday, float newCarbsToday)
+    {
+        Dictionary<string, object> updates = new Dictionary<string, object>();
+        updates["requiredCalories"] = newKcalToday;
+        updates["requiredCarbs"] = newCarbsToday;
+        updates["requiredFat"] = newFatsToday;
+        updates["requiredProtein"] = newProteinsToday;
 
         UpdateUser(userId, updates);
     }
@@ -408,6 +448,35 @@ public class DatabaseManager : MonoBehaviour
                         meals.Add(_meal);
                     }
                     callback(meals);
+                }
+            });
+    }
+
+    public void GetMealById(string userId, string mealId, Action<Meal> callback)
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("Users/" + userId + "/Meals")
+            .GetValueAsync().ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted || !task.IsCompleted)
+                {
+                    Debug.LogError("Error fetching user meals: " + task.Exception);
+                    callback(null);
+                }
+                else
+                {
+                    DataSnapshot snapshot = task.Result;
+                    foreach (DataSnapshot mealSnapshot in snapshot.Children)
+                    {
+                        Meal _meal = JsonUtility.FromJson<Meal>(mealSnapshot.GetRawJsonValue());
+                        if (_meal.MealId == mealId)
+                        {
+                            callback(_meal);
+                            return; // Exit the method once the meal is found
+                        }
+                    }
+                    // If the meal with the specified ID is not found
+                    callback(null);
                 }
             });
     }
@@ -642,7 +711,7 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
-    
+
     public void MarkTaskAsCompleted(string userId, string taskId)
     {
         Dictionary<string, object> updates = new Dictionary<string, object>();
@@ -759,6 +828,8 @@ public class DatabaseManager : MonoBehaviour
 
         return tcs.Task;
     }
+
+    
 
 
 
@@ -1051,10 +1122,17 @@ public class User
     public string Birthday;
     public string SaveData = "";
     public string RegistrationDate;
-    public int todayCarbs = 0;
-    public int todayProtein = 0;
-    public int todayFat = 0;
-    public int todayCalories = 0;
+    public float todayCarbs;
+    public float todayProtein;
+    public float todayFat;
+    public float todayCalories;
+
+    public float requiredCarbs;
+    public float requiredProtein;
+    public float requiredFat;
+    public float requiredCalories;
+    public string nutritionalValuesUpdated; // time when nutritional values were updated
+
     public int Points = 0;
     public List<Task> Tasks = new List<Task>();
     public List<Meal> Meals = new List<Meal>();
@@ -1073,7 +1151,9 @@ public class User
 
 
 
-    public User(string id, string username, string password, string email, string birthday, string registrationDate, int todayCarbs, int todayProtein, int todayFat, int todayCalories, int points, int type, int age, int height, int weight, string gender, string goals, string newChildID)
+    public User(string id, string username, string password, string email, string birthday, string registrationDate, 
+                float _todayCarbs, float _todayProtein, float _todayFat, float _todayCalories, int points, int type, int age,
+                int height, int weight, string gender, string goals, string newChildID)
     {
         Id = id;
         Username = username;
@@ -1082,10 +1162,10 @@ public class User
         Birthday = birthday;
         SaveData = "";
         RegistrationDate = registrationDate;
-        this.todayCarbs = todayCarbs;
-        this.todayProtein = todayProtein;
-        this.todayFat = todayFat;
-        this.todayCalories = todayCalories;
+        todayCarbs = _todayCarbs;
+        todayProtein = _todayProtein;
+        todayFat = _todayFat;
+        todayCalories = _todayCalories;
         Points = points;
         userType = type;
         Age = age;
@@ -1094,6 +1174,8 @@ public class User
         Goals = goals;
         Gender = gender;
         childID = newChildID;
+
+        nutritionalValuesUpdated = "";
     }
 }
 

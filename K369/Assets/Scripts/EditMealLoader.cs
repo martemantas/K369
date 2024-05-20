@@ -21,6 +21,10 @@ public class EditMealLoader : MonoBehaviour
     private string childID;
     private DatabaseManager databaseManager;
 
+    public GameObject errorMessageForGuest;
+    public GameObject editPlanScreen;
+    User user;
+
     private void Start()
     {
         databaseManager = new DatabaseManager();
@@ -36,13 +40,14 @@ public class EditMealLoader : MonoBehaviour
             childID = UserManager.Instance.GetSelectedChildToViewID();
             if (childID != null)
             {
-                User user = await FindUserChild();
+                user = await FindUserChild();
                 SpawnUserMeals(user);
             }
         }
         else
         {
-            SpawnUserMeals(currentUser);
+            user = currentUser;
+            SpawnUserMeals(user);
         }
 
     }
@@ -87,13 +92,18 @@ public class EditMealLoader : MonoBehaviour
 
     public void OnEditButton()
     {
-        User user = UserManager.Instance.CurrentUser;
         ResetContent();
 
         // if user is not guest
         if (user.userType != 0)
-        {           
+        {
+            editPlanScreen.SetActive(true);
             Spawn();
+        }
+        if (user.userType == 0)
+        {
+            // show error message
+            errorMessageForGuest.SetActive(true);
         }
     }
 
