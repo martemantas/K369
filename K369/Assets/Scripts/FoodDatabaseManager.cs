@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -29,12 +31,14 @@ public class FoodDatabaseManager : MonoBehaviour
     private List<Nutrient> FormatFoodList()
     {
         List<Nutrient> list = new List<Nutrient>();
-        Nutrient n1 = new Nutrient("1", "Egg", "", 10, 10, 10, 30, 50, 1, "");
+        /*Nutrient n1 = new Nutrient("1", "Egg", "", 10, 10, 10, 30, 50, 1, "");
         Nutrient n2 = new Nutrient("2", "Bread", "", 20, 20, 20, 60, 80, 1, "");
         Nutrient n3 = new Nutrient("3", "Chicken", "", 30, 30, 30, 90, 150, 1, "");
         list.Add(n1);
         list.Add(n2);
-        list.Add(n3);
+        list.Add(n3);*/
+        string jsonResponse = File.ReadAllText("Assets/Scripts/foundationDownload.json");
+        list = ParseNutrientData(jsonResponse);
         return list;
     }
 
@@ -53,6 +57,83 @@ public class FoodDatabaseManager : MonoBehaviour
         }
         return food;
     }
+    
+  private List<Nutrient> ParseNutrientData(string jsonResponse)
+{
+    var nutrients = new List<Nutrient>();
+    var jsonObject = JObject.Parse(jsonResponse);
+
+    if (jsonObject == null || jsonObject["FoundationFoods"] == null)
+    {
+        return nutrients;
+    }
+
+    var foodItems = jsonObject["FoundationFoods"];
+
+    foreach (var foodItem in foodItems)
+    {
+        if (foodItem == null || foodItem["description"] == null || foodItem["foodNutrients"] == null)
+        {
+            continue;
+        }
+
+        var nutrient = new Nutrient
+        {
+            Id = foodItem["fdcId"]?.ToString(),
+            Name = foodItem["description"].ToString(),
+            Date = "",
+            Serving = 100,
+            Count = 1,
+            MealName = ""
+        };
+
+        foreach (var nutrientInfo in foodItem["foodNutrients"])
+        {
+            if (nutrientInfo == null || nutrientInfo["nutrient"] == null || nutrientInfo["nutrient"]["id"] == null || nutrientInfo["amount"] == null)
+            {
+                continue;
+            }
+
+            var nutrientId = (int)nutrientInfo["nutrient"]["id"];
+            if (float.TryParse(nutrientInfo["amount"].ToString(), out var nutrientAmount))
+            {
+                switch (nutrientId)
+                {
+                    case 1003: // Protein
+                        nutrient.Protein = (int)nutrientAmount;
+                        if (nutrient.Calories == 0)
+                        {
+                            nutrient.Calories += nutrient.Protein * 4; // 1 gram of protein = 4 kcal
+                        }
+                        break;
+                    case 1085: // Total fat (NLEA)
+                    case 1004: // Total lipid (fat)
+                        nutrient.Fat = (int)nutrientAmount;
+                        if (nutrient.Calories == 0)
+                        {
+                            nutrient.Calories = nutrient.Fat * 9; // 1 gram of fat = 9 kcal
+                        }
+                        break;
+                    case 1005: // Carbohydrate, by difference
+                        nutrient.Carbohydrates = (int)nutrientAmount;
+                        if (nutrient.Calories == 0)
+                        {
+                            nutrient.Calories += nutrient.Carbohydrates * 4; // 1 gram of carbohydrate = 4 kcal
+                        }
+                        break;
+                    case 1008: // Energy
+                        nutrient.Calories = (int)nutrientAmount;
+                        break;
+                }
+                
+            }
+        }
+
+        nutrients.Add(nutrient);
+    }
+
+    return nutrients;
+}
 
 
 }

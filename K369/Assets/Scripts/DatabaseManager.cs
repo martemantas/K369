@@ -1252,6 +1252,10 @@ public class Nutrient
     public float Serving;
     public int Count;
     public string MealName;
+    
+    public Nutrient()
+    {
+    }
 
     public Nutrient(string id, string name, string date, int protein, int fat, int carbohydrates, int calories,
                     float serving, int count, string mealName)
