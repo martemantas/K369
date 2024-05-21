@@ -35,25 +35,6 @@ public class DatabaseManager : MonoBehaviour
         databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
     
-    //Firebase is asynchronous, so we use callbacks to handle the results
-    //This is an example of how to use the GetUserByEmail method
-    void ExampleGetUser()
-    {
-        GetUserByEmail("asd@emaio.com", (User user) => {
-            if (user != null)
-            {
-                Debug.Log($"User found: {user.Username}");
-                // Do something with the user object
-            }
-            else
-            {
-                Debug.Log("User not found.");
-            }
-        });
-    }
-
-
-
     public void AddNewUser(string userId, string username, string password, string email, string birthday, string registrationDate, int age, int height, int weight, string gender, string goals, int type)
     {
         UserManager userManager = UserManager.Instance;
