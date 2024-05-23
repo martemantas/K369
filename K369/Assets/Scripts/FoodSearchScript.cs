@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -39,29 +40,6 @@ public class FoodSearchScript : MonoBehaviour
         SceneManager.LoadScene(NutritionScreenName);
     }
 
-    // Need to implement
-    public void OptionsButtonAction()
-    {
-
-    }
-
-    // Need to implement
-    public void RecentButtonAction()
-    {
-
-    }
-
-    // Need to implement
-    public void FavoritesButtonAction()
-    {
-
-    }
-
-    // Need to implement
-    public void MyFoodsButtonAction()
-    {
-
-    }
 
 
 }
