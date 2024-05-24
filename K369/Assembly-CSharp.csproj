@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\FacebookLoginManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\Scripts\DatabaseManager.cs" />
+    <Compile Include="Assets\CompletionCalculator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\Scripts\Mover.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Assets\Scripts\MoveObjectOnClick.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\SubMenus\TournamentsMenu.cs" />
     <Compile Include="Assets\Scripts\RegisterForm.cs" />
+    <Compile Include="Assets\ParentViewLoader.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsA2UNotificationsManager.cs" />
     <Compile Include="Assets\Scripts\InstantiatePrefab.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Mobile\Scripts\SubMenus\AppRequests.cs" />
@@ -187,11 +189,11 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Scripts\foundationDownload.json" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
+    <None Include="Assets\StreamingAssets\google-services-desktop.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
-    <None Include="Assets\StreamingAssets\google-services-desktop.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
