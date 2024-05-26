@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class ChildPrefabController : MonoBehaviour
 {
@@ -32,9 +28,27 @@ public class ChildPrefabController : MonoBehaviour
         DatabaseManager databaseManager = new DatabaseManager();
         User user = await databaseManager.FindUserByChildID(nameText.text);
         return user;
-
     }
 
+    public async void DeleteChild()
+    {
+        User parent = UserManager.Instance.CurrentUser;
+        string childId = nameText.text;
+        GameObject parentObject = transform.parent.gameObject;
+
+        DatabaseManager.Instance.RemoveChildFromParent(parent.Id, childId, (bool isRemoved) => {
+            if (isRemoved)
+            {
+                // Remove the prefab from the scene
+                Destroy(parentObject);
+                Debug.Log("child removed from children list");
+            }
+            else
+            {
+                Debug.LogError("Failed to remove child from parent's list in database.");
+            }
+        });
+    }
 }
 
 

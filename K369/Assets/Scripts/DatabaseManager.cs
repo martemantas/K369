@@ -809,8 +809,54 @@ public class DatabaseManager : MonoBehaviour
 
         return tcs.Task;
     }
+    public void RemoveChildFromParent(string parentId, string childId, Action<bool> callback)
+    {
+        DatabaseReference parentRef = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(parentId).Child("children");
 
-    
+        parentRef.GetValueAsync().ContinueWithOnMainThread(task => {
+            if (task.IsFaulted || !task.IsCompleted)
+            {
+                Debug.LogError("Error fetching parent's children: " + task.Exception);
+                callback(false);
+            }
+            else
+            {
+                DataSnapshot snapshot = task.Result;
+                if (snapshot.Exists)
+                {
+                    List<string> childrenList = new List<string>();
+                    foreach (DataSnapshot childSnapshot in snapshot.Children)
+                    {
+                        string id = childSnapshot.Value.ToString();
+                        if (id != childId)
+                        {
+                            childrenList.Add(id);
+                        }
+                    }
+
+                    // Update the parent's children list in the database
+                    parentRef.SetValueAsync(childrenList).ContinueWithOnMainThread(setTask => {
+                        if (setTask.IsFaulted)
+                        {
+                            Debug.LogError("Error updating parent's children list: " + setTask.Exception);
+                            callback(false);
+                        }
+                        else
+                        {
+                            callback(true);
+                        }
+                    });
+                }
+                else
+                {
+                    Debug.Log("Parent has no children or children list does not exist.");
+                    callback(false);
+                }
+            }
+        });
+    }
+
+
 
 
 
