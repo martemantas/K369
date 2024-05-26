@@ -855,7 +855,64 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
+    public void UpdateChildName(string childId, string newName, Action<bool> callback)
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("Users")
+            .OrderByChild("userType")
+            .EqualTo(2) // Assuming 2 indicates a parent user type
+            .GetValueAsync().ContinueWithOnMainThread(task => {
+                if (task.IsFaulted || !task.IsCompleted)
+                {
+                    Debug.LogError("Error fetching users: " + task.Exception);
+                    callback(false);
+                }
+                else
+                {
+                    DataSnapshot snapshot = task.Result;
+                    bool found = false;
 
+                    foreach (DataSnapshot parentSnapshot in snapshot.Children)
+                    {
+                        if (parentSnapshot.Child("children").Exists)
+                        {
+                            foreach (DataSnapshot childSnapshot in parentSnapshot.Child("children").Children)
+                            {
+                                if (childSnapshot.Key == childId)
+                                {
+                                    string parentId = parentSnapshot.Key;
+                                    string childKey = childSnapshot.Key;
+
+                                    // Update the nickname field for the specific child entry
+                                    databaseReference.Child("Users").Child(parentId).Child("children").Child(childKey).Child("nickname").SetValueAsync(newName).ContinueWithOnMainThread(updateTask => {
+                                        if (updateTask.IsFaulted)
+                                        {
+                                            Debug.LogError("Error updating child name: " + updateTask.Exception);
+                                            callback(false);
+                                        }
+                                        else
+                                        {
+                                            callback(true);
+                                        }
+                                    });
+
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (found) break;
+                    }
+
+                    if (!found)
+                    {
+                        Debug.LogError("Child ID not found.");
+                        callback(false);
+                    }
+                }
+            });
+    }
 
 
 
@@ -962,17 +1019,25 @@ public class DatabaseManager : MonoBehaviour
             else if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
-                List<int> children = new List<int>();
+                Dictionary<string, object> children = new Dictionary<string, object>();
                 if (snapshot.Exists && snapshot.ChildrenCount > 0)
                 {
                     foreach (DataSnapshot childSnapshot in snapshot.Children)
                     {
-                        int existingChildId = int.Parse(childSnapshot.Value.ToString());
-                        children.Add(existingChildId);
+                        string existingChildId = childSnapshot.Key;
+                        object childData = childSnapshot.Value;
+                        children.Add(existingChildId, childData);
                     }
                 }
-                children.Add(childId);
 
+                string newChildKey = childId.ToString();
+                Dictionary<string, object> newChildData = new Dictionary<string, object>
+                {
+                    { "childID", childId },
+                    { "nickname", "" }
+                };
+
+                children.Add(newChildKey, newChildData);
                 userChildrenRef.SetValueAsync(children).ContinueWithOnMainThread(updateTask =>
                 {
                     if (updateTask.IsFaulted)

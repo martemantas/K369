@@ -107,7 +107,7 @@ public class LoginForm : MonoBehaviour
     {
         WaitForCallback wait = new WaitForCallback();
         User fetchedUser = null;
-
+ 
         DatabaseManager.Instance.GetUserByEmailAndPassword(email, password, (User user) =>
         {
             fetchedUser = user; // Directly use the user object returned from the database

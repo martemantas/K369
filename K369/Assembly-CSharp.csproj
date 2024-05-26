@@ -147,6 +147,7 @@
     <Compile Include="Assets\Scripts\MealController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Scripts\ChildPrefabController.cs" />
+    <Compile Include="Assets\Scripts\ChangeChildName.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\CloudAndroid\Scripts\LogScroller.cs" />
     <Compile Include="Assets\Scripts\TaskLoader.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Windows\FBWindowsLogsManager.cs" />
