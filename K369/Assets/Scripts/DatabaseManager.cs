@@ -813,7 +813,8 @@ public class DatabaseManager : MonoBehaviour
     {
         DatabaseReference parentRef = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(parentId).Child("children");
 
-        parentRef.GetValueAsync().ContinueWithOnMainThread(task => {
+        parentRef.GetValueAsync().ContinueWithOnMainThread(task =>
+        {
             if (task.IsFaulted || !task.IsCompleted)
             {
                 Debug.LogError("Error fetching parent's children: " + task.Exception);
@@ -824,18 +825,23 @@ public class DatabaseManager : MonoBehaviour
                 DataSnapshot snapshot = task.Result;
                 if (snapshot.Exists)
                 {
-                    List<string> childrenList = new List<string>();
+                    Dictionary<string, object> updatedChildren = new Dictionary<string, object>();
+
                     foreach (DataSnapshot childSnapshot in snapshot.Children)
                     {
-                        string id = childSnapshot.Value.ToString();
-                        if (id != childId)
+                        // Deserialize the snapshot to a Child object
+                        Child child = JsonUtility.FromJson<Child>(childSnapshot.GetRawJsonValue());
+
+                        // Add the child to the updated list if it's not the one being removed
+                        if (child.childID.ToString() != childId)
                         {
-                            childrenList.Add(id);
+                            updatedChildren[child.childID.ToString()] = child;
                         }
                     }
 
                     // Update the parent's children list in the database
-                    parentRef.SetValueAsync(childrenList).ContinueWithOnMainThread(setTask => {
+                    parentRef.SetValueAsync(updatedChildren).ContinueWithOnMainThread(setTask =>
+                    {
                         if (setTask.IsFaulted)
                         {
                             Debug.LogError("Error updating parent's children list: " + setTask.Exception);
@@ -855,6 +861,7 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
+
     public void UpdateChildName(string childId, string newName, Action<bool> callback)
     {
         FirebaseDatabase.DefaultInstance
@@ -1203,6 +1210,19 @@ public class DatabaseManager : MonoBehaviour
 
 
 }
+[System.Serializable]
+public class Child
+{
+    public int childID;
+    public string nickname;
+
+    public Child(int id, string name)
+    {
+        childID = id;
+        nickname = name;
+    }
+}
+
 
 [System.Serializable]
 public class User
