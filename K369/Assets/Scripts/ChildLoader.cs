@@ -22,7 +22,8 @@ public class ChildLoader : MonoBehaviour
             ChildPrefabController controller = instantiatedPrefab.GetComponent<ChildPrefabController>();
             if (controller != null)
             {
-                controller.Initialize(child.ToString());
+                string nickname = ChildManager.GetChildNickname(child);
+                controller.Initialize(child, nickname);
             }
         });
     }

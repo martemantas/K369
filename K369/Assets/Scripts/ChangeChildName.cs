@@ -5,6 +5,7 @@ public class ChangeChildName : MonoBehaviour
 {
     public TMP_Text childIDField;
     public TMP_InputField childNameField;
+    public TMP_Text usernameText;
 
     public void ChangeName()
     {
@@ -16,6 +17,11 @@ public class ChangeChildName : MonoBehaviour
             if (success)
             {
                 Debug.Log("Child name updated successfully.");
+                // Update the username text TMP value if not empty
+                if (!string.IsNullOrEmpty(newName))
+                {
+                    usernameText.text = newName;
+                }
                 // Add any additional logic here after successfully updating the child's name
             }
             else

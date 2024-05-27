@@ -6,11 +6,18 @@ using UnityEngine.SceneManagement;
 public class ChildPrefabController : MonoBehaviour
 {
     public TMP_Text nameText;
+    public TMP_Text childNameField;
     private string SceneToLoad = "Main screen";
+    private int childId;
+    private string childNickname;
 
-    public void Initialize(string name)
+    public void Initialize(int id, string nickname)
     {
-        nameText.text = name;
+        childId = id;
+        childNickname = nickname;
+
+        nameText.text = childId.ToString();
+        childNameField.text = childNickname;
     }
 
     // On child selected, save selected child to current user
@@ -48,6 +55,26 @@ public class ChildPrefabController : MonoBehaviour
                 Debug.LogError("Failed to remove child from parent's list in database.");
             }
         });
+    }
+    public void SaveChanges()
+    {
+        string newNickname = childNameField.text;
+        if (newNickname != childNickname)
+        {
+            ChildManager.AddChildNickname(childId, newNickname);
+            DatabaseManager.Instance.UpdateChildName(childId.ToString(), newNickname, success =>
+            {
+                if (success)
+                {
+                    Debug.Log("Child nickname updated successfully.");
+                    childNickname = newNickname;
+                }
+                else
+                {
+                    Debug.LogError("Failed to update child nickname.");
+                }
+            });
+        }
     }
 }
 
