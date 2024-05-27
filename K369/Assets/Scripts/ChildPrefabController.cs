@@ -17,7 +17,7 @@ public class ChildPrefabController : MonoBehaviour
         childNickname = nickname;
 
         nameText.text = childId.ToString();
-        childNameField.text = childNickname;
+        childNameField.text = string.IsNullOrEmpty(childNickname) ? "" : childNickname;
     }
 
     // On child selected, save selected child to current user
@@ -55,6 +55,7 @@ public class ChildPrefabController : MonoBehaviour
                 Debug.LogError("Failed to remove child from parent's list in database.");
             }
         });
+
     }
     public void SaveChanges()
     {

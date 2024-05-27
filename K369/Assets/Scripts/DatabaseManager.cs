@@ -825,17 +825,17 @@ public class DatabaseManager : MonoBehaviour
                 DataSnapshot snapshot = task.Result;
                 if (snapshot.Exists)
                 {
-                    Dictionary<string, object> updatedChildren = new Dictionary<string, object>();
+                    List<string> updatedChildren = new List<string>();
 
                     foreach (DataSnapshot childSnapshot in snapshot.Children)
                     {
-                        // Deserialize the snapshot to a Child object
-                        Child child = JsonUtility.FromJson<Child>(childSnapshot.GetRawJsonValue());
+                        // Get the child ID from the snapshot key
+                        string childKey = childSnapshot.Key;
 
-                        // Add the child to the updated list if it's not the one being removed
-                        if (child.childID.ToString() != childId)
+                        // Add the child ID to the updated list if it's not the one being removed
+                        if (childKey != childId)
                         {
-                            updatedChildren[child.childID.ToString()] = child;
+                            updatedChildren.Add(childKey);
                         }
                     }
 
@@ -861,6 +861,7 @@ public class DatabaseManager : MonoBehaviour
             }
         });
     }
+
 
     public void UpdateChildName(string childId, string newName, Action<bool> callback)
     {
