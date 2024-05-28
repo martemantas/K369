@@ -809,99 +809,210 @@ public class DatabaseManager : MonoBehaviour
 
         return tcs.Task;
     }
+    public void RemoveChildFromParent(string parentId, string childId, Action<bool> callback)
+    {
+        DatabaseReference parentRef = FirebaseDatabase.DefaultInstance.GetReference("Users").Child(parentId).Child("children");
 
-    
-
-
-
-    public void GetUserByEmailAndPassword(string email, string password, Action<User> callback)
-{
-    FirebaseDatabase.DefaultInstance
-        .GetReference("Users")
-        .OrderByChild("Email")
-        .EqualTo(email)
-        .GetValueAsync().ContinueWithOnMainThread(task =>
+        parentRef.GetValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.IsFaulted || !task.IsCompleted)
             {
-                Debug.LogError("Error fetching user: " + task.Exception);
-                callback(null);
+                Debug.LogError("Error fetching parent's children: " + task.Exception);
+                callback(false);
             }
             else
             {
                 DataSnapshot snapshot = task.Result;
-                if (snapshot.Exists && snapshot.ChildrenCount > 0)
+                if (snapshot.Exists)
                 {
-                    foreach (var childSnapshot in snapshot.Children)
+                    List<string> updatedChildren = new List<string>();
+
+                    foreach (DataSnapshot childSnapshot in snapshot.Children)
                     {
-                        User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
+                        // Get the child ID from the snapshot key
+                        string childKey = childSnapshot.Key;
 
-                        if (foundUser.Password == password)
+                        // Add the child ID to the updated list if it's not the one being removed
+                        if (childKey != childId)
                         {
-                            foundUser.Tasks.Clear();
-                            foundUser.Meals.Clear();
-                            foundUser.children.Clear(); 
-
-                            DataSnapshot tasksSnapshot = childSnapshot.Child("Tasks");
-                            foreach (DataSnapshot taskSnapshot in tasksSnapshot.Children)
-                            {
-                                Task _task = JsonUtility.FromJson<Task>(taskSnapshot.GetRawJsonValue());
-                                foundUser.Tasks.Add(_task);
-                            }
-
-                            DataSnapshot mealsSnapshot = childSnapshot.Child("Meals");
-                            foreach (DataSnapshot mealSnapshot in mealsSnapshot.Children)
-                            {
-                                Meal _meal = JsonUtility.FromJson<Meal>(mealSnapshot.GetRawJsonValue());
-                                foundUser.Meals.Add(_meal);
-                            }
-
-                            DataSnapshot childrenSnapshot = childSnapshot.Child("children");
-                            if (childrenSnapshot.Exists)
-                            {
-                                foreach (DataSnapshot childIdSnapshot in childrenSnapshot.Children)
-                                {
-                                    int childId = int.Parse(childIdSnapshot.Value.ToString());
-                                    foundUser.children.Add(childId);
-                                }
-                            }
-                            
-                            DataSnapshot boughtItemsSnapshot = childSnapshot.Child("boughtItems");
-                            if (boughtItemsSnapshot.Exists)
-                            {
-                                foreach (DataSnapshot BoughtItemIdSnapshot in boughtItemsSnapshot.Children)
-                                {
-                                    int childId = int.Parse(BoughtItemIdSnapshot.Value.ToString());
-                                    foundUser.boughtItems.Add(childId);
-                                }
-                            }
-                            
-                            DataSnapshot equippedItemsSnapshot = childSnapshot.Child("equippedItems");
-                            if (equippedItemsSnapshot.Exists)
-                            {
-                                foreach (DataSnapshot EquippedItemIdSnapshot in equippedItemsSnapshot.Children)
-                                {
-                                    int childId = int.Parse(EquippedItemIdSnapshot.Value.ToString());
-                                    foundUser.equipped.Add(childId);
-                                }
-                            }
-
-                            foundUser.Id = childSnapshot.Key;
-                            callback(foundUser);
-                            return;
+                            updatedChildren.Add(childKey);
                         }
                     }
-                    Debug.Log("No user found with the specified email and password.");
-                    callback(null); 
+
+                    // Update the parent's children list in the database
+                    parentRef.SetValueAsync(updatedChildren).ContinueWithOnMainThread(setTask =>
+                    {
+                        if (setTask.IsFaulted)
+                        {
+                            Debug.LogError("Error updating parent's children list: " + setTask.Exception);
+                            callback(false);
+                        }
+                        else
+                        {
+                            callback(true);
+                        }
+                    });
                 }
                 else
                 {
-                    Debug.Log("No user found with the specified email.");
-                    callback(null);
+                    Debug.Log("Parent has no children or children list does not exist.");
+                    callback(false);
                 }
             }
         });
-}
+    }
+
+
+    public void UpdateChildName(string childId, string newName, Action<bool> callback)
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("Users")
+            .OrderByChild("userType")
+            .EqualTo(2) // Assuming 2 indicates a parent user type
+            .GetValueAsync().ContinueWithOnMainThread(task => {
+                if (task.IsFaulted || !task.IsCompleted)
+                {
+                    Debug.LogError("Error fetching users: " + task.Exception);
+                    callback(false);
+                }
+                else
+                {
+                    DataSnapshot snapshot = task.Result;
+                    bool found = false;
+
+                    foreach (DataSnapshot parentSnapshot in snapshot.Children)
+                    {
+                        if (parentSnapshot.Child("children").Exists)
+                        {
+                            foreach (DataSnapshot childSnapshot in parentSnapshot.Child("children").Children)
+                            {
+                                if (childSnapshot.Key == childId)
+                                {
+                                    string parentId = parentSnapshot.Key;
+                                    string childKey = childSnapshot.Key;
+
+                                    // Update the nickname field for the specific child entry
+                                    databaseReference.Child("Users").Child(parentId).Child("children").Child(childKey).Child("nickname").SetValueAsync(newName).ContinueWithOnMainThread(updateTask => {
+                                        if (updateTask.IsFaulted)
+                                        {
+                                            Debug.LogError("Error updating child name: " + updateTask.Exception);
+                                            callback(false);
+                                        }
+                                        else
+                                        {
+                                            ChildManager.AddChildNickname(int.Parse(childId), newName);
+                                            callback(true);
+                                        }
+                                    });
+
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (found) break;
+                    }
+
+                    if (!found)
+                    {
+                        Debug.LogError("Child ID not found.");
+                        callback(false);
+                    }
+                }
+            });
+    }
+
+
+
+
+    public void GetUserByEmailAndPassword(string email, string password, Action<User> callback)
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("Users")
+            .OrderByChild("Email")
+            .EqualTo(email)
+            .GetValueAsync().ContinueWithOnMainThread(task =>
+            {
+                if (task.IsFaulted || !task.IsCompleted)
+                {
+                    Debug.LogError("Error fetching user: " + task.Exception);
+                    callback(null);
+                }
+                else
+                {
+                    DataSnapshot snapshot = task.Result;
+                    if (snapshot.Exists && snapshot.ChildrenCount > 0)
+                    {
+                        foreach (var childSnapshot in snapshot.Children)
+                        {
+                            User foundUser = JsonUtility.FromJson<User>(childSnapshot.GetRawJsonValue());
+
+                            if (foundUser.Password == password)
+                            {
+                                foundUser.Tasks.Clear();
+                                foundUser.Meals.Clear();
+                                foundUser.children.Clear();
+
+                                DataSnapshot tasksSnapshot = childSnapshot.Child("Tasks");
+                                foreach (DataSnapshot taskSnapshot in tasksSnapshot.Children)
+                                {
+                                    Task _task = JsonUtility.FromJson<Task>(taskSnapshot.GetRawJsonValue());
+                                    foundUser.Tasks.Add(_task);
+                                }
+
+                                DataSnapshot mealsSnapshot = childSnapshot.Child("Meals");
+                                foreach (DataSnapshot mealSnapshot in mealsSnapshot.Children)
+                                {
+                                    Meal _meal = JsonUtility.FromJson<Meal>(mealSnapshot.GetRawJsonValue());
+                                    foundUser.Meals.Add(_meal);
+                                }
+
+                                DataSnapshot childrenSnapshot = childSnapshot.Child("children");
+                                foreach (DataSnapshot singleChildSnapshot in childrenSnapshot.Children)
+                                {
+                                    int childId = int.Parse(singleChildSnapshot.Key);
+                                    string nickname = singleChildSnapshot.Child("nickname").Value.ToString();
+                                    foundUser.children.Add(childId);
+                                    ChildManager.AddChildNickname(childId, nickname);
+                                }
+
+                                DataSnapshot boughtItemsSnapshot = childSnapshot.Child("boughtItems");
+                                if (boughtItemsSnapshot.Exists)
+                                {
+                                    foreach (DataSnapshot BoughtItemIdSnapshot in boughtItemsSnapshot.Children)
+                                    {
+                                        int childId = int.Parse(BoughtItemIdSnapshot.Value.ToString());
+                                        foundUser.boughtItems.Add(childId);
+                                    }
+                                }
+                            
+                                DataSnapshot equippedItemsSnapshot = childSnapshot.Child("equippedItems");
+                                if (equippedItemsSnapshot.Exists)
+                                {
+                                    foreach (DataSnapshot EquippedItemIdSnapshot in equippedItemsSnapshot.Children)
+                                    {
+                                        int childId = int.Parse(EquippedItemIdSnapshot.Value.ToString());
+                                        foundUser.equipped.Add(childId);
+                                    }
+                                }
+
+                                foundUser.Id = childSnapshot.Key;
+                                callback(foundUser);
+                                return;
+                            }
+                        }
+                        Debug.Log("No user found with the specified email and password.");
+                        callback(null); 
+                    }
+                    else
+                    {
+                        Debug.Log("No user found with the specified email.");
+                        callback(null);
+                    }
+                }
+            });
+    }
 
     
     public void AddChildToUser(string userId, int childId)
@@ -916,17 +1027,25 @@ public class DatabaseManager : MonoBehaviour
             else if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
-                List<int> children = new List<int>();
+                Dictionary<string, object> children = new Dictionary<string, object>();
                 if (snapshot.Exists && snapshot.ChildrenCount > 0)
                 {
                     foreach (DataSnapshot childSnapshot in snapshot.Children)
                     {
-                        int existingChildId = int.Parse(childSnapshot.Value.ToString());
-                        children.Add(existingChildId);
+                        string existingChildId = childSnapshot.Key;
+                        object childData = childSnapshot.Value;
+                        children.Add(existingChildId, childData);
                     }
                 }
-                children.Add(childId);
 
+                string newChildKey = childId.ToString();
+                Dictionary<string, object> newChildData = new Dictionary<string, object>
+                {
+                    { "childID", childId },
+                    { "nickname", "" }
+                };
+
+                children.Add(newChildKey, newChildData);
                 userChildrenRef.SetValueAsync(children).ContinueWithOnMainThread(updateTask =>
                 {
                     if (updateTask.IsFaulted)
@@ -1092,6 +1211,43 @@ public class DatabaseManager : MonoBehaviour
 
 
 }
+
+public static class ChildManager
+{
+    private static Dictionary<int, string> childNicknames = new Dictionary<int, string>();
+
+    public static void AddChildNickname(int childId, string nickname)
+    {
+        if (!childNicknames.ContainsKey(childId))
+        {
+            childNicknames[childId] = nickname;
+        }
+    }
+
+    public static string GetChildNickname(int childId)
+    {
+        if (childNicknames.TryGetValue(childId, out string nickname))
+        {
+            return nickname;
+        }
+        return string.Empty;
+    }
+}
+
+
+[System.Serializable]
+public class Child
+{
+    public int childID;
+    public string nickname;
+
+    public Child(int id, string name)
+    {
+        childID = id;
+        nickname = name;
+    }
+}
+
 
 [System.Serializable]
 public class User
