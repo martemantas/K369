@@ -16,14 +16,15 @@ public class CompletionCalculator : MonoBehaviour
     public int completedTasksCount;
     public int totalReceivedPoints;
     public int totalPossiblePoints;
+    public float score;
 
-    // UI Elements
     public Image mealCompletionImage;
     public Image taskCompletionImage;
     public Image pointsCompletionImage;
     public TMP_Text mealCompletionText;
     public TMP_Text taskCompletionText;
     public TMP_Text pointsCompletionText;
+    public TMP_Text scoreText;
 
     private async void Start()
     {
@@ -64,12 +65,7 @@ public class CompletionCalculator : MonoBehaviour
 
         receivedPointsPercentage = totalPossiblePoints > 0 ? (float)totalReceivedPoints / totalPossiblePoints : 0;
 
-        Debug.Log($"Meal Completion Percentage: {mealCompletionPercentage * 100}%");
-        Debug.Log($"Task Completion Percentage: {taskCompletionPercentage * 100}%");
-        Debug.Log($"Received Points Percentage: {receivedPointsPercentage * 100}%");
-        Debug.Log($"Completed Meals: {completedMealsCount}");
-        Debug.Log($"Completed Tasks: {completedTasksCount}");
-        Debug.Log($"Total Received Points: {totalReceivedPoints}");
+        CalculateScore(childMealsThisWeek, childTasksThisWeek);
     }
 
     public async Task<User> FindUserChild(User user)
@@ -112,6 +108,7 @@ public class CompletionCalculator : MonoBehaviour
         mealCompletionText.text = completedMealsCount.ToString();
         taskCompletionText.text = completedTasksCount.ToString();
         pointsCompletionText.text = totalReceivedPoints.ToString();
+        scoreText.text = score.ToString("0.00");
     }
 
     private DateTime GetStartOfWeek(DateTime date)
@@ -183,5 +180,34 @@ public class CompletionCalculator : MonoBehaviour
         }
 
         return items.Count == 0 ? 0 : (float)completedCount / items.Count;
+    }
+
+    private void CalculateScore(List<Meal> meals, List<Task> tasks)
+    {
+        score = 8f;
+
+        foreach (var meal in meals)
+        {
+            if (meal.Completed && DateTime.Parse(meal.DateExpire) >= DateTime.Now)
+            {
+                score = Mathf.Clamp(score + 0.25f, 0f, 10f);
+            }
+            else if (!meal.Completed && DateTime.Parse(meal.DateExpire) < DateTime.Now)
+            {
+                score = Mathf.Clamp(score - 0.25f, 0f, 10f);
+            }
+        }
+
+        foreach (var task in tasks)
+        {
+            if (task.Completed && DateTime.Parse(task.DateExpire) >= DateTime.Now)
+            {
+                score = Mathf.Clamp(score + 0.25f, 0f, 10f);
+            }
+            else if (!task.Completed && DateTime.Parse(task.DateExpire) < DateTime.Now)
+            {
+                score = Mathf.Clamp(score - 0.25f, 0f, 10f);
+            }
+        }
     }
 }
