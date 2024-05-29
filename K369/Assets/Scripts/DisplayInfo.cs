@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -10,6 +11,13 @@ public class DisplayInfo : MonoBehaviour
     public Image carbImage;
     public Image proteinImage;
     public Image fatImage;
+    
+    [Header("Character")]
+    public GameObject maleModel;
+    public GameObject femaleModel;
+    
+    //private AvatarScript avatarScript;
+    //public GameObject parent;
 
     void Start()
     {
@@ -29,6 +37,8 @@ public class DisplayInfo : MonoBehaviour
         displayCarbs();
         displayProtein();
         displayFat();
+
+        displayGender();
     }
     public void displayCarbs()
     {
@@ -55,4 +65,24 @@ public class DisplayInfo : MonoBehaviour
 
         //fatImage.fillAmount = totalFat;
     }
+    
+    public void displayGender()
+    {
+        UserManager userManager;
+        userManager = UserManager.Instance;
+        string playerGender = userManager.GetPlayerGender();
+
+        switch (playerGender)
+        {
+            case "Male":
+                maleModel.SetActive(true);
+                femaleModel.SetActive(false);
+                break;
+            case "Female":
+                maleModel.SetActive(false);
+                femaleModel.SetActive(true);
+                break;
+        }
+    }
+
 }
